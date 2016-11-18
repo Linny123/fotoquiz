@@ -1,0 +1,1 @@
+var fotoApp = angular.module('fotoApp', ['ui.router']);
