@@ -1,9 +1,21 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" ng-controller="navCtrl">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a ui-sref="home">Home</a></li>
             <li><a ui-sref="nav1">nav item 1</a></li>
             <li><a ui-sref="nav2">nav item 2</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-show="isLoggedIn()" role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                {{ currentUser() }} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a ui-sref="profile">My Profile</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ui-sref="home" ng-click="logOut()">Log Out</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>

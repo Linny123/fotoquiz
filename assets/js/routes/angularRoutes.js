@@ -6,7 +6,8 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         
         .state('home', {
             url: '/home',
-            templateUrl: 'templates/home.html'
+            templateUrl: 'templates/home.html',
+            controller: 'homeCtrl'
         })
         
         .state('nav1', {
@@ -17,6 +18,24 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         .state('nav2', {
               url: '/nav2', 
               templateUrl: 'templates/nav2.html'
+        })
+        
+        .state('login', {
+              url: '/login', 
+              templateUrl: 'templates/login.html',
+              controller: 'authCtrl'
+        })
+
+        .state('signup', {
+              url: '/signup', 
+              templateUrl: 'templates/signup.html',
+              controller: 'authCtrl'
+        })
+
+        .state('profile', {
+            url: '/profile',
+              templateUrl: 'templates/profile.html',
+              controller: 'profileCtrl'
         })
 
 });
