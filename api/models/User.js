@@ -1,22 +1,24 @@
+// A model represents a collection of structured data
+// User.js = The set of users registered in our Database.
+
+// jsonwebtoken = method for representing claims securely between two parties
 var jwt = require('jsonwebtoken');
 
 module.exports = {
     attributes: {
         username: {
             type: 'string',
-            //minLength: 5,
             required: true
         },
         email: {
             type: 'string',
-            required: true,
-            unique: true
+            required: true
         },
         password: {
             type: 'string',
-            //minLength: 5,
             required: true
         },
+        // Token will be used to authenticate user and manage sessions (via expiration)
         generateJWT: function() {
             var today = new Date();
             var exp = new Date(today);

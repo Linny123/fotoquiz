@@ -1,3 +1,6 @@
+// Controllers are responsible for responding to requests from any system capable of communicating with a server
+
+// Passport is authentication middleware for Node
 var passport = require('passport');
 
 module.exports = {

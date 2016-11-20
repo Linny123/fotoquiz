@@ -1,3 +1,5 @@
+// Passport local strategy for authentication
+
 var passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 

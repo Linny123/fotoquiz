@@ -37,6 +37,8 @@ module.exports.routes = {
    
   'post /login': 'AuthController.login',
 
+  //'post /quiz': 'QuizController.newQuiz'
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
