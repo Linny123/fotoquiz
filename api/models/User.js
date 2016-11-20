@@ -14,6 +14,7 @@ module.exports = {
             type: 'string',
             required: true
         },
+        // TODO ENCRYPTION
         password: {
             type: 'string',
             required: true
@@ -29,5 +30,6 @@ module.exports = {
             exp: parseInt(exp.getTime() / 1000)
             }, 'SECRET');
         }
+        // TODO ENCRYPTION generateHash + comparepassword
     }
 };

@@ -7,7 +7,7 @@ fotoApp.controller('authCtrl',
       auth.signup($scope.user).error(function(error) {
         $scope.error = error;
       }).then(function() {
-        $state.go('profile');
+        $state.go('home');
       });
     };
 
@@ -15,7 +15,7 @@ fotoApp.controller('authCtrl',
       auth.login($scope.user).error(function(error) {
         $scope.error = error;
       }).then(function successCallback() {
-        $state.go('profile');
+        $state.go('home');
       });
     };
 }]);
