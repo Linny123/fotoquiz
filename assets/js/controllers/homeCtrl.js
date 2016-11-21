@@ -1,3 +1,3 @@
-fotoApp.controller('homeCtrl', ['$scope', 'auth', function($scope, auth) {
+fotoApp.controller('homeCtrl', ['$scope','auth', function($scope, auth) {
     $scope.isLoggedIn = auth.isLoggedIn;
 }]);

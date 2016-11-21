@@ -18,19 +18,8 @@ module.exports = {
         password: {
             type: 'string'
         },
-        facebook: {
-            id: {
-                type: 'String'
-            },
-            token: { 
-                type: 'String'
-            },
-            email: {
-                type: 'String'
-            },
-            name: {
-                type: 'String'
-            }
+        FBID: {
+            type: 'string'
         },
         // Token will be used to authenticate user and manage sessions (via expiration)
         generateJWT: function() {

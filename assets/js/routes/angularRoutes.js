@@ -9,6 +9,12 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/home.html',
             controller: 'homeCtrl'
         })
+
+        .state('facebook', {
+            url: '/facebook/{token}',
+            templateUrl: 'templates/facebook.html',
+            controller: 'fbCtrl'
+        })
         
         .state('nav1', {
               url: '/nav1', 
