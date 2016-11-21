@@ -1,7 +1,9 @@
 // Passport local strategy for authentication
 
-var passport = require('passport'),
+var configAuth = require('./auth');
+var passport = require('passport');
 LocalStrategy = require('passport-local').Strategy;
+FacebookStrategy = require('passport-facebook').Strategy;
 
 
 passport.use('local-login', new LocalStrategy({
@@ -44,5 +46,30 @@ passport.use('local-signup', new LocalStrategy({
           });
         }
     });
-  }  
-));
+}));
+
+passport.use('facebook', new FacebookStrategy({
+        clientID        : configAuth.facebookAuth.clientID,
+        clientSecret    : configAuth.facebookAuth.clientSecret,
+        callbackURL     : configAuth.facebookAuth.callbackURL
+    },
+    // facebook will send back the token and profile
+    function(token, refreshToken, profile, done) {
+      console.log('etape 1111');
+        User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+           // if there is an error connecting to db, stop everything and return that
+           if (err) {return done(err);}
+           if (user) {return done(null, user);} // user found, return that user
+           else {// if there is no user found with that facebook id, create them
+              User.create({
+              'facebook.id': profile.id, 
+              'facebook.token': token,
+              username: profile.name.givenName + ' ' + profile.name.familyName,
+              email: profile.emails[0].value
+              }).exec(function (err, user){
+                if(err){return done(err);}
+                return done(null, user);
+                });
+            }
+        });
+}));

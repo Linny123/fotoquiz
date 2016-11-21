@@ -16,8 +16,21 @@ module.exports = {
         },
         // TODO ENCRYPTION
         password: {
-            type: 'string',
-            required: true
+            type: 'string'
+        },
+        facebook: {
+            id: {
+                type: 'String'
+            },
+            token: { 
+                type: 'String'
+            },
+            email: {
+                type: 'String'
+            },
+            name: {
+                type: 'String'
+            }
         },
         // Token will be used to authenticate user and manage sessions (via expiration)
         generateJWT: function() {

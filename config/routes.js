@@ -37,6 +37,11 @@ module.exports.routes = {
    
   'post /login': 'AuthController.login',
 
+  'get /auth/facebook': 'AuthController.facebookLogin',
+
+  'get /auth/facebook/callback': 'AuthController.facebookLoginCallback',
+
+
   //'post /quiz': 'QuizController.newQuiz'
 
   /***************************************************************************
