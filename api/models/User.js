@@ -11,10 +11,12 @@ module.exports = {
             required: true
         },
         firstName: {
-            type: 'string'
+            type: 'string',
+            defaultsTo: 'Your First Name'
         },
         lastName: {
-            type: 'string'
+            type: 'string',
+            defaultsTo: 'Your Last Name'
         },
         email: {
             type: 'string'

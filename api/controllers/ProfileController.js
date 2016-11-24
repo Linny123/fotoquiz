@@ -28,14 +28,8 @@ module.exports = {
           email: userProfile.email
         },
         function(err, user) {
-          if(err) {
-            console.log('fucked up');
-            res.send('EDIT request not successful');
-          }   
-          if(user) {
-            console.log('not fucked up');
-            res.send('EDIT request successful');
-          }
+          if(err) {res.send('EDIT request not successful');}   
+          if(user) {res.send('EDIT request successful');}
       });
     }
 };
