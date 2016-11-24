@@ -1,0 +1,11 @@
+
+body {
+	font-family: 'Oxygen', sans-serif;
+}
+
+body.home-page {
+    background-image: url("../images/backgroundH.jpg");
+}
+
+body.profile-page {
+}

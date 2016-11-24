@@ -4,7 +4,8 @@
     <title>fotoQuiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- CSS -->
-     <link rel="stylesheet" href="styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles/bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles/mainStyle.css"/>
 
     <!-- JS -->
     <script src="js/dependencies/jquery-3.1.1.min.js"></script>
@@ -20,16 +21,15 @@
     <script src="js/controllers/authCtrl.js"></script>
     <script src="js/controllers/profileCtrl.js"></script>
     <script src="js/controllers/fbCtrl.js"></script>
+    <script src="js/controllers/bodyCtrl.js"></script>
   </head>
 
-  <body>
-  <div ng-app="fotoApp">
-          <!-- NAVIGATION -->
-          <div ng-include="'templates/nav.html'"></div>
-          <div class="container">
-              <!-- MAIN CONTENT -->
-              <div ui-view></div>
-          </div>
-  </div>
+  <body ng-app="fotoApp" class="{{bodyClass}}" ng-controller="bodyCtrl">
+    <!-- NAVIGATION -->
+    <div ng-include="'templates/nav.html'"></div>
+    <div class="container">
+      <!-- MAIN CONTENT -->
+      <div ui-view></div>
+    </div>
   </body>
 </html>
