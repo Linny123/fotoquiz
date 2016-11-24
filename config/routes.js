@@ -41,6 +41,9 @@ module.exports.routes = {
 
   'get /auth/facebook/callback': 'AuthController.facebookLoginCallback',
 
+  'get /profile': 'ProfileController.getUserProfile',
+
+  'put /profile': 'ProfileController.editUserProfile',
 
   //'post /quiz': 'QuizController.newQuiz'
 

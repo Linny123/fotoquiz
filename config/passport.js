@@ -63,7 +63,7 @@ passport.use(new FacebookStrategy({
            else {// if there is no user found with that facebook id, create them
               User.create({
               FBID: profile.id, 
-              username: profile.name.familyName,
+              username: profile.name.givenName + ' ' + profile.name.familyName,
               email: profile.emails[0].value || null
               }).exec(function (err, user){
                 if(err){return done(err);}

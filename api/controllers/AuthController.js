@@ -41,17 +41,18 @@ module.exports = {
             else {return res.status(401).json(next);}
         })(req, res);
     },
+
     facebookLogin: function(req,res,next){
         passport.authenticate('facebook', {session: false, scope: ['email'] },
             function(err, user, next){
                 if(err){return next(err);}
             })(req, res);
     },
+
     facebookLoginCallback: function(req,res,next){
         passport.authenticate('facebook', function(err, user, next){
             if(user){
                 return res.redirect('/#/facebook/token=' + user.generateJWT());
-               // return res.json({token: user.generateJWT()});
             }
             else {return res.status(401).json(next);}
         })(req, res);

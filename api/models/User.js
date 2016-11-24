@@ -10,9 +10,14 @@ module.exports = {
             type: 'string',
             required: true
         },
+        firstName: {
+            type: 'string'
+        },
+        lastName: {
+            type: 'string'
+        },
         email: {
-            type: 'string',
-            required: true
+            type: 'string'
         },
         // TODO ENCRYPTION
         password: {
