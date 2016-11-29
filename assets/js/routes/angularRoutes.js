@@ -25,23 +25,21 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               url: '/nav2', 
               templateUrl: 'templates/nav2.html'
         })
-        
-        .state('login', {
-              url: '/login', 
-              templateUrl: 'templates/login.html',
-              controller: 'authCtrl'
-        })
-
-        .state('signup', {
-              url: '/signup', 
-              templateUrl: 'templates/signup.html',
-              controller: 'authCtrl'
-        })
 
         .state('profile', {
             url: '/profile',
               templateUrl: 'templates/profile.html',
-              controller: 'profileCtrl'
+              controller: 'profileCtrl',
+              resolve : {
+                isLoggedIn:  function($state, $q, $timeout, auth){
+                  if(!auth.isLoggedIn()){
+                    $timeout(function() {
+                        $state.go('home')
+                      },0);
+                      return $q.reject()
+                  }
+                }
+              }
         })
 
 });

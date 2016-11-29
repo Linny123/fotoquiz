@@ -1,5 +1,6 @@
 fotoApp.controller('profileCtrl', ['$scope', 'auth', 'appDB',
 	function ($scope, auth, appDB) {
+		$scope.bodyClass = '';
 		$scope.currentUser = auth.currentUser;
 		$scope.userProfile = {};
 		$scope.userProfile.username = auth.currentUser() // TODO: visitor can visit a users page
