@@ -1,9 +1,9 @@
 fotoApp.config(function($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider.otherwise('/home');
-    
+
     $stateProvider
-        
+
         .state('home', {
             url: '/home',
             templateUrl: 'templates/home.html',
@@ -15,15 +15,26 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/facebook.html',
             controller: 'fbCtrl'
         })
-        
+
         .state('nav1', {
-              url: '/nav1', 
+              url: '/nav1',
               templateUrl: 'templates/nav1.html'
         })
 
-        .state('nav2', {
-              url: '/nav2', 
-              templateUrl: 'templates/nav2.html'
+        .state('quiz', {
+              url: '/quiz',
+              templateUrl: 'templates/quiz/quiz.html'
+        })
+
+        .state('createPost', {
+          url: '/quiz/createPost',
+          templateUrl: 'templates/quiz/createPost.html',
+          controller: 'QuizPostController'
+        })
+
+        .state('getPosts', {
+          url: '/quiz/getPosts',
+          templateUrl: 'templates/quiz/getPosts.html'
         })
 
         .state('profile', {

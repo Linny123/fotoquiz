@@ -34,7 +34,7 @@ module.exports.routes = {
 
 
   'post /signup': 'AuthController.signup',
-   
+
   'post /login': 'AuthController.login',
 
   'get /auth/facebook': 'AuthController.facebookLogin',
@@ -45,7 +45,9 @@ module.exports.routes = {
 
   'put /profile': 'ProfileController.editUserProfile',
 
-  //'post /quiz': 'QuizController.newQuiz'
+  'post /quiz/createPost': 'QuizPostController.createPost'
+
+  //'get /quiz/getquiz': 'QuizController.getPosts'
 
   /***************************************************************************
   *                                                                          *

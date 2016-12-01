@@ -16,7 +16,7 @@ module.exports = {
             return res.status(400).json(
             {message: 'Please fill out all fields'});
         }
-        
+
         passport.authenticate('local-signup', function(err, user, next) {
             if(err){return next(err);}
             if(user){
@@ -56,5 +56,5 @@ module.exports = {
             }
             else {return res.status(401).json(next);}
         })(req, res);
-    }  
+    }
 };
