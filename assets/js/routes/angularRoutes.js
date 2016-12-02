@@ -21,9 +21,9 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               templateUrl: 'templates/nav1.html'
         })
 
-        .state('nav2', {
-              url: '/nav2', 
-              templateUrl: 'templates/nav2.html'
+        .state('ranking', {
+              url: '/ranking', 
+              templateUrl: 'templates/ranking.html'
         })
 
         .state('profile', {
