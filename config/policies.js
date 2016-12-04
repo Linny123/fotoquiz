@@ -19,6 +19,13 @@
 
 module.exports.policies = {
 
+// Adding authorization so that only those who are logged in and have a valid token can
+// use these functionalities..
+  ProfileController: {
+        getUserProfile: 'Authorized',
+        editUserProfile: 'Authorized'
+  }
+
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *

@@ -49,7 +49,7 @@ module.exports = {
     facebookLoginCallback: function(req,res,next){
         passport.authenticate('facebook', function(err, user, next){
             if(user){
-                return res.redirect('/#/facebook/token=' + JSONWebToken.generateJWT(user.username));
+                return res.redirect('/#/facebook/' + JSONWebToken.generateJWT(user.username));
             }
             else {return res.status(401).json(next);}
         })(req, res);

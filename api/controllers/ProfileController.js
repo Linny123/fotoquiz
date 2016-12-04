@@ -20,12 +20,11 @@ module.exports = {
     },
 
     editUserProfile: function(req, res, next){
-    	var userProfile = req.body.params;
-      User.update({username: userProfile.username},
+      User.update({username: req.query.username},
         { 
-          firstName: userProfile.firstName,
-          lastName: userProfile.lastName,
-          email: userProfile.email
+          firstName: req.query.firstName,
+          lastName: req.query.lastName,
+          email: req.query.email
         },
         function(err, user) {
           if(err) {res.send('EDIT request not successful');}   
