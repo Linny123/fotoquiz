@@ -1,4 +1,5 @@
 var map;
+var latlng
     function initMap() {
         var point = {lat: 50.8201646, lng: 4.398042};
         map = new google.maps.Map(document.getElementById('map'), {
@@ -6,20 +7,10 @@ var map;
           center: point
     });
         google.maps.event.addListener(map, 'click', function(event) {
-        placeMarker(event.latLng);
+          latlng = event.latLng;
+          console.log(latlng);
       });
     }
-    function placeMarker(location) {
-      var marker = new google.maps.Marker({
-          position: location, 
-          map: map
-      });
-
-      map.setCenter(location);
-      document.write(location+"<BR>"+"distance (in meter): ");
-      var point = new google.maps.LatLng(50.8201646, 4.398042);
-      document.write(getDistance(location, point));
-  }
 var rad = function(x) {
   return x * Math.PI / 180;
 };
