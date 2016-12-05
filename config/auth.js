@@ -10,9 +10,9 @@ module.exports = {
 	},
 
 	'ImgurApi' : {
-		'clientID'		; '90f58e42cf3f991',
-		'Api_key'		; '67260609d4e4f5309235e48c155b3e3f7ab44a6d'
-		
+		'clientID'		: '90f58e42cf3f991',
+		'Api_key'		: '67260609d4e4f5309235e48c155b3e3f7ab44a6d'
+
 	}
 
 };
