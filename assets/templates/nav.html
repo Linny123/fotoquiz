@@ -4,6 +4,8 @@
             <li><a ui-sref="home">Home</a></li>
             <li><a ui-sref="nav1">map</a></li>
             <li><a ui-sref="ranking">Ranking</a></li>
+            <li ng-show="isLoggedIn()"><a ui-sref="fotouploader">Foto uploader</a></li>
+            <li ng-show="isLoggedIn()"><a ui-sref="fotoviewer">Fotoviewer</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-show="isLoggedIn()" role="presentation" class="dropdown">

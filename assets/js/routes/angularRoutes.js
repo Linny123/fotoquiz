@@ -21,6 +21,18 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               templateUrl: 'templates/nav1.html'
         })
 
+        .state('fotoviewer', {
+              url: '/fotoviewer', 
+              templateUrl: 'templates/fotoviewer.html',
+              controller: 'imgurCtrl'
+        })
+
+        .state('fotouploader', {
+              url: '/fotouploader', 
+              templateUrl: 'templates/fotouploader.html',
+              controller: 'imgurCtrl'
+        })
+
         .state('ranking', {
               url: '/ranking', 
               templateUrl: 'templates/ranking.html'

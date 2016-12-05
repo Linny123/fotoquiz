@@ -31,7 +31,11 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  'post /upload': 'ImgurController.uploadImage',
 
+  'get /getimages': 'ImgurController.getImages',
+
+  'get /getimage': 'ImgurController.getImage',
 
   'post /signup': 'AuthController.signup',
    
