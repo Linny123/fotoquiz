@@ -21,21 +21,16 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               templateUrl: 'templates/nav1.html'
         })
 
-        .state('quiz', {
-              url: '/quiz',
-              templateUrl: 'templates/quiz/quiz.html'
+        .state('ranking', {
+              url: '/ranking',
+              templateUrl: 'templates/ranking.html'
         })
 
-        .state('createPost', {
-          url: '/quiz/createPost',
-          templateUrl: 'templates/quiz/createPost.html',
-          controller: 'QuizPostController'
-        })
-
-        .state('getPosts', {
-          url: '/quiz/getPosts',
-          templateUrl: 'templates/quiz/getPosts.html'
-        })
+      .state('quiz', {
+        url: '/quiz',
+        templateUrl: 'templates/quiz.html',
+        controller: 'quizCtrl'
+      })
 
         .state('profile', {
             url: '/profile',

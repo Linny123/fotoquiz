@@ -5,7 +5,8 @@
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "bcrypt": "~0.8.0",
+    "bcrypt-nodejs": "latest",
+    "bcryptjs": "^2.3.0",
     "ejs": "2.3.4",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
@@ -24,7 +25,6 @@
     "passport": "~0.2.1",
     "passport-facebook": "^2.1.1",
     "passport-local": "~1.0.0",
-    "bcrypt-nodejs" : "latest",
     "rc": "1.0.1",
     "sails": "~0.12.9",
     "sails-disk": "~0.10.9",
@@ -39,6 +39,6 @@
     "type": "git",
     "url": "git://github.com/lindadecorte/fotoquiz.git"
   },
-  "author": "lindadecorte",
+  "author": ["lindadecorte", "Youssef Boudiba", "Thibeaut", "Geatan"],
   "license": ""
 }

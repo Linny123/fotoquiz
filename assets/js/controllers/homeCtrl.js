@@ -18,6 +18,7 @@ fotoApp.controller('homeCtrl', ['$scope', '$state', 'auth', function($scope, $st
         $scope.errorBoolean = true;
         $scope.error = error;
       }).then(function() {
+        $scope.user = {};
         $state.go('home');
       });
     };
@@ -26,7 +27,8 @@ fotoApp.controller('homeCtrl', ['$scope', '$state', 'auth', function($scope, $st
       auth.login($scope.user).error(function(error) {
         $scope.errorBoolean = true;
         $scope.error = error;
-      }).then(function successCallback() {
+      }).then(function() {
+        $scope.user = {};
         $state.go('home');
       });
     };

@@ -1,7 +1,7 @@
 // This services handle communication with the server.
 // Every get, post, put and delete request will be written here.
 
-fotoApp.factory('appDB', 
+fotoApp.factory('appDB',
 	['$http', '$window', function($http, $window){
 	var obj = {};
 
@@ -23,6 +23,15 @@ fotoApp.factory('appDB',
 			}
 		});
 	};
-	
-	return obj;
+
+    obj.createQuiz = function(quiz){
+      return $http.post('/quiz', quiz).success(function(data){
+      });
+    };
+
+    obj.getQuiz = function () {
+      return $http.get('/quiz');
+    };
+
+    return obj;
 }]);

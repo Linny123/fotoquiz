@@ -1,4 +1,4 @@
-// Passport local strategy for authentication
+// Passport local & facebook strategy for authentication
 
 var configAuth = require('./auth');
 var passport = require('passport');
@@ -12,14 +12,20 @@ passport.use('local-login', new LocalStrategy({
   },
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
+      if (err) {return done(err);}
       if (!user) {
         return done(null, false, { message: 'Username not found' });
       }
-      if (user.password != password) {
-          return done(null, false, {message: 'Password didn\'t match'});
-          }
+      User.comparePassword(password, user, function(err, match){
+        if(err){
+          return done(null, false, {message: 'Something went wrong'});
+        }
+        if(match){
           return done(null, user, {message: 'Logged in successfully'});
+        } else {
+          return done(null, false, {message: 'Password didn\'t match'});
+        }
+      });
     });
   }
 ));
@@ -62,7 +68,8 @@ passport.use(new FacebookStrategy({
            if (user) {return done(null, user);} // user found, return that user
            else {// if there is no user found with that facebook id, create them
               User.create({
-              FBID: profile.id, 
+              FBID: profile.id,
+              password: profile.id, 
               username: profile.name.givenName + ' ' + profile.name.familyName,
               email: profile.emails[0].value || null
               }).exec(function (err, user){

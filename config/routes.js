@@ -45,9 +45,9 @@ module.exports.routes = {
 
   'put /profile': 'ProfileController.editUserProfile',
 
-  'post /quiz/createPost': 'QuizPostController.createPost'
+  'post /quiz': 'QuizController.createQuiz',
 
-  //'get /quiz/getquiz': 'QuizController.getPosts'
+  'get /quiz': 'QuizController.getQuiz'
 
   /***************************************************************************
   *                                                                          *
