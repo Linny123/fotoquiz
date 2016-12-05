@@ -9,6 +9,8 @@ var latlng
         google.maps.event.addListener(map, 'click', function(event) {
           latlng = event.latLng;
           console.log(latlng);
+          console.log(fotoID);
+          //latlng naar het foto object(met ID = fotoID) sturen  
       });
     }
 var rad = function(x) {
