@@ -5,8 +5,6 @@ fotoApp.factory('appDB',
 	['$http', '$window', 'auth', function($http, $window, auth){
 	var obj = {};
 
-
-
 	obj.getUserProfile = function (username) {
 		return $http({  
 	        method: 'GET',  
@@ -27,6 +25,27 @@ fotoApp.factory('appDB',
 				email: userProfile.email
 			},  
 	        headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }  
+		});
+	};
+
+
+	obj.getCommentSection = function (quizID) {
+		return $http({  
+	        method: 'GET',  
+	        url: '/comment/',  
+	        params: {quizID: quizID} 
+		});
+	};
+
+	obj.postComment = function(author, comment, quizID){
+		return $http({  
+	        method: 'POST',  
+	        url: '/comment/',  
+	        params: {
+				author: author,
+				content: comment,
+				quizID: quizID
+			}
 		});
 	};
 	

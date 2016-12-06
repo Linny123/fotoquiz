@@ -53,6 +53,10 @@ module.exports.routes = {
 
   'put /profile': 'ProfileController.editUserProfile',
 
+  'get /comment': 'CommentController.getCommentSection',
+
+  'post /comment': 'CommentController.postNewComment',
+
   //'post /quiz': 'QuizController.newQuiz'
 
   /***************************************************************************

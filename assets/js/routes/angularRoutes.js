@@ -15,6 +15,12 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/facebook.html',
             controller: 'fbCtrl'
         })
+
+        .state('comment', {
+              url: '/comment', 
+              templateUrl: 'templates/comment.html',
+              controller: 'commentCtrl'
+        })
         
         .state('nav1', {
               url: '/nav1', 
