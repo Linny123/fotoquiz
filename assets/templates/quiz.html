@@ -1,0 +1,41 @@
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add</button>
+<div class="row h3">
+  <div class="col-md-3">Author</div>
+  <div class="col-md-3">Quiz</div>
+  <div class="col-md-3">Try to guess</div>
+  <div class="col-md-3"></div>
+</div>
+
+<div class="row" ng-repeat="item in quizzes">
+  <div class="col-md-3" ng-bind="item.username"></div>
+  <div class="col-md-3" ng-bind="item.content"></div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3">
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">Edit</button>
+    <button class="btn" ng-click="removeQuiz(quiz)">Remove</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Upload your picture and start your own quiz!</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group"><input type="text" ng-model="quiz.content" class="form-control" placeholder="content"/>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="createQuiz()">Create Quiz</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

@@ -42,7 +42,7 @@ module.exports.routes = {
   'get /getimage': 'ImgurController.getImage',
 
   'post /signup': 'AuthController.signup',
-   
+
   'post /login': 'AuthController.login',
 
   'get /auth/facebook': 'AuthController.facebookLogin',
@@ -53,11 +53,13 @@ module.exports.routes = {
 
   'put /profile': 'ProfileController.editUserProfile',
 
+  'post /quiz': 'QuizController.createQuiz',
+
+  'get /quiz': 'QuizController.getQuiz',
+
   'get /comment': 'CommentController.getCommentSection',
 
   'post /comment': 'CommentController.postNewComment',
-
-  //'post /quiz': 'QuizController.newQuiz'
 
   /***************************************************************************
   *                                                                          *
