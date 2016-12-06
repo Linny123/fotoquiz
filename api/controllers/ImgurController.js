@@ -8,11 +8,8 @@
 var request = require('request');
 var btoa = require('btoa');
 var fs = require('fs');
-//var FileReader = require('filereader')
-//var FileAPI = require('file-api')
-//var deferred = require('deferred');
-//var XMLHttpRequest = require('xhr');
-//var FormData = require('form-data');
+var ExifImage = require('exif');
+
 var client_id = '6206717c1dd47fc';
 
 
@@ -31,6 +28,8 @@ function uploadToImgur(base64) {
 	return new Promise(function(resolve, reject) {
 	sails.log("IN ImgurController (uploadToImgur)");
 
+		var imageInfo = {};
+
         var options = {
 			url: "https://api.imgur.com/3/image.json",
 			headers: {
@@ -39,7 +38,9 @@ function uploadToImgur(base64) {
 			method: 'POST',
 		    json: {
 		        'image': base64,
-		        'type' : 'base64'
+		        'type' : 'base64',
+		        //'album': 'tFkhZ',
+		        //'description' : 'Dit is een test'
 		    }
 		};
 		 
@@ -49,7 +50,10 @@ function uploadToImgur(base64) {
 		  	reject(error)
 		  }
 		  //sails.log.info(body);
-		  resolve(body.data.link)
+		  imageInfo.link = body.data.link
+		  imageInfo.deletehash = body.data.deletehash
+		  imageInfo.id = body.data.id
+		  resolve(imageInfo)
 		}
 		request(options, callback);
 	});
@@ -129,21 +133,44 @@ module.exports = {
     uploadImage: function(req, res){
 		sails.log("IN ImgurController (UPLOAD IMAGE)");
 
-		req.file('uploadImage').upload({
-		  dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+		var image = {};
+
+		req.file('uploadImage').upload({ // Upload file locally 
+		  //dirname: require('path').resolve(sails.config.appPath, 'assets/images')
 		},function (err, uploadedFiles) {
 		  if (err) return res.negotiate(err);
 
+		  sails.log("LOCAL PATH")
+		  sails.log(uploadedFiles[0].fd) 
 		 
-		  fs.readFile(uploadedFiles[0].fd, (err, data) => {
+		  ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { // Get Exif data from local file
+		        if (error)
+		            console.log('Error: '+error.message);
+		        else
+		        	//sails.log("METADATA")
+		            //console.log(exifData); // Do something with your data! 
+		            var exif = {}
+		            exif.GPSLatitudeRef = exifData.gps.GPSLatitudeRef
+		            exif.GPSLatitude = exifData.gps.GPSLatitude
+		            exif.GPSLongitudeRef = exifData.gps.GPSLongitudeRef
+		            exif.GPSLongitude = exifData.gps.GPSLongitude
+		            image.gps = exif; // Add exif data to image variable
+		    });
+		  
+		 
+		  fs.readFile(uploadedFiles[0].fd, (err, data) => { // Get Buffer of local file
 			  if (err) throw err;
-		
-			  file = btoa(uint8ToString(data))
 
-			  uploadToImgur(file).then(function(link) {
-			  	sails.log("LINK RECEIVED")
-			  	sails.log(link)
-			  	return res.send(link)
+			  file = btoa(uint8ToString(data)) // Convert buffer of local file to base64
+
+			  uploadToImgur(file).then(function(imageInfo) { // Upload local file to IMGUR
+			  	image.url = imageInfo.link;
+			  	image.id = imageInfo.id;
+			  	image.deletehash = imageInfo.deletehash
+
+			  	sails.log("IMAGE DATA")
+			  	sails.log(image)
+			  	return res.send(image)  // Return all collected data and url of remote image
 			  });
 		  });
 		
@@ -152,6 +179,6 @@ module.exports = {
     },
 
 
-	
+
 };
 
