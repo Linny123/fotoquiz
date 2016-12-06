@@ -59,6 +59,38 @@ function uploadToImgur(base64) {
 	});
 }
 
+function removeImage(imageDeleteHash) {
+	return new Promise(function(resolve, reject) {
+	sails.log("IN ImgurController (removeImage from Imgur)");
+
+		var imageInfo = {};
+
+        var options = {
+		  url: "https://api.imgur.com/3/image/"+imageDeleteHash,
+		  method: 'DELETE',
+		  headers: {
+            "Authorization": "Client-ID " + client_id
+          }
+		};
+		 
+		function callback(error, response, body) {
+		  if(error) {
+		  	sails.log.error("ERROR: "+error);
+		  	reject(error)
+		  }
+		  // if(!body.success) {
+		  // 	sails.log.error("ERROR removeImage (from Imgur)")
+		  // 	sails.log.error(body.data.error)
+		  // 	var statuscode = body.status
+		  // 	sails.log.error(statuscode)
+		  // }
+		  //sails.log(body)
+		  resolve(body.status) // returns statuscode
+		}
+		request(options, callback);
+	});
+}
+
 module.exports = {
 
 	_config: {
@@ -129,54 +161,78 @@ module.exports = {
 
     },
 
+    createQuiz: function(req, res){ 
+    	// Just a dummy function
+    	// Will be replaced by similar function within QuizController
+    	// So: QuizController will be responsible for handling create quiz form 
+
+    	sails.log.debug("IN DUMMY QuizController")
+    	sails.log.debug("Quiz name: "+req.param('description'))
+
+    	// Quiz controller must call this function (uploadImage) (with original request) to upload image
+    	sails.controllers.imgur.uploadImage(req, res).then(function(imageData) {
+    		sails.log.debug("RECEIVED IMAGE DATA: ")
+	    	sails.log.debug(imageData)
+	    	return res.send(imageData)
+    	})
+    
+    },
+
 
     uploadImage: function(req, res){
 		sails.log("IN ImgurController (UPLOAD IMAGE)");
+		return new Promise(function(resolve, reject) {
 
-		var image = {};
+			var image = {};
 
-		req.file('uploadImage').upload({ // Upload file locally 
-		  //dirname: require('path').resolve(sails.config.appPath, 'assets/images')
-		},function (err, uploadedFiles) {
-		  if (err) return res.negotiate(err);
+			req.file('uploadImage').upload({ // Upload file locally 
+			  //dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+			},function (err, uploadedFiles) {
+			  if (err) return res.negotiate(err);
 
-		  sails.log("LOCAL PATH")
-		  sails.log(uploadedFiles[0].fd) 
-		 
-		  ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { // Get Exif data from local file
-		        if (error)
-		            console.log('Error: '+error.message);
-		        else
-		        	//sails.log("METADATA")
-		            //console.log(exifData); // Do something with your data! 
-		            var exif = {}
-		            exif.GPSLatitudeRef = exifData.gps.GPSLatitudeRef
-		            exif.GPSLatitude = exifData.gps.GPSLatitude
-		            exif.GPSLongitudeRef = exifData.gps.GPSLongitudeRef
-		            exif.GPSLongitude = exifData.gps.GPSLongitude
-		            image.gps = exif; // Add exif data to image variable
-		    });
-		  
-		 
-		  fs.readFile(uploadedFiles[0].fd, (err, data) => { // Get Buffer of local file
-			  if (err) throw err;
+			  // sails.log("LOCAL PATH")
+			  // sails.log(uploadedFiles[0].fd) 
+			 
+			  ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { // Get Exif data from local file
+			        if (error)
+			            console.log('Error: '+error.message);
+			        else
+			        	//sails.log("METADATA")
+			            //console.log(exifData); // Do something with your data! 
+			            var exif = {}
+			            exif.GPSLatitudeRef = exifData.gps.GPSLatitudeRef
+			            exif.GPSLatitude = exifData.gps.GPSLatitude
+			            exif.GPSLongitudeRef = exifData.gps.GPSLongitudeRef
+			            exif.GPSLongitude = exifData.gps.GPSLongitude
+			            image.gps = exif; // Add exif data to image variable
+			    });
+			  
+			 
+			  fs.readFile(uploadedFiles[0].fd, (err, data) => { // Get Buffer of local file
+				  if (err) throw err;
 
-			  file = btoa(uint8ToString(data)) // Convert buffer of local file to base64
+				  file = btoa(uint8ToString(data)) // Convert buffer of local file to base64
 
-			  uploadToImgur(file).then(function(imageInfo) { // Upload local file to IMGUR
-			  	image.url = imageInfo.link;
-			  	image.id = imageInfo.id;
-			  	image.deletehash = imageInfo.deletehash
+				  uploadToImgur(file).then(function(imageInfo) { // Upload local file to IMGUR
+				  	image.url = imageInfo.link;
+				  	image.id = imageInfo.id;
+				  	image.deletehash = imageInfo.deletehash
 
-			  	sails.log("IMAGE DATA")
-			  	sails.log(image)
-			  	return res.send(image)  // Return all collected data and url of remote image
+				  	// sails.log("IMAGE DATA")
+				  	// sails.log(image)
+				  	resolve(image)  // Return all collected data and url of remote image
+				  });
 			  });
-		  });
-		
-		});
-
+			
+			});
+		}); // end promise
     },
+
+    removeImage: function(req, res){
+    	sails.log("IN ImgurController (removeImage)");
+		var imageDeleteHash = req.body.params.deletehash;
+    	return removeImage(imageDeleteHash);
+    }
 
 
 
