@@ -29,11 +29,13 @@ fotoApp.controller('imgurCtrl',
 
 
     $scope.upload = function() {
+        // TODO Remove this function (img upload is now handled bu quizCtrl)
         console.log("function call: upload");
         var file = document.getElementById('uploadImage').files[0]
         console.log(file)
+        $scope.form.file = file
         console.log($scope.form)
-        imgur.upload(file).error(function(error) {
+        imgur.upload($scope.form).error(function(error) {
           $scope.error = error;
         }).then(function(image) {
           console.log("upload OK");

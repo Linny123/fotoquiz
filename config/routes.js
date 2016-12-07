@@ -33,11 +33,11 @@ module.exports.routes = {
   ***************************************************************************/
   'post /removeImage': 'ImgurController.removeImage',
 
-  'post /uploadQuiz': 'ImgurController.createQuiz', // DUMMY
+  'post /uploadQuiz': 'ImgurController.createQuiz', // DUMMY // TODO Remove dummy
 
-  'post /upload': 'ImgurController.uploadImage',
+  'post /upload': 'ImgurController.uploadImage', // TODO Remove (not needed anymore)
 
-  'get /getimages': 'ImgurController.getImages',
+  'get /getimages': 'ImgurController.getImages', // TODO Remove (not needed)
 
   'get /getimage': 'ImgurController.getImage',
 

@@ -162,25 +162,27 @@ module.exports = {
     },
 
     createQuiz: function(req, res){ 
+    	// TODO Remove this Dummy function
     	// Just a dummy function
     	// Will be replaced by similar function within QuizController
     	// So: QuizController will be responsible for handling create quiz form 
 
     	sails.log.debug("IN DUMMY QuizController")
-    	sails.log.debug(req)
+    	//sails.log.debug(req)
     	sails.log.debug("Quiz name: "+req.param('description'))
 
     	// Quiz controller must call this function (uploadImage) (with original request) to upload image
     	sails.controllers.imgur.uploadImage(req, res).then(function(imageData) {
     		sails.log.debug("RECEIVED IMAGE DATA: ")
 	    	sails.log.debug(imageData)
-	    	return res.send(imageData)
+	    	return res.send(imageData) 
     	})
     
     },
 
 
     uploadImage: function(req, res){
+    	// TODO cleanup comments
 		sails.log("IN ImgurController (UPLOAD IMAGE)");
 		return new Promise(function(resolve, reject) {
 

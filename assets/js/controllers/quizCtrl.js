@@ -5,9 +5,13 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
     $scope.createQuiz = function () {
       console.log($scope.quiz.content)
+      var file = document.getElementById('image').files[0]
+      console.log(file)
+      $scope.quiz.file = file
+
       if (auth.isLoggedIn()) {
-        appDB.createQuiz($scope.quiz).success(function () {
-          $state.go('quiz');
+        appDB.createQuiz($scope.quiz).success(function (data) {
+          $state.reload(); // TODO also remove model overlay (doesnt accept input)
         });
       }
       else {

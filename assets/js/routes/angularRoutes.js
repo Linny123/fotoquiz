@@ -27,13 +27,13 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               templateUrl: 'templates/nav1.html'
         })
 
-        .state('fotoviewer', {
+        .state('fotoviewer', { // TODO Remove (not needed anymore)
               url: '/fotoviewer',
               templateUrl: 'templates/fotoviewer.html',
               controller: 'imgurCtrl'
         })
 
-        .state('fotouploader', {
+        .state('fotouploader', { // TODO Remove (not needed anymore)
               url: '/fotouploader',
               templateUrl: 'templates/fotouploader.html',
               controller: 'imgurCtrl'

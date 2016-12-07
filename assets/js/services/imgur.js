@@ -21,12 +21,18 @@ fotoApp.factory('imgur',
         });
     };
 
-    imgur.upload = function(file) {
-        console.log("IN UPLOAD function, id: "+file)
-        console.log(file)
+    imgur.upload = function(form) {
+        // TODO Remove this function (img upload is now handled bu quizCtrl)
+        console.log("IN UPLOAD function, id: "+form.description)
 
         var formData = new FormData();
-        formData.append('file', file);
+
+        // Transform data to formData (to send it with post)
+        for (var key in form) {
+          if (form.hasOwnProperty(key)) {
+            formData.append(key, form[key]);
+          }
+        }
 
         return $http.post('/uploadQuiz', formData, {
                                transformRequest: angular.identity,

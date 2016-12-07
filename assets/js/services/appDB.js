@@ -28,8 +28,26 @@ fotoApp.factory('appDB',
 		});
 	};
 
-    obj.createQuiz = function(quiz){
-      return $http.post('/quiz', quiz).success(function(data){
+    obj.createQuiz = function(quiz){  
+		console.log("-> appDB.createQuiz")  	
+    	console.log(quiz)    
+
+        // Transform data to formData (to send it with post)
+        var formData = new FormData();
+        for (var key in quiz) {
+          if (quiz.hasOwnProperty(key)) {
+            formData.append(key, quiz[key]);
+          }
+        }
+
+      return $http.post(
+      		'/quiz', 
+      		formData, 
+      		{ transformRequest: angular.identity, // So that angular does not change request
+          	  headers: {'Content-Type': undefined}
+        }).success(function(data){
+        	console.log("-> appDB.createQuiz: succesfully added quiz: data:")
+            console.log(data);
       });
     };
 
