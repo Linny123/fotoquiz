@@ -2,6 +2,7 @@ fotoApp.controller('imgurCtrl',
   ['$scope', '$state', 'imgur',
   function($scope, $state, imgur){
     $scope.images = {};
+    $scope.form = {};
     console.log("IN imgurCtrl");
 
     $scope.images = function() {
@@ -29,9 +30,18 @@ fotoApp.controller('imgurCtrl',
 
     $scope.upload = function() {
         console.log("function call: upload");
-
-        console.log($scope.title)
-        
+        var file = document.getElementById('uploadImage').files[0]
+        console.log(file)
+        console.log($scope.form)
+        imgur.upload(file).error(function(error) {
+          $scope.error = error;
+        }).then(function(image) {
+          console.log("upload OK");
+          var obj = image.data
+          console.log(obj);
+          $scope.imageData = obj;
+        });
+          
     };
 
     $scope.removeImage = function(id) {

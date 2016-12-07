@@ -1,12 +1,15 @@
 <h3>Imgur images</h3>
 <div class="col-sm-2">
 
-<!-- enctype="multipart/form-data" action="/upload"-->
-<form  action="/uploadQuiz"  id="uploadForm" method="post" enctype="multipart/form-data">
-		<input type="text" id="description" name="description" placeholder="Beschrijving" />
+<!-- enctype="multipart/form-data" action="/uploadQuiz"-->
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+		<input ng-model="form.description" type="text" id="description" name="description" placeholder="Beschrijving" />
     	<input type="file" id="uploadImage" name="uploadImage" />
-    	<input type="submit" value="Nieuwe quiz" />
+    	<input ng-click="upload()" type="submit" value="Nieuwe quiz" />
 </form>
+
+
+<p>{{imageData}}</p>
 
 
 </div>

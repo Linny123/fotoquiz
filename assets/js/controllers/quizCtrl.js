@@ -4,6 +4,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz.username = auth.currentUser();
 
     $scope.createQuiz = function () {
+      console.log($scope.quiz.content)
       if (auth.isLoggedIn()) {
         appDB.createQuiz($scope.quiz).success(function () {
           $state.go('quiz');

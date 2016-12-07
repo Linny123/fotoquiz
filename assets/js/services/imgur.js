@@ -3,10 +3,6 @@ fotoApp.factory('imgur',
     var imgur = {};
     console.log("IN imgur.js");
 
-    imgur.displayLink = function (link){
-        console.log("Received link: "+link)
-    };
-
     imgur.images = function(album_id) {
         console.log("IN imgur.images function, id: "+album_id)
 
@@ -27,8 +23,15 @@ fotoApp.factory('imgur',
 
     imgur.upload = function(file) {
         console.log("IN UPLOAD function, id: "+file)
+        console.log(file)
 
-        return $http.post('/upload', { params: { "file": file } }).success(function(data){
+        var formData = new FormData();
+        formData.append('file', file);
+
+        return $http.post('/uploadQuiz', formData, {
+                               transformRequest: angular.identity,
+                               headers: {'Content-Type': undefined}
+                            }).success(function(data){
             console.log(" SUCCESS UPLOAD FILE")
             console.log(data);
         });

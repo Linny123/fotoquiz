@@ -167,6 +167,7 @@ module.exports = {
     	// So: QuizController will be responsible for handling create quiz form 
 
     	sails.log.debug("IN DUMMY QuizController")
+    	sails.log.debug(req)
     	sails.log.debug("Quiz name: "+req.param('description'))
 
     	// Quiz controller must call this function (uploadImage) (with original request) to upload image
@@ -185,7 +186,7 @@ module.exports = {
 
 			var image = {};
 
-			req.file('uploadImage').upload({ // Upload file locally 
+			req.file('file').upload({ // Upload file locally 
 			  //dirname: require('path').resolve(sails.config.appPath, 'assets/images')
 			},function (err, uploadedFiles) {
 			  if (err) return res.negotiate(err);
