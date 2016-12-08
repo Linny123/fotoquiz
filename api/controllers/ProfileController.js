@@ -21,14 +21,21 @@ module.exports = {
 
     editUserProfile: function(req, res, next){
       User.update({username: req.query.username},
-        { 
+        {
           firstName: req.query.firstName,
           lastName: req.query.lastName,
           email: req.query.email
         },
         function(err, user) {
-          if(err) {res.send('EDIT request not successful');}   
+          if(err) {res.send('EDIT request not successful');}
           if(user) {res.send('EDIT request successful');}
       });
-    }
+    },
+
+  getUserQuiz: function (req, res, next) {
+    Quiz.find({username: req.query.username}).exec(function (err, Quizs){
+      if (err) {return next(err);}
+      return res.json(Quizs);
+    });
+  }
 };

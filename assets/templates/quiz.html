@@ -13,8 +13,7 @@
   <div class="col-md-3" ><img height="150" src="{{item.imageURL}}" /></div>
   <div class="col-md-3"></div>
   <div class="col-md-3">
-    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">Edit</button>
-    <button class="btn" ng-click="removeQuiz(quiz)">Remove</button>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">Submit guess</button>
   </div>
 </div>
 
@@ -38,7 +37,7 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="createQuiz()">Create Quiz</button>
+        <button class="btn btn-primary" ng-click="createQuiz()" data-dismiss="modal">Create Quiz</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

@@ -61,6 +61,8 @@ module.exports.routes = {
 
   'post /comment': 'CommentController.postNewComment',
 
+  'get /profile/quiz': 'ProfileController.getUserQuiz',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

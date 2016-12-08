@@ -28,9 +28,9 @@ fotoApp.factory('appDB',
 		});
 	};
 
-    obj.createQuiz = function(quiz){  
-		console.log("-> appDB.createQuiz")  	
-    	console.log(quiz)    
+    obj.createQuiz = function(quiz){
+		console.log("-> appDB.createQuiz")
+    	console.log(quiz)
 
         // Transform data to formData (to send it with post)
         var formData = new FormData();
@@ -41,8 +41,8 @@ fotoApp.factory('appDB',
         }
 
       return $http.post(
-      		'/quiz', 
-      		formData, 
+      		'/quiz',
+      		formData,
       		{ transformRequest: angular.identity, // So that angular does not change request
           	  headers: {'Content-Type': undefined}
         }).success(function(data){
@@ -53,6 +53,15 @@ fotoApp.factory('appDB',
 
     obj.getQuiz = function () {
       return $http.get('/quiz');
+    };
+
+
+    obj.getUserQuiz = function (username) {
+      return $http.get('/profile/quiz', {
+        params: {
+          "username": username
+        }
+      });
     };
 
 

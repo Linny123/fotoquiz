@@ -12,7 +12,7 @@ fotoApp.controller('profileCtrl', ['$scope', 'auth', 'appDB',
 					$scope.userProfile = profile;
 				})
 		};
-		
+
 		// Edit profile in DB and update immediately afterwards
 		$scope.editProfile = function (profile){
 			appDB.editUserProfile(profile).
@@ -21,7 +21,18 @@ fotoApp.controller('profileCtrl', ['$scope', 'auth', 'appDB',
 	    	});
 	    };
 
+
+    var getUserQuiz = function (username) {
+      appDB.getUserQuiz($scope.userProfile.username).success(function (data) {
+        for (var i = 0; i < data.length; i++) {
+          data[i].index = i;
+        }
+        $scope.userQuizzes = data;
+      })
+    };
+
 	    //Initialize the profile shown on the page
 	    getProfile($scope.userProfile.username);
+    getUserQuiz($scope.userProfile.username);
 
 }]);
