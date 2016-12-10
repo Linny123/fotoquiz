@@ -4,6 +4,7 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
 		$scope.currentUser = auth.currentUser;
 		$scope.userProfile = {};
 		$scope.userProfile.username = auth.currentUser() // TODO: visitor can visit a users page
+    $scope.selectedQuiz = {};
 
 		// Get profile from DB and update fields on profile page
 		var getProfile = function (username) {
@@ -37,6 +38,17 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
           $state.reload();
         });
       }
+    };
+
+    $scope.selectQuiz = function (data) {
+      $scope.selectedQuiz = data;
+    };
+
+    $scope.editUserQuiz = function (quiz) {
+      $scope.selectedQuiz.content = quiz.content;
+        appDB.editUserQuiz($scope.selectedQuiz).success(function () {
+          $scope.selectedQuiz = {};
+        });
     };
 
 	    //Initialize the profile shown on the page

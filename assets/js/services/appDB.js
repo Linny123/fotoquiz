@@ -74,6 +74,16 @@ fotoApp.factory('appDB',
     };
 
 
+    obj.editUserQuiz = function(quiz){
+        return $http.put('/profile/quiz', {
+          params: {
+            "id": quiz.id,
+            "content": quiz.content
+          }
+        });
+    };
+
+
 	obj.getCommentSection = function (quizID) {
 		return $http({
 	        method: 'GET',

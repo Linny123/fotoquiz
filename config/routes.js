@@ -65,6 +65,8 @@ module.exports.routes = {
 
   'delete /profile/quiz': 'ProfileController.removeUserQuiz',
 
+  'put /profile/quiz': 'ProfileController.editUserQuiz',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

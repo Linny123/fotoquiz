@@ -44,9 +44,18 @@ module.exports = {
       if (err) {
         return res.negotiate(err);
       }
-      sails.log('Any users named Finn have now been deleted, if there were any.');
       return res.ok();
     });
+  },
+
+  editUserQuiz: function(req, res, next){
+    var quiz = req.body.params;
+    Quiz.update({id: quiz.id},
+      {
+        content: quiz.content
+      },
+      function(err, quiz) {
+      });
   }
 
 };

@@ -104,11 +104,11 @@
       <div class="col-md-3" ><img height="150" src="{{item.imageURL}}" /></div>
       <div class="col-md-3"></div>
       <div class="col-md-3">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="editQuiz(item)">Edit</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="selectQuiz(item)">Edit</button>
         <button class="btn" ng-click="removeQuiz(item)">Remove</button>
       </div>
     </div>
-	</div>
+  </div>
 </div>
 
 <div class="modal fade" id="editQuizModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -123,7 +123,7 @@
 
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="saveQuizModifications()">Save</button>
+        <button class="btn btn-primary" ng-click="editUserQuiz(quiz)" data-dismiss="modal">Save</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
