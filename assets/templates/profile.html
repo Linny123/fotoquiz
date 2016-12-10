@@ -104,9 +104,30 @@
       <div class="col-md-3" ><img height="150" src="{{item.imageURL}}" /></div>
       <div class="col-md-3"></div>
       <div class="col-md-3">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">Edit</button>
-        <button class="btn" ng-click="removeQuiz(quiz)">Remove</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="editQuiz(item)">Edit</button>
+        <button class="btn" ng-click="removeQuiz(item)">Remove</button>
       </div>
     </div>
 	</div>
+</div>
+
+<div class="modal fade" id="editQuizModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit your quiz!</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">  <input type="text" ng-model="quiz.content"  class="form-control"/></div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="saveQuizModifications()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </div>

@@ -65,6 +65,15 @@ fotoApp.factory('appDB',
     };
 
 
+    obj.removeQuiz = function (quizID) {
+      return $http.delete('/profile/quiz', {
+        params: {
+          "id": quizID
+        }
+      });
+    };
+
+
 	obj.getCommentSection = function (quizID) {
 		return $http({
 	        method: 'GET',

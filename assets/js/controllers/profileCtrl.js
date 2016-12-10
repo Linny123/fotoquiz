@@ -1,5 +1,5 @@
-fotoApp.controller('profileCtrl', ['$scope', 'auth', 'appDB',
-	function ($scope, auth, appDB) {
+fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
+	function ($scope, $state, auth, appDB) {
 		$scope.bodyClass = '';
 		$scope.currentUser = auth.currentUser;
 		$scope.userProfile = {};
@@ -29,6 +29,14 @@ fotoApp.controller('profileCtrl', ['$scope', 'auth', 'appDB',
         }
         $scope.userQuizzes = data;
       })
+    };
+
+    $scope.removeQuiz = function (data) {
+      if (confirm('Do you really want to delete?')){
+        appDB.removeQuiz(data.id).success(function (data) {
+          $state.reload();
+        });
+      }
     };
 
 	    //Initialize the profile shown on the page
