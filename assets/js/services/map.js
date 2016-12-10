@@ -1,5 +1,6 @@
 var map;
-var latlng
+var latlng;
+var counter 3
     function initMap() {
         var point = {lat: 50.8201646, lng: 4.398042};
         map = new google.maps.Map(document.getElementById('map'), {
@@ -10,7 +11,18 @@ var latlng
           latlng = event.latLng;
           console.log(latlng);
           console.log(fotoID);
-          //latlng naar het foto object(met ID = fotoID) sturen  
+          if (getDistance(fotoID, latlng) < 100){
+            document.write("Yes, you guessed right!");
+          }else{
+            if(counter = 0){
+              location.reload();
+              document.write("Oops, you guessed wrong 3 times");
+
+            }
+          }
+
+          //latlng naar het foto object(met ID = fotoID) sturen
+          // als teller = 3 quiz gedaan, pagina reload  
       });
     }
 var rad = function(x) {
