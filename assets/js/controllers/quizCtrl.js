@@ -11,7 +11,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
       if (auth.isLoggedIn()) {
         appDB.createQuiz($scope.quiz).success(function (data) {
-          $state.reload(); // TODO also remove model overlay (doesnt accept input)
+          $state.reload(); 
         });
       }
       else {

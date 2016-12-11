@@ -34,7 +34,7 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
 
     $scope.removeQuiz = function (data) {
       if (confirm('Do you really want to delete?')){
-        appDB.removeQuiz(data.id).success(function (data) {
+        appDB.removeQuiz(data.id, data.imageDeletehash).success(function (data) {
           $state.reload();
         });
       }

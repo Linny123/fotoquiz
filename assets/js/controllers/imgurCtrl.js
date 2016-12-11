@@ -46,18 +46,7 @@ fotoApp.controller('imgurCtrl',
           
     };
 
-    $scope.removeImage = function(id) {
-      console.log("function call: remove Image by deletehash: "+id);
-      imgur.remove(id).error(function(error) {
-        $scope.error = error;
-      }).then(function(image) {
-        console.log("RemoveImage OK");
-        console.log(image.data);
-      });
-    };
 
-
-    //$scope.removeImage('CM1VAEkGAJtjzMJ');
 
     $scope.getImage('2kvoi3p');
 

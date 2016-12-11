@@ -39,10 +39,6 @@ module.exports = {
 
     })
 
-
-    
-
-
   },
 
   getQuiz: function (req, res, next) {

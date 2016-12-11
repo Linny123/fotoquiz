@@ -46,7 +46,7 @@ fotoApp.factory('imgur',
     imgur.remove = function(id) {
         console.log("IN REMOVE function, id: "+id)
 
-        return $http.post('/removeImage', { params: { "deletehash": id } }).success(function(data){
+        return $http.post('/removeImage', { params: { "imageDeletehash": id } }).success(function(data){
             console.log(" SUCCESS REMOVE FILE")
             console.log(data);
         });

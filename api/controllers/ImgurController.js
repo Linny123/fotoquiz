@@ -233,8 +233,9 @@ module.exports = {
 
     removeImage: function(req, res){
     	sails.log("IN ImgurController (removeImage)");
-		var imageDeleteHash = req.body.params.deletehash;
-    	return removeImage(imageDeleteHash);
+		var imageDeletehash = req.query.imageDeletehash
+		sails.log(imageDeletehash);
+    	return removeImage(imageDeletehash);
     }
 
 

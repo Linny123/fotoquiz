@@ -65,10 +65,11 @@ fotoApp.factory('appDB',
     };
 
 
-    obj.removeQuiz = function (quizID) {
+    obj.removeQuiz = function (quizID, imageDeletehash) {
       return $http.delete('/profile/quiz', {
         params: {
-          "id": quizID
+          "id": quizID,
+          "imageDeletehash" : imageDeletehash
         }
       });
     };

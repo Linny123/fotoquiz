@@ -40,6 +40,10 @@ module.exports = {
   },
 
   removeUserQuiz: function (req, res, next) {
+    // Also remove image file from Imgur
+    var imageDeletehash = req.query.imageDeletehash
+    sails.controllers.imgur.removeImage(req, res);
+
     Quiz.destroy({id: req.query.id}).exec(function (err){
       if (err) {
         return res.negotiate(err);
