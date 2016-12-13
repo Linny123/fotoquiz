@@ -2,240 +2,165 @@
  * ImgurController
  *
  * @description :: Server-side logic for managing Imgur API
+ * @author      :: Thibaut Deweert
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var request = require('request');
-var btoa = require('btoa');
-var fs = require('fs');
-var ExifImage = require('exif');
+ var request = require('request');
+ var btoa = require('btoa');
+ var fs = require('fs');
+ var ExifImage = require('exif');
 
-var client_id = '6206717c1dd47fc';
-
-
-
-function uint8ToString(buf) {
-    var i, length, out = '';
-    for (i = 0, length = buf.length; i < length; i += 1) {
-        out += String.fromCharCode(buf[i]);
-    }
-    return out;
-}
+ var client_id = '6206717c1dd47fc';
 
 
+ function uint8ToString(buf) {
+ 	var i, length, out = '';
+ 	for (i = 0, length = buf.length; i < length; i += 1) {
+ 		out += String.fromCharCode(buf[i]);
+ 	}
+ 	return out;
+ }
 
-function uploadToImgur(base64) {
-	return new Promise(function(resolve, reject) {
-	sails.log("IN ImgurController (uploadToImgur)");
+ function coordinatesToDecimal(degrees, minutes, seconds) {
+ 	return degrees + minutes/60 + seconds/3600;
+ }
 
-		var imageInfo = {};
+ function uploadToImgur(base64) {
+ 	return new Promise(function(resolve, reject) {
 
-        var options = {
-			url: "https://api.imgur.com/3/image.json",
-			headers: {
-				"Authorization": "Client-ID " + client_id
-			},
-			method: 'POST',
-		    json: {
-		        'image': base64,
-		        'type' : 'base64',
-		        //'album': 'tFkhZ',
-		        //'description' : 'Dit is een test'
+ 		var imageInfo = {};
+
+ 		var options = {
+ 			url: "https://api.imgur.com/3/image.json",
+ 			headers: {
+ 				"Authorization": "Client-ID " + client_id
+ 			},
+ 			method: 'POST',
+ 			json: {
+ 				'image': base64,
+ 				'type' : 'base64'
 		    }
 		};
-		 
+
 		function callback(error, response, body) {
-		  if(error) {
-		  	sails.log.error("ERROR: "+error);
-		  	reject(error)
-		  }
-		  //sails.log.info(body);
+			if(error) {
+				sails.log.error("ERROR: "+error);
+				reject(error)
+			}
+
 		  imageInfo.link = body.data.link
 		  imageInfo.deletehash = body.data.deletehash
 		  imageInfo.id = body.data.id
 		  resolve(imageInfo)
 		}
+
 		request(options, callback);
 	});
-}
+ }
 
-function removeImage(imageDeleteHash) {
-	return new Promise(function(resolve, reject) {
-	sails.log("IN ImgurController (removeImage from Imgur)");
+ function removeImage(imageDeleteHash) {
+ 	return new Promise(function(resolve, reject) {
+ 		sails.log("-> Removed image with deletehash: "+imageDeleteHash);
 
-		var imageInfo = {};
+ 		var imageInfo = {};
 
-        var options = {
-		  url: "https://api.imgur.com/3/image/"+imageDeleteHash,
-		  method: 'DELETE',
-		  headers: {
-            "Authorization": "Client-ID " + client_id
-          }
-		};
-		 
-		function callback(error, response, body) {
-		  if(error) {
-		  	sails.log.error("ERROR: "+error);
-		  	reject(error)
-		  }
-		  // if(!body.success) {
-		  // 	sails.log.error("ERROR removeImage (from Imgur)")
-		  // 	sails.log.error(body.data.error)
-		  // 	var statuscode = body.status
-		  // 	sails.log.error(statuscode)
-		  // }
-		  //sails.log(body)
-		  resolve(body.status) // returns statuscode
+ 		var options = {
+ 			url: "https://api.imgur.com/3/image/"+imageDeleteHash,
+ 			method: 'DELETE',
+ 			headers: {
+ 				"Authorization": "Client-ID " + client_id
+ 			}
+ 		};
+
+ 		function callback(error, response, body) {
+ 			if(error) {
+ 				sails.log.error("ERROR: "+error);
+ 				reject(error)
+ 			}
+			resolve(body.status) // returns statuscode
 		}
 		request(options, callback);
 	});
-}
+ }
 
-module.exports = {
+ module.exports = {
 
-	_config: {
-        actions: false,
-        shortcuts: false,
-        rest: false
-    },
+ 	getImageLinkByID: function(req, res){
+ 		// id should be in params field: 'id'
 
-	getImages: function(req, res){
-		sails.log("IN ImgurController (GETIMAGE)");
-		var album_id = req.query.album_id;
+ 		var id = req.query.id;
 
-        var options = {
-		  url: "https://api.imgur.com/3/album/"+album_id+"/images/",
-		  headers: {
-            "Authorization": "Client-ID " + client_id
-          }
-		};
-		 
-		function callback(error, response, body) {
-		  if (!error && response.statusCode == 200) {
-		  	var info = JSON.parse(body);
-		  	var images = [];
-		  	for (i = 0; i < info.data.length; ++i) {
-		  		images.push({ id: info.data[i].id, link: info.data[i].link});
-			    sails.log(info.data[i].link);
-			}
+ 		var options = {
+ 			url: "https://api.imgur.com/3/image/"+id,
+ 			headers: {
+ 				"Authorization": "Client-ID " + client_id
+ 			}
+ 		};
 
-		    return res.send(images)
-		    sails.log("RETURNED");
-		  }
-		  if(error) {
-		  	sails.log(error);
-		  }
-		}
-		 
-		request(options, callback);
+ 		function callback(error, response, body) {
+ 			if (!error && response.statusCode == 200) {
+ 				var info = JSON.parse(body);
+ 				var image = info.data.link;
+
+ 				return res.send(image)
+ 			}
+ 			if(error) {
+ 				sails.log(error);
+ 			}
+ 		}
+
+ 		request(options, callback);
 
 
-    },
-
-    getImage: function(req, res){
-		sails.log("IN ImgurController (GETIMAGE)");
-		var id = req.query.id;
-
-        var options = {
-		  url: "https://api.imgur.com/3/image/"+id,
-		  headers: {
-            "Authorization": "Client-ID " + client_id
-          }
-		};
-		 
-		function callback(error, response, body) {
-		  if (!error && response.statusCode == 200) {
-		  	var info = JSON.parse(body);
-		  	var image = info.data.link;
-
-		    return res.send(image)
-		    sails.log("RETURNED");
-		  }
-		  if(error) {
-		  	sails.log(error);
-		  }
-		}
-		 
-		request(options, callback);
-
-
-    },
-
-    createQuiz: function(req, res){ 
-    	// TODO Remove this Dummy function
-    	// Just a dummy function
-    	// Will be replaced by similar function within QuizController
-    	// So: QuizController will be responsible for handling create quiz form 
-
-    	sails.log.debug("IN DUMMY QuizController")
-    	//sails.log.debug(req)
-    	sails.log.debug("Quiz name: "+req.param('description'))
-
-    	// Quiz controller must call this function (uploadImage) (with original request) to upload image
-    	sails.controllers.imgur.uploadImage(req, res).then(function(imageData) {
-    		sails.log.debug("RECEIVED IMAGE DATA: ")
-	    	sails.log.debug(imageData)
-	    	return res.send(imageData) 
-    	})
-    
-    },
+ 	},
 
 
     uploadImage: function(req, res){
-    	// TODO cleanup comments
-		sails.log("IN ImgurController (UPLOAD IMAGE)");
-		return new Promise(function(resolve, reject) {
+    	// file should be in formdata field: 'file'
+    	sails.log("IN UPLOAD")
+    	// Make promise of uploader
+    	return new Promise(function(resolve, reject) {
 
-			var image = {};
+    		var image = {};
 
-			req.file('file').upload({ // Upload file locally 
-			  //dirname: require('path').resolve(sails.config.appPath, 'assets/images')
-			},function (err, uploadedFiles) {
-			  if (err) return res.negotiate(err);
+			// Upload file locally
+			req.file('file').upload({/*custom dirpath*/},function (err, uploadedFiles) {
+				if (err) return res.negotiate(err);
 
-			  // sails.log("LOCAL PATH")
-			  // sails.log(uploadedFiles[0].fd) 
-			 
-			  ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { // Get Exif data from local file
-			        if (error)
-			            console.log('Error: '+error.message);
-			        else
-			        	//sails.log("METADATA")
-			            //console.log(exifData); // Do something with your data! 
-			            var exif = {}
-			            exif.GPSLatitudeRef = exifData.gps.GPSLatitudeRef
-			            exif.GPSLatitude = exifData.gps.GPSLatitude
-			            exif.GPSLongitudeRef = exifData.gps.GPSLongitudeRef
-			            exif.GPSLongitude = exifData.gps.GPSLongitude
-			            image.gps = exif; // Add exif data to image variable
-			    });
-			  
-			 
-			  fs.readFile(uploadedFiles[0].fd, (err, data) => { // Get Buffer of local file
-				  if (err) throw err;
+				// Get Exif data from local file
+				ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { 
+					if (error)
+						console.log('Error: '+error.message);
+					else
+						var gps = {}
+						gps.lat = coordinatesToDecimal(exifData.gps.GPSLatitude[0], exifData.gps.GPSLatitude[1], exifData.gps.GPSLatitude[2]) 
+						gps.lng = coordinatesToDecimal(exifData.gps.GPSLongitude[0], exifData.gps.GPSLongitude[1], exifData.gps.GPSLongitude[2])
+				        image.gps = gps; // Add exif data to image variable
+				});
 
-				  file = btoa(uint8ToString(data)) // Convert buffer of local file to base64
+				// Get Buffer of local file
+				fs.readFile(uploadedFiles[0].fd, (err, data) => { 
+				 	if (err) throw err;
 
-				  uploadToImgur(file).then(function(imageInfo) { // Upload local file to IMGUR
-				  	image.url = imageInfo.link;
-				  	image.id = imageInfo.id;
-				  	image.deletehash = imageInfo.deletehash
+					file = btoa(uint8ToString(data)) // Convert buffer of local file to base64
 
-				  	// sails.log("IMAGE DATA")
-				  	// sails.log(image)
-				  	resolve(image)  // Return all collected data and url of remote image
-				  });
-			  });
-			
+					uploadToImgur(file).then(function(imageInfo) { // Upload local file to IMGUR
+						image.url = imageInfo.link;
+					  	image.id = imageInfo.id;
+					  	image.deletehash = imageInfo.deletehash
+					  	sails.log(image)
+					  	resolve(image) // Return all collected data and url of remote image
+					});
+				});
+
 			});
 		}); // end promise
     },
 
     removeImage: function(req, res){
-    	sails.log("IN ImgurController (removeImage)");
-		var imageDeletehash = req.query.imageDeletehash
-		sails.log(imageDeletehash);
-    	return removeImage(imageDeletehash);
+    	// deletehash should be in params field: 'imageDeletehash'
+    	return removeImage(req.query.imageDeletehash);
     }
 
 

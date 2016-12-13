@@ -31,15 +31,11 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-  'post /removeImage': 'ImgurController.removeImage',
+  'delete /image': 'ImgurController.removeImage',
 
-  'post /uploadQuiz': 'ImgurController.createQuiz', // DUMMY // TODO Remove dummy
+  'post /image': 'ImgurController.uploadImage', 
 
-  'post /upload': 'ImgurController.uploadImage', // TODO Remove (not needed anymore)
-
-  'get /getimages': 'ImgurController.getImages', // TODO Remove (not needed)
-
-  'get /getimage': 'ImgurController.getImage',
+  'get /image': 'ImgurController.getImageLinkByID',
 
   'post /signup': 'AuthController.signup',
 
