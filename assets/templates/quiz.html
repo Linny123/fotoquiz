@@ -1,21 +1,18 @@
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add</button>
-<div class="row h3">
-  <div class="col-md-3">Author</div>
-  <div class="col-md-3">Quiz</div>
-  <div class="col-md-3">Image</div>
-  <div class="col-md-3">Try to guess</div>
-  <div class="col-md-3"></div>
+
+<div class="row h3">All pictures</div>
+
+<div class="row" >
+
+  <div class="col-md-2 quiz" ng-repeat="item in quizzes">
+    <a data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">
+    <img src="{{item.imageURL}}" /><br> {{item.username}}
+    </a>
+  </div>
+
 </div>
 
-<div class="row" ng-repeat="item in quizzes">
-  <div class="col-md-3" ng-bind="item.username"></div>
-  <div class="col-md-3" ng-bind="item.content"></div>
-  <div class="col-md-3" ><img height="150" src="{{item.imageURL}}" /></div>
-  <div class="col-md-3"></div>
-  <div class="col-md-3">
-    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">Submit guess</button>
-  </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,11 +25,13 @@
       <div class="modal-body">
 
         <div class="form-group">
-          <input type="text" ng-model="quiz.content" class="form-control" placeholder="content"/>
+          Select a picture of your location.
+          <input type="file" ng-model="image" id="image" class="form-control" />
         </div>
 
         <div class="form-group">
-          <input type="file" ng-model="image" id="image" class="form-control" />
+          Give a hint for your location.
+          <input type="text" ng-model="quiz.hint" class="form-control" placeholder="Hint"/>
         </div>
 
       </div>

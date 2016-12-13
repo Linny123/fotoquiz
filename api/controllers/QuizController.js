@@ -9,7 +9,7 @@ module.exports = {
   createQuiz: function (req, res, next) {
     sails.log("-> QuizController")
     sails.log(req.form)
-    if (!req.body.content) {
+    if (!req.body) {
       return res.status(400).json(
         {message: 'Please fill in the field'});
     }
@@ -21,7 +21,7 @@ module.exports = {
 
       Quiz.create({
         username: req.body.username,
-        content: req.body.content,
+        hint: req.body.hint,
         imageID: imageData.id,
         imageURL: imageData.url,
         imageDeletehash: imageData.deletehash,

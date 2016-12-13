@@ -6,7 +6,7 @@ module.exports = {
       type: 'string',
       required: true
     },
-    content: {
+    hint: {
       type: 'string'
     },
     imageID: {
