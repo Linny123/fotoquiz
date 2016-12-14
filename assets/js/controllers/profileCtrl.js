@@ -51,6 +51,31 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
         });
     };
 
+    $scope.addPoints = function (points) {
+      appDB.addPoints($scope.userProfile.username, points).success(function (data) {
+        console.log(data)
+        $state.reload();
+      });
+    };
+
+    $scope.addQuizDone = function (quizID) {
+      appDB.addQuizDone($scope.userProfile.username, quizID).success(function (data) {
+        console.log(data)
+        //$state.reload();
+      });
+    };
+
+    $scope.hasDoneQuiz = function (quizID) {
+      appDB.hasDoneQuiz($scope.userProfile.username, quizID).success(function (data) {
+        console.log(data)
+        //$state.reload();
+      });
+    };
+
+    $scope.selectQuiz = function (data) {
+      $scope.selectedQuiz = data;
+    };
+
 	    //Initialize the profile shown on the page
 	    getProfile($scope.userProfile.username);
     getUserQuiz($scope.userProfile.username);

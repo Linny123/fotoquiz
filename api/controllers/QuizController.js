@@ -7,8 +7,7 @@ module.exports = {
   },
 
   createQuiz: function (req, res, next) {
-    sails.log("-> QuizController")
-    sails.log(req.form)
+    sails.log("-> createQuiz in QuizController")
     if (!req.body) {
       return res.status(400).json(
         {message: 'Please fill in the field'});
@@ -16,8 +15,6 @@ module.exports = {
 
     // Calls uploadImage in ImgurController to upload image and get ID and possible GPS back
     sails.controllers.imgur.uploadImage(req, res).then(function(imageData) {
-      sails.log.debug("RECEIVED IMAGE DATA: ")
-      sails.log.debug(imageData)
 
       Quiz.create({
         username: req.body.username,

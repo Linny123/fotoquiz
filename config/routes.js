@@ -63,6 +63,12 @@ module.exports.routes = {
 
   'put /profile/quiz': 'ProfileController.editUserQuiz',
 
+  'put /profile/points': 'ProfileController.UserAddPoints',
+
+  'put /profile/quizzes': 'ProfileController.UserAddQuizDone',
+
+  'get /profile/hasdonequiz': 'ProfileController.UserHasDoneQuiz',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

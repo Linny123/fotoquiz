@@ -22,6 +22,14 @@ module.exports = {
         email: {
             type: 'string'
         },
+        score: {
+            type: 'integer',
+            defaultsTo: 0
+        },
+        quizzes: {
+            type: 'array',
+            defaultsTo: []
+        },
         // Password is stored encrypted
         encryptedPassword: {
             type: 'string'

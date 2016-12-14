@@ -105,5 +105,38 @@ fotoApp.factory('appDB',
 		});
 	};
 
+  obj.addPoints = function (username, points) {
+    return $http({
+          method: 'PUT',
+          url: '/profile/points',
+          params: {
+            username: username,
+            points: points
+          }
+    });
+  };
+
+  obj.addQuizDone = function (username, quizID) {
+    return $http({
+          method: 'PUT',
+          url: '/profile/quizzes',
+          params: {
+            username: username,
+            quizID: quizID
+          }
+    });
+  };
+
+  obj.hasDoneQuiz = function (username, quizID) {
+    return $http({
+          method: 'GET',
+          url: '/profile/hasdonequiz',
+          params: {
+            username: username,
+            quizID: quizID
+          }
+    });
+  };
+
 	return obj;
 }]);
