@@ -14,6 +14,10 @@
  var client_id = '6206717c1dd47fc';
 
 
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
  function uint8ToString(buf) {
  	var i, length, out = '';
  	for (i = 0, length = buf.length; i < length; i += 1) {
@@ -118,7 +122,7 @@
 
     uploadImage: function(req, res){
     	// file should be in formdata field: 'file'
-    	sails.log("IN UPLOAD")
+    	sails.log("-> uploadImage in ImgurController")
     	// Make promise of uploader
     	return new Promise(function(resolve, reject) {
 
@@ -134,8 +138,10 @@
 						console.log('Error: '+error.message);
 					else
 						var gps = {}
-						gps.lat = coordinatesToDecimal(exifData.gps.GPSLatitude[0], exifData.gps.GPSLatitude[1], exifData.gps.GPSLatitude[2]) 
-						gps.lng = coordinatesToDecimal(exifData.gps.GPSLongitude[0], exifData.gps.GPSLongitude[1], exifData.gps.GPSLongitude[2])
+						if(!isEmpty(exifData.gps)) { // If image contains GPS exif data
+							gps.lat = coordinatesToDecimal(exifData.gps.GPSLatitude[0], exifData.gps.GPSLatitude[1], exifData.gps.GPSLatitude[2]) 
+							gps.lng = coordinatesToDecimal(exifData.gps.GPSLongitude[0], exifData.gps.GPSLongitude[1], exifData.gps.GPSLongitude[2])
+						}
 				        image.gps = gps; // Add exif data to image variable
 				});
 
