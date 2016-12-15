@@ -3,20 +3,26 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
 
-    $scope.createQuiz = function () {
-      console.log($scope.quiz.content)
-      var file = document.getElementById('image').files[0]
-      console.log(file)
-      $scope.quiz.file = file
+    $scope.initiateNewQuiz = function () {
+      $scope.quiz = {};
+      $scope.quiz.username = auth.currentUser();
+    };
 
-      if (auth.isLoggedIn()) {
-        appDB.createQuiz($scope.quiz).success(function (data) {
-          $state.reload(); 
-        });
-      }
-      else {
-        $state.go('home');
-      }
+    $scope.closeFirstModal = function () {
+        var file = document.getElementById('image').files[0]
+        console.log(file)
+        $scope.quiz.file = file
+    };
+
+    $scope.createQuiz = function () {
+        if (auth.isLoggedIn()) {
+          appDB.createQuiz($scope.quiz).success(function (data) {
+            $state.reload();
+          });
+        }
+        else {
+          $state.go('home');
+        }
     };
 
     appDB.getQuiz().success(function (data) {
