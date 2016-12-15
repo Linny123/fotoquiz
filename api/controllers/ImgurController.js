@@ -88,6 +88,32 @@ function isEmpty(obj) {
 	});
  }
 
+
+ // function getLocation(lat, lng) {
+ // 	return new Promise(function(resolve, reject) {
+ // 		sails.log("-> getLocation in ImgurController: "+lat+lng);
+
+ // 		var imageInfo = {};
+
+ // 		var options = {
+ // 			url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyBrriX06otU67RMzucGE-vRA_W4Rvvva5Y",
+ // 			//method: 'DELETE',
+ 			
+ // 		};
+
+ // 		function callback(error, response, body) {
+ // 			if(error) {
+ // 				sails.log.error("ERROR: "+error);
+ // 				reject(error)
+ // 			}
+	// 		resolve(body) // returns statuscode
+	// 		sails.log(body)
+	// 	}
+	// 	request(options, callback);
+	// });
+ // }
+
+
  module.exports = {
 
  	getImageLinkByID: function(req, res){
@@ -134,15 +160,17 @@ function isEmpty(obj) {
 
 				// Get Exif data from local file
 				ExifImage({ image : uploadedFiles[0].fd }, function (error, exifData) { 
-					if (error)
-						console.log('Error: '+error.message);
-					else
-						var gps = {}
-						if(!isEmpty(exifData.gps)) { // If image contains GPS exif data
+					var gps = {}
+
+					if (error) { console.log('Error: '+error.message); }
+					else {
+						if(!isEmpty(exifData.gps) && ('GPSLatitude' in exifData.gps)) { // If image contains GPS exif data
 							gps.lat = coordinatesToDecimal(exifData.gps.GPSLatitude[0], exifData.gps.GPSLatitude[1], exifData.gps.GPSLatitude[2]) 
 							gps.lng = coordinatesToDecimal(exifData.gps.GPSLongitude[0], exifData.gps.GPSLongitude[1], exifData.gps.GPSLongitude[2])
 						}
-				        image.gps = gps; // Add exif data to image variable
+					}
+
+					image.gps = gps; // Add exif data to image variable
 				});
 
 				// Get Buffer of local file
@@ -155,7 +183,7 @@ function isEmpty(obj) {
 						image.url = imageInfo.link;
 					  	image.id = imageInfo.id;
 					  	image.deletehash = imageInfo.deletehash
-					  	sails.log(image)
+					  	
 					  	resolve(image) // Return all collected data and url of remote image
 					});
 				});
@@ -167,7 +195,7 @@ function isEmpty(obj) {
     removeImage: function(req, res){
     	// deletehash should be in params field: 'imageDeletehash'
     	return removeImage(req.query.imageDeletehash);
-    }
+    },
 
 
 

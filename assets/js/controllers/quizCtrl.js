@@ -29,6 +29,17 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         }
     };
 
+    $scope.updateQuizLocation = function (quizID, lat, lng) {
+        if (auth.isLoggedIn()) {
+          appDB.updateQuizLocation(quizID, lat, lng).success(function (data) {
+            console.log(data)
+          });
+        }
+        else {
+          $state.go('home');
+        }
+    };
+
     $scope.filter = function() {
       if (auth.isLoggedIn()) {
         console.log("-> in filter function")
@@ -69,4 +80,9 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       }
       $scope.quizzes = data;
     });
+
+
+      $scope.updateQuizLocation("585316cb9a8d34ec2f63ceb5", 1, 2);
   }]);
+
+
