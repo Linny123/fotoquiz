@@ -53,6 +53,8 @@ module.exports.routes = {
 
   'get /quiz': 'QuizController.getQuiz',
 
+  'put /quiz': 'QuizController.updateQuizLocation',
+
   'get /comment': 'CommentController.getCommentSection',
 
   'post /comment': 'CommentController.postNewComment',

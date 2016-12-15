@@ -51,6 +51,20 @@ fotoApp.factory('appDB',
       });
     };
 
+    obj.updateQuizLocation = function(quizID, lat, lng){
+      console.log("-> appDB.updateQuizlocation")
+
+      return $http({
+          method: 'PUT',
+          url: '/quiz/',
+          params: {
+            id: quizID,
+            lat: lat,
+            lng: lng
+          }
+      });
+    };
+
     obj.getQuiz = function () {
       return $http.get('/quiz');
     };

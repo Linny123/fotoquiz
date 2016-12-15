@@ -53,6 +53,25 @@ module.exports = {
 
   },
 
+  updateQuizLocation: function (req, res, next) {
+    sails.log("-> updateQuizLocation in QuizController")
+    if (!req.body) {
+      return res.status(400).json(
+        {message: 'Please fill in the field'});
+    }
+
+    Quiz.update({id: req.query.id},
+        {
+          locationLat: req.query.lat,
+          locationLng: req.query.lng
+        },
+        function(err, quiz) {
+          if(err) {res.send('EDIT request not successful');}
+          if(quiz) {res.send(quiz[0]);}
+      });
+
+  },
+
   getQuizzesInRange: function(req, res, next) {
     sails.log("-> getQuizzesInRange in QuizController")
     if (!req.body) {
