@@ -1,30 +1,45 @@
 var map;
+var chances = 0;
+var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
-var counter 3
-    function initMap() {
-        var point = {lat: 50.8201646, lng: 4.398042};
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: point
-    });
-        google.maps.event.addListener(map, 'click', function(event) {
-          latlng = event.latLng;
-          console.log(latlng);
-          console.log(fotoID);
-          if (getDistance(fotoID, latlng) < 100){
-            document.write("Yes, you guessed right!");
-          }else{
-            if(counter = 0){
-              location.reload();
-              document.write("Oops, you guessed wrong 3 times");
 
-            }
-          }
+function initMap(){
+  geocoder = new google.maps.Geocoder();
+  
+  if(arguments.length == 0){
+    // provide some default initialization options
+    options = 
+    {
+      zoom: 14,
+      center: new google.maps.LatLng(50.8201646, 4.398042),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  }
+  
+  // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
+  map = new google.maps.Map(document.getElementById("map"), options);
+  google.maps.event.addListener(map, "click", Testlocation);
 
-          //latlng naar het foto object(met ID = fotoID) sturen
-          // als teller = 3 quiz gedaan, pagina reload  
-      });
-    }
+      
+}
+
+function Testlocation(event){
+  latlng = event.latLng;
+  testwith = new google.maps.LatLng(point.lat, point.lng);
+   console.log(latlng);
+   if(chances >= 3){
+      console.log("guessed too much");
+    }else{
+       if(getDistance(latlng, testwith) < 100){
+          console.log("yes");
+       }else{
+          console.log("no");
+       }
+       chances = chances + 1;
+     }
+
+}
+
 var rad = function(x) {
   return x * Math.PI / 180;
 };
