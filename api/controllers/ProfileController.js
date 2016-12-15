@@ -45,8 +45,8 @@ module.exports = {
     sails.log.info("-> UserAddPoints for "+username+" points: "+points)
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
-          if (user) { 
-            currentScore = parseInt(user.score); 
+          if (user) {
+            currentScore = parseInt(user.score);
 
             User.update({username: username}, { score: currentScore + parseInt(points) }, function(err, user) {
                 if(err) {res.send('ADD POINTS request not successful');}
@@ -63,15 +63,15 @@ module.exports = {
     sails.log.info("-> AddQuizDone for "+username+" with QuizID: "+quizID)
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
-          if (user) { 
-            currentQuizzes = user.quizzes 
+          if (user) {
+            currentQuizzes = user.quizzes
             currentQuizzes.push(quizID)
 
             User.update({username: username}, { quizzes: currentQuizzes }, function(err, user) {
                 if(err) {res.send('ADD QUIZ request not successful');}
                 if(user) {res.send({ DoneQuizzes : user[0].quizzes });}
             });
-          }  
+          }
     });
   },
 
@@ -82,10 +82,10 @@ module.exports = {
     sails.log.info("-> UserHasDoneQuiz for "+username+" with QuizID: "+quizID)
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
-          if (user) { 
+          if (user) {
             if(user.quizzes.includes(quizID)) { res.send(true); }
             else { res.send(false) }
-          }  
+          }
     });
   },
 
@@ -111,9 +111,10 @@ module.exports = {
 
   editUserQuiz: function(req, res, next){
     var quiz = req.body.params;
+    sails.log(quiz.content);
     Quiz.update({id: quiz.id},
       {
-        hint: quiz.hint
+        content: quiz.content
       },
       function(err, quiz) {
       });

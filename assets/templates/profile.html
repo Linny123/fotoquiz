@@ -97,13 +97,15 @@
 		  </div>
 		</div>
     <div class="row h3">
+      <div class="col-md-2">Content</div>
       <div class="col-md-5">Quizzes</div>
-      <div class="col-md-1">Hint</div>
+      <div class="col-md-2">Hint</div>
     </div>
 
     <div class="row" style="margin:20px" ng-repeat="item in userQuizzes">
+      <div class="col-md-2" ng-bind="item.content"></div>
       <div class="col-md-5"><img height="150" ng-src="{{item.imageURL}}" /></div>
-      <div class="col-md-1" ng-bind="item.hint"></div>
+      <div class="col-md-2" ng-bind="item.hint"></div>
       <div class="col-md-2"></div>
       <div class="col-md-3">
         <button class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="selectQuiz(item)">Edit</button>

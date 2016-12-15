@@ -6,6 +6,10 @@ module.exports = {
       type: 'string',
       required: true
     },
+    content: {
+      type: 'string',
+      defaultsTo: 'Can you guess my location?'
+    },
     hint: {
       type: 'string'
     },

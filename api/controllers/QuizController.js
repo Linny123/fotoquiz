@@ -18,6 +18,7 @@ module.exports = {
 
       Quiz.create({
         username: req.body.username,
+        content: req.body.content,
         hint: req.body.hint,
         imageID: imageData.id,
         imageURL: imageData.url,
@@ -29,9 +30,9 @@ module.exports = {
         if (err) {
           return next(err);
         }
-        
-        return res.send(imageData) 
-        
+
+        return res.send(imageData)
+
       });
 
     })
