@@ -3,19 +3,22 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
+    $scope.imageFile = {};
 
     $scope.initiateNewQuiz = function () {
       $scope.quiz = {};
       $scope.quiz.username = auth.currentUser();
+      $scope.imageFile = {};
     };
 
     $scope.closeFirstModal = function () {
         var file = document.getElementById('image').files[0]
         console.log(file)
-        $scope.quiz.file = file
+        $scope.imageFile = file
     };
 
     $scope.createQuiz = function () {
+      $scope.quiz.file = $scope.imageFile
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
             $state.reload();
@@ -31,7 +34,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         console.log("-> in filter function")
         var address = $scope.filter.address;
         var radius = $scope.filter.range;
-        var quizzesInRange = []; 
+        var quizzesInRange = [];
 
         getLatLng(address, function(results) {
 
@@ -48,7 +51,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
                 quizzesInRange.push(data[i])
               }
 
-              
+
             }
             $scope.quizzes = quizzesInRange;
           });
@@ -56,8 +59,8 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
       } else {
         $state.go('home');
-      }  
-    
+      }
+
     };
 
     appDB.getQuiz().success(function (data) {

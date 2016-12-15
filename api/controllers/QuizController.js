@@ -43,7 +43,7 @@ module.exports = {
         if (err) {
           return next(err);
         }
-        
+
         sails.log(quiz) // DEBUG
         return res.send(quiz)
 
