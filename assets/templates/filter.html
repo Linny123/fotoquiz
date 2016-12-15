@@ -1,0 +1,15 @@
+<input type="text" ng-model="filter.address" class="form-control" placeholder="Locatie"/>
+<input type="text" ng-model="filter.range" class="form-control" placeholder="Radius in km"/>
+<button type="button" class="btn btn-primary" ng-click="filter()">Next</button>
+
+<div class="row h3">Filtered pictures</div>
+
+<div class="row" >
+
+  <div class="col-md-2 quiz" ng-repeat="item in quizzes">
+    <a data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">
+    <img ng-src="{{item.imageURL}}" /><br> {{item.username}}
+    </a>
+  </div>
+
+</div>

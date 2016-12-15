@@ -4,6 +4,33 @@ var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 var options;
 
+
+function getLatLng(address, callback){
+  geocoder = new google.maps.Geocoder();
+
+  var location = { address: address }
+
+  geocoder.geocode(location, function(results, status) {
+    var latlng = {
+      lat: results[0].geometry.location.lat(),
+      lng: results[0].geometry.location.lng()
+    }
+    callback(latlng)
+  })
+
+}
+
+
+
+ function inRange(latc, lngc, lat, lng, km) {
+  var range = km*1000
+  var distance = getDistance({ lat: function() { return latc}, lng: function() { return lngc} }, { lat: function() { return lat}, lng: function() { return lng} });
+
+  if(distance<range) { return true }
+  return false
+ }
+
+
 function GuessingMap(){
   geocoder = new google.maps.Geocoder();
 

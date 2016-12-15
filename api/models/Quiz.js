@@ -25,7 +25,7 @@ module.exports = {
     locationLat: {
       type: 'string'
     },
-    locationLon: {
+    locationLng: {
       type: 'string'
     },
   }

@@ -27,28 +27,22 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
               templateUrl: 'templates/nav1.html'
         })
 
-        .state('fotoviewer', { // TODO Remove (not needed anymore)
-              url: '/fotoviewer',
-              templateUrl: 'templates/fotoviewer.html',
-              controller: 'imgurCtrl'
-        })
-
-        .state('fotouploader', { // TODO Remove (not needed anymore)
-              url: '/fotouploader',
-              templateUrl: 'templates/fotouploader.html',
-              controller: 'imgurCtrl'
-        })
-
         .state('ranking', {
               url: '/ranking',
               templateUrl: 'templates/ranking.html'
         })
 
-      .state('quiz', {
-        url: '/quiz',
-        templateUrl: 'templates/quiz.html',
-        controller: 'quizCtrl'
-      })
+        .state('quiz', {
+          url: '/quiz',
+          templateUrl: 'templates/quiz.html',
+          controller: 'quizCtrl'
+        })
+
+         .state('filter', {
+          url: '/filter',
+          templateUrl: 'templates/filter.html',
+          controller: 'quizCtrl'
+        })
 
         .state('profile', {
             url: '/profile',

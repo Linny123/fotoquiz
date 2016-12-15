@@ -36,15 +36,16 @@ module.exports = {
         imageID: imageData.id,
         imageURL: imageData.url,
         imageDeletehash: imageData.deletehash,
-        locationLat: imageData.gps.GPSLatitude,
-        locationLon: imageData.gps.GPSLongitude
+        locationLat: imageData.gps.lat,
+        locationLng: imageData.gps.lng
 
       }).exec(function (err, quiz) {
         if (err) {
           return next(err);
         }
-
-        return res.send(imageData)
+        
+        sails.log(quiz) // DEBUG
+        return res.send(quiz)
 
       });
 
@@ -69,8 +70,8 @@ module.exports = {
         imageID: imageData.id,
         imageURL: imageData.url,
         imageDeletehash: imageData.deletehash,
-        locationLat: imageData.gps.GPSLatitude,
-        locationLon: imageData.gps.GPSLongitude
+        locationLat: imageData.gps.lat,
+        locationLng: imageData.gps.lng
 
       }).exec(function (err, quiz) {
         if (err) {
