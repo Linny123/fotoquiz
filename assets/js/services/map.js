@@ -3,7 +3,7 @@ var chances = 0;
 var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 
-function initMap(){
+function GuessingMap(){
   geocoder = new google.maps.Geocoder();
   
   if(arguments.length == 0){
@@ -21,6 +21,35 @@ function initMap(){
   google.maps.event.addListener(map, "click", Testlocation);
 
       
+}
+function LocationMap(latitude, longitude, fotoID){
+  geocoder = new google.maps.Geocoder();
+  var setting = false;
+  if(latitude == NULL){
+    latitude = 50.8201646;
+    longitude = 4.398042
+    setting = true;
+  }
+
+    if(arguments.length == 0){
+      // provide some default initialization options
+      options = 
+      {
+        zoom: 14,
+        center: new google.maps.LatLng(latitude, longitude),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+    }
+  
+  // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
+  map = new google.maps.Map(document.getElementById("map"), options);
+  google.maps.event.addListener(map, "click", Testlocation);
+
+      
+}
+
+function getlocation(event){
+    
 }
 
 function Testlocation(event){
