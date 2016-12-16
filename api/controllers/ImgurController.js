@@ -51,12 +51,12 @@ function isEmpty(obj) {
 			if(error) {
 				sails.log.error("ERROR: "+error);
 				reject(error)
+			} else {
+				imageInfo.link = body.data.link
+			  	imageInfo.deletehash = body.data.deletehash
+			  	imageInfo.id = body.data.id
+			  	resolve(imageInfo)
 			}
-
-		  imageInfo.link = body.data.link
-		  imageInfo.deletehash = body.data.deletehash
-		  imageInfo.id = body.data.id
-		  resolve(imageInfo)
 		}
 
 		request(options, callback);

@@ -3,22 +3,24 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
-    $scope.imageFile = {};
+    //$scope.imageFile = {};
 
     $scope.initiateNewQuiz = function () {
       $scope.quiz = {};
       $scope.quiz.username = auth.currentUser();
-      $scope.imageFile = {};
+      //$scope.imageFile = {};
     };
 
     $scope.closeFirstModal = function () {
-        var file = document.getElementById('image').files[0]
-        console.log(file)
-        $scope.imageFile = file
+      // var file = document.getElementById('image').files[0]
+      // $scope.quiz.file = file
+      // Moet dit echt hier?
     };
 
     $scope.createQuiz = function () {
-      $scope.quiz.file = $scope.imageFile
+        var file = document.getElementById('image').files[0]
+        $scope.quiz.file = file
+
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
             $state.reload();
@@ -82,7 +84,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     });
 
 
-      $scope.updateQuizLocation("585316cb9a8d34ec2f63ceb5", 1, 2);
+      //$scope.updateQuizLocation("585316cb9a8d34ec2f63ceb5", 1, 2);
   }]);
 
 
