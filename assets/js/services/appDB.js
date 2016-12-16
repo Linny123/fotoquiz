@@ -152,5 +152,24 @@ fotoApp.factory('appDB',
     });
   };
 
+
+        obj.generalSearch = function (general) {
+            return $http.get('/quizsearch/generalsearch', {
+                params: {
+                    "general": general
+                }
+            });
+        };
+
+
+        obj.advancedSearch = function (advanced) {
+            return $http.get('/quizsearch/advancedsearch', {
+                params: {
+                    "author": advanced.author,
+                    "content": advanced.content
+                }
+            });
+        };
+
 	return obj;
 }]);

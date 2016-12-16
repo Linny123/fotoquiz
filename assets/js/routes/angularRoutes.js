@@ -38,6 +38,12 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'quizCtrl'
         })
 
+      .state('quizsearch', {
+        url: '/quizsearch',
+        templateUrl: 'templates/search.html',
+        controller: 'searchCtrl'
+      })
+
          .state('filter', {
           url: '/filter',
           templateUrl: 'templates/filter.html',

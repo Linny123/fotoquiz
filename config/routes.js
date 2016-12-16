@@ -71,6 +71,10 @@ module.exports.routes = {
 
   'get /profile/hasdonequiz': 'ProfileController.UserHasDoneQuiz',
 
+  'get /quizsearch/generalsearch': 'SearchController.generalSearch',
+
+  'get /quizsearch/advancedsearch': 'SearchController.advancedSearch',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
