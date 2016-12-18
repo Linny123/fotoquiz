@@ -19,7 +19,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
      $scope.selectQuiz = function (data) {
       $scope.selectedQuiz = data;
-      console.log(data);
     };
 
     $scope.createQuiz = function () {
