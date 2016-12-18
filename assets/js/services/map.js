@@ -49,7 +49,27 @@ function GuessingMap(fotoID){
       // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
       map = new google.maps.Map(document.getElementById("map"), options);
 
+      var onError = function(error) {
+        console.log("Could not get the current location.");
+      };
       
+      if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+          function(position) {
+            var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            // now that we have the current location, use the Map API to move the map to this location
+            // you may also want to adjust the zoom level
+            // see the API reference for the relevant functions:
+            // https://developers.google.com/maps/documentation/javascript/reference
+            
+            map.panTo(currentLocation);
+            
+          }, 
+          onError
+        );
+      }else{
+        onError();
+      }
       google.maps.event.addListener(map, "click", Testlocation);
 
       
