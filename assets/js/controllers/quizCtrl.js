@@ -17,6 +17,11 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       // Moet dit echt hier?
     };
 
+     $scope.selectQuiz = function (data) {
+      $scope.selectedQuiz = data;
+      console.log(data);
+    };
+
     $scope.createQuiz = function () {
         var file = document.getElementById('image').files[0]
         $scope.quiz.file = file
