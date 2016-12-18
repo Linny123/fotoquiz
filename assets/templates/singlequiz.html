@@ -1,0 +1,32 @@
+<div class="row h3">Quiz</div>
+<div class ="row h4"> {{item.username}} </div>
+<script> window.onload = GuessingMap({{item.ID}});</script>
+
+<div class="row" >
+
+  <div class="col-md-2 quiz" ng-repeat="quiz in quizzes">
+    <a data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">
+    <div id="map"></div>
+    <img ng-src="{{item.imageURL}}" />
+    <div class="row h3">Quiz</div>
+	<div class ="row h4"> {{item.username}} </div>
+	
+    
+  </div>
+
+</div>
+<div class="jumbotron">
+  <h3 class="text-center lead">Comment Section</h3>
+  <div class="form" ng-show="isLoggedIn()" style="margin-bottom: 20px;">
+    <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
+    <button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
+  </div>
+  <div ng-repeat="comment in commentSection" class="list-group">
+    <div class="list-group-item">
+        <blockquote>
+          <p>{{comment.content}}</p>
+          <footer>Posted by <cite title="Source Title">{{comment.author}}</cite></footer>
+        </blockquote>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ var chances = 0;
 var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 var options;
+var fotosID
 
 
 function getLatLng(address, callback){
@@ -31,48 +32,30 @@ function getLatLng(address, callback){
  }
 
 
-function GuessingMap(){
-  geocoder = new google.maps.Geocoder();
+function GuessingMap(fotoID){
+      geocoder = new google.maps.Geocoder();
+      fotosID = fotoID
+      
+      if(arguments.length == 0){
+        // provide some default initialization options
+        options = 
+        {
+          zoom: 14,
+          center: new google.maps.LatLng(50.8201646, 4.398042),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+      }
+      
+      // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
+      map = new google.maps.Map(document.getElementById("map"), options);
 
-  
-  if(arguments.length == 0){
-    // provide some default initialization options
-    options = 
-    {
-      zoom: 14,
-      center: new google.maps.LatLng(50.8201646, 4.398042),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-  }
-  
-  // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
-  map = new google.maps.Map(document.getElementById("map"), options);
-
-  var onError = function(error) {
-    console.log("Could not get the current location.");
-  };
-  
-  if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-      function(position) {
-        var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        // now that we have the current location, use the Map API to move the map to this location
-        // you may also want to adjust the zoom level
-        // see the API reference for the relevant functions:
-        // https://developers.google.com/maps/documentation/javascript/reference
-        
-        map.panTo(currentLocation);
-        
-      }, 
-      onError
-    );
-  }else{
-    onError();
-  }
-  google.maps.event.addListener(map, "click", Testlocation);
+      
+      google.maps.event.addListener(map, "click", Testlocation);
 
       
 }
+
+
 function LocationMap(latitude, longitude, fotoID){
   geocoder = new google.maps.Geocoder();
   var setting = false;
