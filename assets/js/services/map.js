@@ -32,9 +32,9 @@ function getLatLng(address, callback){
  }
 
 
-function GuessingMap(fotoID){
+function GuessingMap(){
       geocoder = new google.maps.Geocoder();
-      fotosID = fotoID
+      //fotosID = fotoID
       
       if(arguments.length == 0){
         // provide some default initialization options
@@ -54,9 +54,9 @@ function GuessingMap(fotoID){
       };
       
       if(navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
+         navigator.geolocation.getCurrentPosition(
           function(position) {
-            var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+           var currentLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
             // now that we have the current location, use the Map API to move the map to this location
             // you may also want to adjust the zoom level
             // see the API reference for the relevant functions:
@@ -66,7 +66,7 @@ function GuessingMap(fotoID){
             
           }, 
           onError
-        );
+       );
       }else{
         onError();
       }
