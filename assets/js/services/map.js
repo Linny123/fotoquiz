@@ -86,6 +86,7 @@ function LocationMap(latitude, longitude, fotoID){
     console.log(latitude);
     console.log(longitude);
   }
+  latlng = new google.maps.LatLng(latitude, longitude)
 
     if(arguments.length == 0){
       // provide some default initialization options
@@ -118,6 +119,7 @@ function getlocation(event){
   chances = chances+1;
   latlng = event.latLng;
   }  
+  // HIER MOET DE JUISTE  FUNCTIE OPGEROEPEN WORDEN (om de geklikte functie op te slaan)
 
 }
 
