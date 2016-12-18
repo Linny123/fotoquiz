@@ -41,7 +41,7 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         .state('singlequiz', {
           url: '/singlequiz',
           templateUrl: 'templates/singlequiz.html',
-          controller: 'quizCtrl'
+          controller: 'singlequizCtrl'
         })
 
       .state('quizsearch', {
