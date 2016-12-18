@@ -6,7 +6,8 @@
 
   <div class="col-md-2 quiz" ng-repeat="item in quizzes">
     <a data-toggle="modal" ng-click="selectQuiz(item)" data-target="#singlquizModal">
-    <img ng-src="{{item.imageURL}}" /><br> {{item.username}}
+    <img ng-src="{{item.imageURL}}" /><br> 
+    <a href="#" ng-click="visitProfile(item.username)">{{item.username}}</a>
     </a>
   </div>
 

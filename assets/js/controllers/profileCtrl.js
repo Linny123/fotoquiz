@@ -1,10 +1,27 @@
-fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
-	function ($scope, $state, auth, appDB) {
+fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', 'appDB',
+	function ($scope, $state, $stateParams, auth, appDB) {
 		$scope.bodyClass = '';
 		$scope.currentUser = auth.currentUser;
 		$scope.userProfile = {};
-		$scope.userProfile.username = auth.currentUser() // TODO: visitor can visit a users page
     $scope.selectedQuiz = {};
+    $scope.visitBoolean = false;
+
+
+    // Check to see if user visits it's own profile
+    if ($stateParams.username === '') {
+      // No username provided so just opening his own
+      $scope.userProfile.username = auth.currentUser();
+    }
+    else {// User can open his own profile, so we need to make sure usernames are different
+      if ($stateParams.username !== auth.currentUser()) {
+        $scope.visitBoolean = true;
+      }
+      $scope.userProfile.username = $stateParams.username;
+    }
+
+    $scope.visitMode = function(){
+      return $scope.visitBoolean;
+    }
 
 		// Get profile from DB and update fields on profile page
 		var getProfile = function (username) {
@@ -76,8 +93,8 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', 'auth', 'appDB',
       $scope.selectedQuiz = data;
     };
 
-	    //Initialize the profile shown on the page
-	    getProfile($scope.userProfile.username);
+	  //Initialize the profile shown on the page
+    getProfile($scope.userProfile.username);
     getUserQuiz($scope.userProfile.username);
 
 }]);

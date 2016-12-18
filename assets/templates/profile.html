@@ -87,7 +87,7 @@
 			   		<td>{{userProfile.email}}</td>
 				</tr>
 			</table>
-			<button type="button" class="btn btn-info" data-toggle="modal"
+			<button ng-hide="visitMode()" type="button" class="btn btn-info" data-toggle="modal"
 				data-target="#ModalEditProfile">Edit
 			</button>
 		  </div>
@@ -104,8 +104,8 @@
       <div class="col-md-2" ng-bind="item.hint"></div>
       <div class="col-md-2"></div>
       <div class="col-md-3">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="selectQuiz(item)">Edit</button>
-        <button class="btn" ng-click="removeQuiz(item)">Remove</button>
+        <button ng-hide="visitMode()" class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="selectQuiz(item)">Edit</button>
+        <button ng-hide="visitMode()" class="btn" ng-click="removeQuiz(item)">Remove</button>
       </div>
     </div>
   </div>
