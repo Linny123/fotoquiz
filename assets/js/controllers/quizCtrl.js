@@ -6,10 +6,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.selectedQuiz = {}
     //$scope.imageFile = {};
 
-    $scope.visitProfile = function (author) {
-      $state.go('comment');
-    };
-
     $scope.initiateNewQuiz = function () {
       $scope.quiz = {};
       $scope.quiz.username = auth.currentUser();
@@ -91,7 +87,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       }
       $scope.quizzes = data;
     });
-
       //$scope.updateQuizLocation("585316cb9a8d34ec2f63ceb5", 1, 2);
   }]);
 

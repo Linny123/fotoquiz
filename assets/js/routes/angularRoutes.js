@@ -50,30 +50,29 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         controller: 'searchCtrl'
       })
 
-         .state('filter', {
-          url: '/filter',
-          templateUrl: 'templates/filter.html',
-          controller: 'quizCtrl'
-        })
+      .state('filter', {
+        url: '/filter',
+        templateUrl: 'templates/filter.html',
+        controller: 'quizCtrl'
+      })
 
-        .state('profile', {
-            cache: false,
-            url: '/profile',
-            templateUrl: 'templates/profile.html',
-            controller: 'profileCtrl',
-            params: {
-              username: '' // default = empty string
-            },
-            resolve : {
-              isLoggedIn:  function($state, $q, $timeout, auth){
-                if(!auth.isLoggedIn()){
-                  $timeout(function() {
-                      $state.go('home')
-                    },0);
-                    return $q.reject()
-                }
+      .state('profile', {
+        url: '/profile',
+        params: {
+          username: '' // default = empty string
+        },
+        templateUrl: 'templates/profile.html',
+        controller: 'profileCtrl',
+        resolve : {
+            isLoggedIn:  function($state, $q, $timeout, auth){
+              if(!auth.isLoggedIn()){
+                $timeout(function() {
+                    $state.go('home')
+                  },0);
+                  return $q.reject()
               }
             }
-        })
+          }
+      })
 
 });

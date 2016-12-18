@@ -7,9 +7,10 @@
 
   <div class="col-md-2 quiz" ng-repeat="item in quizzes">
     <a ng-click="selectQuiz(item)" ui-sref="singlequiz">
-    <img ng-src="{{item.imageURL}}" /><br>
-    <a href="#" ng-click="visitProfile(item.username)">{{item.username}}</a>
+    <img ng-src="{{item.imageURL}}" />
     </a>
+    <br>
+    <a ui-sref="profile({username: item.username})">{{item.username}}</a>
   </div>
 
 </div>
