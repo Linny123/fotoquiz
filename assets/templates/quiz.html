@@ -5,7 +5,7 @@
 <div class="row" >
 
   <div class="col-md-2 quiz" ng-repeat="item in quizzes">
-    <a data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">
+    <a ui-sref="singlequiz">
     <img ng-src="{{item.imageURL}}" /><br> {{item.username}}
     </a>
   </div>

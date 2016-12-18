@@ -1,17 +1,17 @@
-<div class="row h3">Quiz</div>
-<div class ="row h4"> {{quiz.username}} </div>
-<script> window.onload = GuessingMap({{quiz.ID}});</script>
 
 <div class="row" >
-
-  <div class="col-md-2 quiz" ng-repeat="item in quizzes">
-    <div id="map"></div>
-    <img ng-src="{{item.imageURL}}" />
-    <div class="row h3">Quiz</div>
-	<div class ="row h4"> {{quiz.username}} </div>
-	
+<div id="map"></div>
+     <div class="col-md-4"> <img ng-src="{{quiz.imageURL}}" /> </div>
+   <div class="col-md-8">
+        <div class="row h3">{{quiz.content}}</div>
+        <div class ="row h4"> {{quiz.username}} </div> 
+        <div class ="row h4"> {{quiz.hint}} </div> 
+  </div>
+  
     
   </div>
+
+
 
 </div>
 <div class="jumbotron">
@@ -29,3 +29,16 @@
     </div>
   </div>
 </div>
+
+<script> window.onload = GuessingMap({{quiz.ID}});</script>
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+           .thumb {
+        height: 75px;
+        border: 1px solid #000;
+        margin: 10px 5px 0 0;
+    }
+    </style>
