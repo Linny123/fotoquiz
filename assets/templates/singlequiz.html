@@ -1,0 +1,25 @@
+ <button type="button" class="btn btn-default corner" ui-sref="quiz"">Close</button>
+
+ <h4 class="modal-title"> Quiz: {{selectedQuiz.content}} - by: {{selectedQuiz.username}}</h4>
+  
+      <script> window.onload = GuessingMap();</script>
+        <div id="map"></div>
+        <div class="col-md-4"> <img ng-src="{{selectedQuiz.imageURL}}" /> </div>
+        <div class ="col-md-8"> <p> Hint: {{selectedQuiz.hint}} </p></div>    
+    
+
+          <div class="jumbotron">
+            <h3 class="text-center lead">Comment Section</h3>
+            <div class="form" ng-show="isLoggedIn()" style="margin-bottom: 20px;">
+              <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
+              <button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
+            </div>
+            <div ng-repeat="comment in commentSection" class="list-group">
+              <div class="list-group-item">
+                  <blockquote>
+                    <p>{{comment.content}}</p>
+                    <footer>Posted by <cite title="Source Title">{{comment.author}}</cite></footer>
+                  </blockquote>
+              </div>
+            </div>
+          </div>

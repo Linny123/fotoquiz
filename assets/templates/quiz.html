@@ -1,3 +1,4 @@
+
 <button class="btn btn-primary btn-lg" data-toggle="modal" ng-click="initiateNewQuiz()" data-target="#firstPostingModal">Add</button>
 
 <div class="row h3">All pictures</div>
@@ -5,62 +6,12 @@
 <div class="row" >
 
   <div class="col-md-2 quiz" ng-repeat="item in quizzes">
-    <a data-toggle="modal" ng-click="selectQuiz(item)" data-target="#singlquizModal">
+    <a ng-click="selectQuiz(item)" ui-sref="singlequiz">
     <img ng-src="{{item.imageURL}}" /><br> {{item.username}}
     </a>
   </div>
 
 </div>
-
-<div class="modal fade" id="singlquizModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{item.content}} - {{item.username}}</h4>
-      </div>
-      <div class="modal-body">
-        <div id="map"></div>
-        <div class="col-md-4"> <img ng-src="{{item.imageURL}}" /> </div>
-        <div class ="col-md-8"> <p> Hint: {{item.hint}} </p></div>    
-      </div>
-
-
-
-          </div>
-          <div class="jumbotron">
-            <h3 class="text-center lead">Comment Section</h3>
-            <div class="form" ng-show="isLoggedIn()" style="margin-bottom: 20px;">
-              <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
-              <button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
-            </div>
-            <div ng-repeat="comment in commentSection" class="list-group">
-              <div class="list-group-item">
-                  <blockquote>
-                    <p>{{comment.content}}</p>
-                    <footer>Posted by <cite title="Source Title">{{comment.author}}</cite></footer>
-                  </blockquote>
-              </div>
-            </div>
-          </div>
-
-          <script> window.onload = GuessingMap();</script>
-          <style>
-                 #map {
-                  height: 400px;
-                  width: 100%;
-                 }
-                     .thumb {
-                  height: 75px;
-                  border: 1px solid #000;
-                  margin: 10px 5px 0 0;
-              }
-              </style>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-  </div>
 
 <!-- Modal -->
 <div class="modal fade" id="firstPostingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
