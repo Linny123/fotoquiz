@@ -1,15 +1,14 @@
 <div class="row h3">Quiz</div>
-<div class ="row h4"> {{item.username}} </div>
-<script> window.onload = GuessingMap({{item.ID}});</script>
+<div class ="row h4"> {{quiz.username}} </div>
+<script> window.onload = GuessingMap({{quiz.ID}});</script>
 
 <div class="row" >
 
-  <div class="col-md-2 quiz" ng-repeat="quiz in quizzes">
-    <a data-toggle="modal" data-target="#myModal" ng-click="editQuiz(quiz)">
+  <div class="col-md-2 quiz" ng-repeat="item in quizzes">
     <div id="map"></div>
     <img ng-src="{{item.imageURL}}" />
     <div class="row h3">Quiz</div>
-	<div class ="row h4"> {{item.username}} </div>
+	<div class ="row h4"> {{quiz.username}} </div>
 	
     
   </div>
