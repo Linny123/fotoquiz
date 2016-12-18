@@ -3,6 +3,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
+    $scope.selectedQuiz = {}
     //$scope.imageFile = {};
 
     $scope.visitProfile = function (author) {
