@@ -76,6 +76,8 @@
 
 <script>
   function showModal(id) {
+    waitingDialog.show('Creating quiz');
+    setTimeout(function () {waitingDialog.hide();}, 2000);
     $(".modal").modal('hide');
     $("#" + id).modal();
   }

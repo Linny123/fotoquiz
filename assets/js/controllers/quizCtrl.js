@@ -13,9 +13,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     };
 
     $scope.closeFirstModal = function () {
-      // var file = document.getElementById('image').files[0]
-      // $scope.quiz.file = file
-      // Moet dit echt hier?
     };
 
      $scope.selectQuiz = function (data) {
