@@ -16,12 +16,6 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'fbCtrl'
         })
 
-        .state('comment', {
-              url: '/comment',
-              templateUrl: 'templates/comment.html',
-              controller: 'commentCtrl'
-        })
-
         .state('nav1', {
               url: '/nav1',
               templateUrl: 'templates/nav1.html'
@@ -38,10 +32,13 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'quizCtrl'
         })
 
-        .state('singlequiz', {
-          url: '/singlequiz',
+        .state('singleQuiz', {
+          url: '/singleQuiz',
+          params: {
+            quiz: ''
+          },
           templateUrl: 'templates/singlequiz.html',
-          controller: 'quizCtrl'
+          controller: 'singleQuizCtrl'
         })
 
       .state('quizsearch', {
