@@ -105,7 +105,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-3">
         <button ng-hide="visitMode()" class="btn btn-primary" data-toggle="modal" data-target="#editQuizModal" ng-click="selectQuiz(item)">Edit</button>
-        <button class="btn" ng-click="removeQuiz(item)" onclick="waitingDialog.show('Removing quiz');setTimeout(function () {waitingDialog.hide();}, 1000);">Remove</button>
+        <button ng-hide="visitMode()" class="btn" ng-click="removeQuiz(item)" onclick="waitingDialog.show('Removing quiz');setTimeout(function () {waitingDialog.hide();}, 1000);">Remove</button>
       </div>
     </div>
   </div>

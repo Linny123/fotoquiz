@@ -15,7 +15,7 @@
                 {{ currentUser() }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
-                    <li><a ui-sref="profile">My Profile</a></li>
+                    <li><a ui-sref="profile" ui-sref-opts="{reload: true,  inherit: false}">My Profile</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a ui-sref="home" ng-click="logOut()">Log Out</a></li>
                 </ul>

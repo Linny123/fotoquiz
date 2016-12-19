@@ -17,6 +17,7 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', '
         $scope.visitBoolean = true;
       }
       $scope.userProfile.username = $stateParams.username;
+      $stateParams.username = '';
     }
 
     $scope.visitMode = function(){

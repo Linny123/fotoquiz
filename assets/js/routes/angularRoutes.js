@@ -57,6 +57,7 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
       })
 
       .state('profile', {
+        cache: false,
         url: '/profile',
         params: {
           username: '' // default = empty string
