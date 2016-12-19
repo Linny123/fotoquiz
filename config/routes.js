@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
   'delete /image': 'ImgurController.removeImage',
 
-  'post /image': 'ImgurController.uploadImage', 
+  'post /image': 'ImgurController.uploadImage',
 
   'get /image': 'ImgurController.getImageLinkByID',
 
@@ -71,7 +71,9 @@ module.exports.routes = {
 
   'get /profile/hasdonequiz': 'ProfileController.UserHasDoneQuiz',
 
-  'get /quizsearch/generalsearch': 'SearchController.generalSearch',
+  'get /quizsearch/generalQuizSearch': 'SearchController.generalQuizSearch',
+
+  'get /quizsearch/generalProfileSearch': 'SearchController.generalProfileSearch',
 
   'get /quizsearch/advancedsearch': 'SearchController.advancedSearch',
 

@@ -153,13 +153,22 @@ fotoApp.factory('appDB',
   };
 
 
-        obj.generalSearch = function (general) {
-            return $http.get('/quizsearch/generalsearch', {
+        obj.generalQuizSearch = function (general) {
+            return $http.get('/quizsearch/generalQuizSearch', {
                 params: {
                     "general": general
                 }
             });
         };
+
+
+    obj.generalProfileSearch = function (general) {
+      return $http.get('/quizsearch/generalProfileSearch', {
+        params: {
+          "general": general
+        }
+      });
+    };
 
 
         obj.advancedSearch = function (advanced) {

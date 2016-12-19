@@ -6,12 +6,19 @@ module.exports = {
     rest: false
   },
 
-    generalSearch: function (req, res, next) {
+  generalQuizSearch: function (req, res, next) {
         Quiz.find({or : [{username: {'contains': req.query.general}},{content: {'contains': req.query.general}}]}).exec(function (err, Quizs){
             if (err) {return next(err);}
             return res.json(Quizs);
         });
     },
+
+  generalProfileSearch: function (req, res, next) {
+    User.find({username: {'contains': req.query.general}}).exec(function (err, Quizs){
+      if (err) {return next(err);}
+      return res.json(Quizs);
+    });
+  },
 
     advancedSearch: function (req, res, next) {
         if (req.query.author && req.query.content) {

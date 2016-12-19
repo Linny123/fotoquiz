@@ -7,11 +7,25 @@ fotoApp.controller('searchCtrl', ['$scope', '$state', 'auth', 'appDB',
 
 
     $scope.generalSearch = function () {
-      appDB.generalSearch($scope.general).success(function (data) {
+      $scope.generalQuizSearch();
+      $scope.generalProfileSearch();
+    };
+
+    $scope.generalQuizSearch = function () {
+      appDB.generalQuizSearch($scope.general).success(function (data) {
         for (var i = 0; i < data.length; i++) {
           data[i].index = i;
         }
         $scope.foundQuizzes = data;
+      })
+    };
+
+    $scope.generalProfileSearch = function () {
+      appDB.generalProfileSearch($scope.general).success(function (data) {
+        for (var i = 0; i < data.length; i++) {
+          data[i].index = i;
+        }
+        $scope.foundProfiles = data;
       })
     };
 
