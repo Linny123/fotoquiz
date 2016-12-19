@@ -64,6 +64,7 @@
 
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="showModal('firstPostingModal')">Prev</button>
         <button class="btn btn-primary" ng-click="createQuiz()" onclick="waitingDialog.show('Creating quiz');setTimeout(function () {waitingDialog.hide();}, 2000);" data-dismiss="modal">Create Quiz</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -77,7 +78,7 @@
 <script>
   function showModal(id) {
     waitingDialog.show('Uploading picture');
-    setTimeout(function () {waitingDialog.hide();}, 2000);
+    setTimeout(function () {waitingDialog.hide();}, 500);
     $(".modal").modal('hide');
     $("#" + id).modal();
   }
