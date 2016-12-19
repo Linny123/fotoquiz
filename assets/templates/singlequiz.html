@@ -1,16 +1,17 @@
 <button class="btn btn-primary btn-lg" ng-click="check()">Add</button>
 
-<button type="button" class="btn btn-default corner" ui-sref="quiz"">Close</button>
+<button ng-click="resetMap()" type="button" class="btn btn-default corner" ui-sref="quiz"">Close</button>
 
 <h4 class="modal-title"> Quiz: {{selectedQuiz.content}} - by: {{selectedQuiz.username}}</h4>
 
-<script> window.onload = GuessingMap();</script>
-<div id="map"></div>
-<div class="row">
-  <div class="col-md-4"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
-  <div class="col-md-4"><p> Hint: {{selectedQuiz.hint}} </p></div>
+<div ng-class="lockClass">
+  <script> window.onload = GuessingMap();</script>
+  <div  ng-click="guessingLocation()" id="map"></div>
+  <div class="row">
+    <div class="col-md-4"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
+    <div class="col-md-4"><p> Hint: {{selectedQuiz.hint}} </p></div>
+  </div>
 </div>
-
 
 <div class="jumbotron">
   <h3 class="text-center lead">Comment Section</h3>

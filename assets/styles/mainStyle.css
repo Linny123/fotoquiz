@@ -13,6 +13,16 @@ body.home {
 body.profile-page {
 }
 
+.free {
+
+}
+
+.lock {
+    opacity: 0.5; 
+    filter: alpha(opacity = 50); 
+    pointer-events: none;
+}
+
 .corner {
 	float: right;
 }

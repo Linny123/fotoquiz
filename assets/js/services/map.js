@@ -1,5 +1,6 @@
 var map;
 var chances = 0;
+var win = false;
 var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 var options;
@@ -132,6 +133,7 @@ function Testlocation(event){
     }else{
        if(getDistance(latlng, testwith) < 100){
           console.log("yes");
+          win = true;
        }else{
           console.log("no");
        }

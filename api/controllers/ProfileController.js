@@ -83,7 +83,7 @@ module.exports = {
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
           if (user) {
-            if(user.quizzes.includes(quizID)) { res.send(true); }
+            if(user.quizzes.includes(quizID)) {res.send(true);}
             else { res.send(false) }
           }
     });
