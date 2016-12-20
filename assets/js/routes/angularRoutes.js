@@ -25,7 +25,17 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         .state('quiz', {
           url: '/quiz',
           templateUrl: 'templates/quiz.html',
-          controller: 'quizCtrl'
+          controller: 'quizCtrl',
+          resolve : {
+            isLoggedIn:  function($state, $q, $timeout, auth){
+              if(!auth.isLoggedIn()){
+                $timeout(function() {
+                    $state.go('home')
+                  },0);
+                  return $q.reject()
+              }
+            }
+          }
         })
 
         .state('singleQuiz', {
@@ -34,13 +44,33 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             quiz: ''
           },
           templateUrl: 'templates/singlequiz.html',
-          controller: 'singleQuizCtrl'
+          controller: 'singleQuizCtrl',
+          resolve : {
+            isLoggedIn:  function($state, $q, $timeout, auth){
+              if(!auth.isLoggedIn()){
+                $timeout(function() {
+                    $state.go('home')
+                  },0);
+                  return $q.reject()
+              }
+            }
+          }
         })
 
       .state('quizsearch', {
         url: '/quizsearch',
         templateUrl: 'templates/search.html',
-        controller: 'searchCtrl'
+        controller: 'searchCtrl',
+        resolve : {
+            isLoggedIn:  function($state, $q, $timeout, auth){
+              if(!auth.isLoggedIn()){
+                $timeout(function() {
+                    $state.go('home')
+                  },0);
+                  return $q.reject()
+              }
+            }
+          }
       })
 
       .state('profile', {

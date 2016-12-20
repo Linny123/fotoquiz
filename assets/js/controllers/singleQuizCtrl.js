@@ -8,7 +8,8 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.lockClass = 'free';
 
     quizID = $stateParams.quiz.id;
-
+    latitude = $stateParams.quiz.locationLat;
+    longitude = $stateParams.quiz.locationLng;
 
     var score = 0;
     var maxScore = 80;

@@ -4,7 +4,10 @@ var win = false;
 var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 var options;
-var fotosID
+var quizID; // the quiz ID
+var latitude = null;
+var longitude = null;
+var points = 0; // points earned
 
 
 function getLatLng(address, callback){
@@ -81,11 +84,26 @@ function GuessingMap(){
       
 }
 
+function setMarker(lat, long){
+  var currentLocation = new google.maps.LatLng(lat, long);
+  map.panTo(currentLocation);
+  var marker = new google.maps.Marker(
+    { 
+      map: map,
+      position: currentLocation,
+      title: "NEW MARKER"
+    });
+  google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
+
+}
+
 
 function LocationMap(){
+  console.log("LOCATION MAP!!");
+  console.log(latitude);
   geocoder = new google.maps.Geocoder();
   var setting = false;
-  if(latitude == "NULL"){
+  if(latitude == null){
     latitude = 50.8201646;
     longitude = 4.398042
     setting = true;
@@ -98,7 +116,7 @@ function LocationMap(){
       // provide some default initialization options
       options = 
       {
-        zoom: 20,
+        zoom: 10,
         center: new google.maps.LatLng(latitude, longitude),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
@@ -125,11 +143,13 @@ function getlocation(event){
   chances = chances+1;
   latlng = event.latLng;
   }  
-  // HIER MOET DE JUISTE  FUNCTIE OPGEROEPEN WORDEN (om de geklikte functie op te slaan)
+  latitude = latlng.lat();
+  longitude = latlng.lng();
 
 }
 
 function Testlocation(event){
+  var loc = new google.maps.LatLng(latitude, longitude);
   latlng = event.latLng;
    if(chances < 3){
     // NIET VERGETEN OM DE LOCATIE NOG TE TESTEN 
@@ -140,8 +160,14 @@ function Testlocation(event){
       title: "NEW MARKER"
     });
   google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
-       chances = chances + 1;
+
+    // testing location smaller then 100 m
+    if(getDistance(loc, latlng) < 100){
+      win = true;
+      
      }
+     chances = chances + 1;
+   }
 
 
 }
