@@ -4,7 +4,10 @@ var win = false;
 var point = {lat: 50.8201646, lng: 4.398042};
 var latlng;
 var options;
-var fotosID
+var quizID; // the quiz ID
+var latitude = null;
+var longitude = null;
+var points = 0; // points earned
 
 
 function getLatLng(address, callback){
@@ -85,7 +88,7 @@ function GuessingMap(){
 function LocationMap(){
   geocoder = new google.maps.Geocoder();
   var setting = false;
-  if(latitude == "NULL"){
+  if(latitude == null){
     latitude = 50.8201646;
     longitude = 4.398042
     setting = true;
@@ -125,11 +128,12 @@ function getlocation(event){
   chances = chances+1;
   latlng = event.latLng;
   }  
-  // HIER MOET DE JUISTE  FUNCTIE OPGEROEPEN WORDEN (om de geklikte functie op te slaan)
+  updateQuizLocation(quizID, latlng.lat(), latlng.lng());
 
 }
 
 function Testlocation(event){
+  var loc = new google.maps.LatLng(latitude, longitude);
   latlng = event.latLng;
    if(chances < 3){
     // NIET VERGETEN OM DE LOCATIE NOG TE TESTEN 
@@ -140,7 +144,16 @@ function Testlocation(event){
       title: "NEW MARKER"
     });
   google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
-       chances = chances + 1;
+
+    // testing location smaller then 100 m
+    if(getDistance(loc, latlng) < 25){
+      points = points+80; // if smaller add 80 points;
+    }else if(getDistance(loc, latlng) < 50)
+      points = points+40;
+    } else if(getDistance(loc, latlng) < 100)
+      points = points+20;
+    }     
+    chances = chances + 1;
      }
 
 

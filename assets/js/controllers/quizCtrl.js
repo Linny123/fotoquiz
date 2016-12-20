@@ -6,6 +6,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.selectedQuiz = {}
     //$scope.imageFile = {};
 
+
     $scope.initiateNewQuiz = function () {
       $scope.quiz = {};
       $scope.quiz.username = auth.currentUser();
@@ -29,7 +30,11 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
             $state.reload();
+            quizID = data.id;
+            latitude = data.locationLat;
+            longitude = data.locationLng;
           });
+
         }
         else {
           $state.go('home');
