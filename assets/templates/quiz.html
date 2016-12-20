@@ -21,17 +21,19 @@
 
 <div class="row h3">All pictures</div>
 
-<div class="row" >
-
-  <div class="col-md-2 quiz" ng-repeat="item in quizzes">
+<div class="row">
+<div class="quiz-container col-md-3" ng-repeat="item in quizzes">
+  <div class="quiz" >
     <a ui-sref="singleQuiz ({quiz: item})">
-    <img ng-src="{{item.imageURL}}" />
+    <img class="full" ng-src="{{item.imageURL}}" />
     </a>
     <br>
     <a ui-sref="profile({username: item.username})">{{item.username}}</a>
   </div>
-
 </div>
+</div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="firstPostingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
