@@ -69,9 +69,6 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', '
         });
     };
 
-    $scope.selectQuiz = function (data) {
-      $scope.selectedQuiz = data;
-    };
 
 	  //Initialize the profile shown on the page
     getProfile($scope.userProfile.username);

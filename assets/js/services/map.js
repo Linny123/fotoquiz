@@ -8,6 +8,7 @@ var quizID; // the quiz ID
 var latitude = null;
 var longitude = null;
 var points = 0; // points earned
+var newQuizMarker;
 
 
 function getLatLng(address, callback){
@@ -84,50 +85,31 @@ function GuessingMap(){
       
 }
 
-function setMarker(lat, long){
-  var currentLocation = new google.maps.LatLng(lat, long);
-  map.panTo(currentLocation);
-  var marker = new google.maps.Marker(
-    { 
-      map: map,
-      position: currentLocation,
-      title: "NEW MARKER"
-    });
-  google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
 
-}
-
-
-function LocationMap(){
-  console.log("LOCATION MAP!!");
-  console.log(latitude);
-  geocoder = new google.maps.Geocoder();
-  var setting = false;
-  if(latitude == null){
-    latitude = 50.8201646;
-    longitude = 4.398042
-    setting = true;
-    console.log(latitude);
-    console.log(longitude);
+function loadMap(lat, lng) {
+  if(lat == null) {
+    var location = new google.maps.LatLng(50.8201646, 4.398042) // If no exif data, set map to VUB
+  } else {
+    var location = new google.maps.LatLng(lat, lng)
   }
-  latlng = new google.maps.LatLng(latitude, longitude)
+  console.log("Create new map and center, lat: "+ lat+ "lng: "+lng+" LOCATION:"+location);
 
-    if(arguments.length == 0){
-      // provide some default initialization options
-      options = 
-      {
-        zoom: 10,
-        center: new google.maps.LatLng(latitude, longitude),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-    }
-  
-  // map_canvas is the id of the HTML element we are using as the map canvas (see HTML snippet above)
+  options = {
+      zoom: 13,
+      center: location,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
   map = new google.maps.Map(document.getElementById("map"), options);
-  google.maps.event.addListener(map, "click", getlocation);
 
-      
+  newQuizMarker = new google.maps.Marker({ 
+    map: map,
+    position: location,
+    title: "Drag marker to the correct position",
+    draggable:true
+  });
 }
+
+
 
 function getlocation(event){
   if(chances > 0){

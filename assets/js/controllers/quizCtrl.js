@@ -4,14 +4,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
     $scope.selectedQuiz = {}
-    //$scope.imageFile = {};
 
-
-    $scope.initiateNewQuiz = function () {
-      $scope.quiz = {};
-      $scope.quiz.username = auth.currentUser();
-      //$scope.imageFile = {};
-    };
 
     $scope.closeFirstModal = function () {
         var file = document.getElementById('image').files[0]
@@ -22,10 +15,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         }
     };
 
-     $scope.selectQuiz = function (data) {
-      $scope.selectedQuiz = data;
-    };
-
     $scope.createQuiz = function () {
       console.log("IN CREATE QUIZ!!!!")
         var file = document.getElementById('image').files[0]
@@ -33,14 +22,13 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
-
+            showModal("secondPostingModal");
             //$state.reload();
             quizID = data.id;
             latitude = data.locationLat;
             longitude = data.locationLng;
-
-            setMarker(latitude, longitude);
-            showModal("secondPostingModal");
+            $scope.quiz = data;
+            
           });
 
         }
@@ -53,7 +41,11 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       console.log("FINALIZE!!!!");
       console.log(latitude);
       console.log(longitude);
-      $scope.updateQuizLocation(quizID, latitude, longitude);
+      console.log(newQuizMarker.getPosition().lat());
+      console.log(newQuizMarker.getPosition().lng());
+      $scope.updateQuizLocation($scope.quiz.id, newQuizMarker.getPosition().lat(), newQuizMarker.getPosition().lng());
+      $scope.quiz = {};
+      $scope.quiz.username = auth.currentUser(); // reset input
     };
 
     $scope.updateQuizLocation = function (quizID, lat, lng) {
