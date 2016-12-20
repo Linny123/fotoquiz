@@ -69,6 +69,11 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', '
         });
     };
 
+    $scope.addPoints = function (points) {
+      appDB.addPoints(auth.currentUser(), points).success(function (data) {
+      });
+    };
+
 
 	  //Initialize the profile shown on the page
     getProfile($scope.userProfile.username);

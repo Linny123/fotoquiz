@@ -6,10 +6,43 @@
 
 module.exports = {
 
-    getAllProfiles: function (req, res, next) {
+    computeRanking: function (req, res, next) {
       // Step 1 get all profiles
-      // Step 2 sort by score
-      // Step 3 attribute rank when going over profiles and update!
+      User.find({}).exec(function (err, profiles){
+        if (err) {return next(err);}
+        if(profiles){
+          // Step 2 sort by score via array
+          var profilesArray = [];
+          for (var profile in profiles){
+            profilesArray.push([profile.username, profile.score]);
+          }
+          profilesArray.sort(function(a, b) {
+              return a[1] - b[1]
+          })
+          // Step 3 attribute rank when going over profiles and update!
+          var singleProfile;
+          var username;
+          var newRank;
+          var arrayLength = profilesArray.length;
+          for (var i = 0; i < arrayLength; i++) {
+            singleProfile = profilesArray[i];
+            username = singleProfile[0];
+            newRank = i + 1;
+            //update rank of given username equals to the cntr (since sorted)
+            User.update({username: username},
+              {
+                rank: newRank
+              },
+              function(err, user) {
+                newRank = 0;
+            });
+          }
+        }
+        return res.send('Ranking computed');
+      });
+    },
+
+    getAllProfiles: function (req, res, next) {
       User.find({}).exec(function (err, profiles){
         if (err) {return next(err);}
         return res.json(profiles);

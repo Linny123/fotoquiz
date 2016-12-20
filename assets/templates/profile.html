@@ -56,6 +56,7 @@
 	            <li class="list-group-item text-right"><span class="pull-left"><strong>Points</strong></span>
               {{userProfile.score}}</li>
         	</ul>
+          <button ng-hide="visitMode()" class="btn btn-primary" ng-click="addPoints(100)">Add Points</button>
         </div>
 	</div>
 	<div class="col-sm-8">

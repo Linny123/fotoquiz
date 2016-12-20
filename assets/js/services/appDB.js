@@ -170,6 +170,13 @@ fotoApp.factory('appDB',
     });
   };
 
+  obj.computeRanking = function () {
+    return $http({
+          method: 'GET',
+          url: '/profile/ranking/'
+    });
+  };
+
   obj.getAllProfiles = function () {
     return $http({
           method: 'GET',
