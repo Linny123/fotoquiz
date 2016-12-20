@@ -12,6 +12,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     var score = 0;
     var maxScore = 80;
     var done = false;
+    var quizChance = 1;
 
 
     var addQuizDone = function (ID) {
@@ -20,46 +21,48 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
       });
     };
 
-    var boolHelper = false;
-    var hasDoneQuiz = function (ID) {
+    var hasDoneQuiz = function (ID ,callback) {
       appDB.hasDoneQuiz(auth.currentUser(), ID).success(function (data) {
-        boolHelper = data;
+        if(callback != null){
+          callback(data)
+        }
       });
     };
 
     var lockQuiz = function () {
-      console.log("lockQuiz");
-      console.log(boolHelper);
-      hasDoneQuiz(quizID);
-      console.log(boolHelper);
-      if(boolHelper){
-        console.log("locking");
-        $scope.lockClass = 'lock';
-      } else {
-        console.log("free");
-      }
+      hasDoneQuiz(quizID, function(data) {
+        if(data){
+          $scope.lockClass = 'lock';
+        }
+      });
     }
 
     $scope.guessingLocation = function () {
       if (!done){
-        if(chances >= 3){
+        if(quizChance >= 3){
           score = 0;
           done = true;
-          alert("You lose and scored" + score)
+          alert("You lose and scored" + score);
+          addQuizDone(quizID);
+          lockQuiz();
         }
         if(win){
           score = maxScore;
           done = true;
-          alert("You won and scored" + score)
+          alert("You won and scored" + score);
+          addQuizDone(quizID);
+          lockQuiz();
         }
+        quizChance = quizChance + 1;
         maxScore = maxScore - 20;
         score = maxScore;
+        if(quizChance >= 3){
+          lockQuiz();
+        }
       } else {
-        console.log("game over");
-        addQuizDone(quizID);
         lockQuiz();
       }
-    }
+    };
 
     $scope.resetMap = function () {
       // moet want chances wordt over alle quiz gedeeld..
