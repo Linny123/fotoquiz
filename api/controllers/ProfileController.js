@@ -6,6 +6,16 @@
 
 module.exports = {
 
+    getAllProfiles: function (req, res, next) {
+      // Step 1 get all profiles
+      // Step 2 sort by score
+      // Step 3 attribute rank when going over profiles and update!
+      User.find({}).exec(function (err, profiles){
+        if (err) {return next(err);}
+        return res.json(profiles);
+      });
+    },
+
     getUserProfile: function(req, res, next){
     	var username = req.query.username;
     	User.findOne({username: username}, function (err, user) {
@@ -118,6 +128,9 @@ module.exports = {
       },
       function(err, quiz) {
       });
-  }
+  },
 
+  ComputeRanking: function(req, res, next){
+    // compute and return all user with correct ranking
+  },
 };

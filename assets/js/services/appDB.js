@@ -153,30 +153,29 @@ fotoApp.factory('appDB',
   };
 
 
-        obj.generalQuizSearch = function (general) {
-            return $http.get('/quizsearch/generalQuizSearch', {
-                params: {
-                    "general": general
-                }
-            });
-        };
+  obj.generalQuizSearch = function (general) {
+    return $http.get('/quizsearch/generalQuizSearch', {
+      params: {
+        "general": general
+      }
+    });
+  };
 
 
-    obj.generalProfileSearch = function (general) {
-      return $http.get('/quizsearch/generalProfileSearch', {
-        params: {
+  obj.generalProfileSearch = function (general) {
+    return $http.get('/quizsearch/generalProfileSearch', {
+      params: {
           "general": general
         }
-      });
-    };
+    });
+  };
 
-    obj.getLocation = function (ID) {
-      return $http({
-            method: 'GET',
-            url: '/quiz/location',
-            params: {quizID: ID}
-      });
-    };
+  obj.getAllProfiles = function () {
+    return $http({
+          method: 'GET',
+          url: '/profile/all/'
+    });
+  };
 
 	return obj;
 }]);

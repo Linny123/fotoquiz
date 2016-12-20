@@ -1,6 +1,6 @@
 fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', 'appDB',
 	function ($scope, $state, $stateParams, auth, appDB) {
-		$scope.bodyClass = '';
+		$scope.bodyClass = ''; // not necessary
 		$scope.currentUser = auth.currentUser;
 		$scope.userProfile = {};
     $scope.selectedQuiz = {};

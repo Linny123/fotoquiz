@@ -1,17 +1,17 @@
-
-
-
 <h4 class="modal-title"> Quiz: {{selectedQuiz.content}} - by: {{selectedQuiz.username}}</h4>
 
 <div ng-class="lockClass">
+  <!-- Map -->
   <script> window.onload = GuessingMap();</script>
   <div  ng-click="guessingLocation()" id="map"></div>
+  <!-- Image & hint -->
   <div class="row">
     <div class="col-md-4"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
     <div class="col-md-4"><p> Hint: {{selectedQuiz.hint}} </p></div>
   </div>
 </div>
 
+<!-- Comment Section -->
 <div class="jumbotron">
   <h3 class="text-center lead">Comment Section</h3>
   <div class="form" ng-show="isLoggedIn()" style="margin-bottom: 20px;">

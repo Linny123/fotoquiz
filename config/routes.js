@@ -75,7 +75,7 @@ module.exports.routes = {
 
   'get /quizsearch/generalProfileSearch': 'SearchController.generalProfileSearch',
 
-  'get /quiz/locattion': 'QuizController.getLocation',
+  'get /profile/all': 'ProfileController.getAllProfiles'
 
   /***************************************************************************
   *                                                                          *
