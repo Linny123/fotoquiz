@@ -170,15 +170,5 @@ fotoApp.factory('appDB',
       });
     };
 
-
-        obj.advancedSearch = function (advanced) {
-            return $http.get('/quizsearch/advancedsearch', {
-                params: {
-                    "author": advanced.author,
-                    "content": advanced.content
-                }
-            });
-        };
-
 	return obj;
 }]);
