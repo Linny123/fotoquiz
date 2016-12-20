@@ -13,11 +13,15 @@ function getLatLng(address, callback){
   var location = { address: address }
 
   geocoder.geocode(location, function(results, status) {
-    var latlng = {
-      lat: results[0].geometry.location.lat(),
-      lng: results[0].geometry.location.lng()
+    if(status == "ZERO_RESULTS") {
+      alert("No location found.")
+    } else {
+      var latlng = {
+        lat: results[0].geometry.location.lat(),
+        lng: results[0].geometry.location.lng()
+      }
+      callback(latlng)
     }
-    callback(latlng)
   })
 
 }

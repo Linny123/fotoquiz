@@ -16,10 +16,6 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'fbCtrl'
         })
 
-        .state('nav1', {
-              url: '/nav1',
-              templateUrl: 'templates/nav1.html'
-        })
 
         .state('ranking', {
               url: '/ranking',
@@ -45,12 +41,6 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
         url: '/quizsearch',
         templateUrl: 'templates/search.html',
         controller: 'searchCtrl'
-      })
-
-      .state('filter', {
-        url: '/filter',
-        templateUrl: 'templates/filter.html',
-        controller: 'quizCtrl'
       })
 
       .state('profile', {
