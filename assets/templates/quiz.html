@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()" onclick="showModal('secondPostingModal')">Next</button>
+        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()" onclick="showModalWithWait('secondPostingModal')">Next</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -76,9 +76,15 @@
 
 
 <script>
-  function showModal(id) {
+  function showModalWithWait(id) {
     waitingDialog.show('Uploading picture');
     setTimeout(function () {waitingDialog.hide();}, 500);
+    $(".modal").modal('hide');
+    $("#" + id).modal();
+  }
+
+
+  function showModal(id) {
     $(".modal").modal('hide');
     $("#" + id).modal();
   }
