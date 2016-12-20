@@ -3,7 +3,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
-    $scope.selectedQuiz = {}
 
 
     $scope.closeFirstModal = function () {
@@ -12,6 +11,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
           alert("No image selected! Please select an image of a location.")
         } else {
           $scope.createQuiz();
+          showProgressBar();
         }
     };
 
@@ -23,11 +23,11 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
             showModal("secondPostingModal");
-            //$state.reload();
-            quizID = data.id;
-            latitude = data.locationLat;
-            longitude = data.locationLng;
-            $scope.quiz = data;
+
+            // Load map AFTER the second model has been completely shown, only then will the map display correctly
+            $('#secondPostingModal').on('shown.bs.modal', function () {
+               loadMap($scope.quiz.locationLat, $scope.quiz.locationLng);
+            });
             
           });
 
@@ -46,6 +46,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       $scope.updateQuizLocation($scope.quiz.id, newQuizMarker.getPosition().lat(), newQuizMarker.getPosition().lng());
       $scope.quiz = {};
       $scope.quiz.username = auth.currentUser(); // reset input
+      //$state.reload();
     };
 
     $scope.updateQuizLocation = function (quizID, lat, lng) {
@@ -97,13 +98,13 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       $state.reload();
     };
 
+    // Load all quizzes
     appDB.getQuiz().success(function (data) {
       for (var i = 0; i < data.length; i++) {
         data[i].index = i;
       }
       $scope.quizzes = data;
     });
-      //$scope.updateQuizLocation("585316cb9a8d34ec2f63ceb5", 1, 2);
   }]);
 
 

@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()" onclick="showProgressBar()">Next</button>
+        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()">Next</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -164,8 +164,5 @@
     })(jQuery);
 
 
-  // Load map AFTER the second model has been completely shown, only then will the map display correctly
-  $('#secondPostingModal').on('shown.bs.modal', function () {
-     loadMap(latitude, longitude);
-  });
+  
 </script>
