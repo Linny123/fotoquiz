@@ -75,8 +75,6 @@ module.exports.routes = {
 
   'get /quizsearch/generalProfileSearch': 'SearchController.generalProfileSearch',
 
-  'get /quizsearch/advancedsearch': 'SearchController.advancedSearch',
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

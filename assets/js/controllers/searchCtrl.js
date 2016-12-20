@@ -29,15 +29,6 @@ fotoApp.controller('searchCtrl', ['$scope', '$state', 'auth', 'appDB',
       })
     };
 
-    $scope.advancedSearch = function () {
-        appDB.advancedSearch($scope.advanced).success(function (data) {
-          for (var i = 0; i < data.length; i++) {
-            data[i].index = i;
-          }
-          $scope.foundQuizzes = data;
-        });
-    };
-
   }]);
 
 

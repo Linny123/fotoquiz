@@ -51,7 +51,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       if (auth.isLoggedIn()) {
         console.log("-> in filter function")
         var address = $scope.filter.address;
-        var radius = $scope.filter.range;
+        var radius = 30; // We use 30km as a radius (so that users cant find the exact location)
         var quizzesInRange = [];
 
         getLatLng(address, function(results) {
@@ -79,6 +79,10 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         $state.go('home');
       }
 
+    };
+
+    $scope.removeFilter = function() {
+      $state.reload();
     };
 
     appDB.getQuiz().success(function (data) {

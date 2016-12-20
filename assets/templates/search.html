@@ -2,26 +2,9 @@
   <div class="col-md-11">
     <div class="row">
       <div class="input-group" id="adv-search">
-        <input type="text" ng-model="general" class="form-control" placeholder="Search"/>
+        <input type="text" ng-model="general" class="form-control" placeholder="Search by user"/>
         <div class="input-group-btn">
           <div class="btn-group" role="group">
-            <div class="dropdown dropdown-lg">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                      aria-expanded="false"><span class="caret"></span></button>
-              <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <form class="form-horizontal" role="form">
-                  <div class="form-group">
-                    <label for="contain">Author</label>
-                    <input type="text" ng-model="advanced.author" class="form-control"/>
-                  </div>
-                  <div class="form-group">
-                    <label for="contain">Content</label>
-                    <input type="text" ng-model="advanced.content" class="form-control"/>
-                  </div>
-                  <button class="btn btn-primary" ng-click="advancedSearch()">Search</button>
-                </form>
-              </div>
-            </div>
             <button class="btn btn-primary" ng-click="generalSearch()">Search</button>
           </div>
         </div>
@@ -44,10 +27,11 @@
   <div class="col-md-2"></div>
   <a class="col-md-3" ui-sref="profile({username: item.username})">{{item.username}}</a>
   <div class="col-md-3" ng-bind="item.content"></div>
-  <div class="col-md-3"><img height="150" src="{{item.imageURL}}"/></div>
+  <a class="col-md-3" ui-sref="singleQuiz ({quiz: item})"><img height="150" src="{{item.imageURL}}"/></a>
   <div class="col-md-3"></div>
 </div>
 </section>
+
 
 <div class="row h3"></div>
 <div class="row h3"></div>
