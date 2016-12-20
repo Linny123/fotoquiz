@@ -101,7 +101,7 @@ function LocationMap(){
       // provide some default initialization options
       options = 
       {
-        zoom: 20,
+        zoom: 10,
         center: new google.maps.LatLng(latitude, longitude),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
