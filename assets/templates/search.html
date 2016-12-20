@@ -27,10 +27,11 @@
   <div class="col-md-2"></div>
   <a class="col-md-3" ui-sref="profile({username: item.username})">{{item.username}}</a>
   <div class="col-md-3" ng-bind="item.content"></div>
-  <div class="col-md-3"><img height="150" src="{{item.imageURL}}"/></div>
+  <a class="col-md-3" ui-sref="singleQuiz ({quiz: item})"><img height="150" src="{{item.imageURL}}"/></a>
   <div class="col-md-3"></div>
 </div>
 </section>
+
 
 <div class="row h3"></div>
 <div class="row h3"></div>
