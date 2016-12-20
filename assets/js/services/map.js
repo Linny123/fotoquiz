@@ -126,7 +126,6 @@ function getlocation(event){
 
 function Testlocation(event){
   latlng = event.latLng;
-  testwith = new google.maps.LatLng(point.lat, point.lng);
    console.log(latlng);
    if(chances < 3){
       var marker = new google.maps.Marker(
