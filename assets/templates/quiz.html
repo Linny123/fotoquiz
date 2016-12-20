@@ -76,15 +76,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Upload your picture and start your own quiz!</h4>
+        <h4 class="modal-title">If the location is not correct you can change it.</h4>
       </div>
       <div class="modal-body"> 
 
-        <div id="map"><script>window.onload = LocationMap();</script></div>
+        <div id="map" ></div>  <!-- Loading of map happens after this modal has been displayed (see bottom) -->
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="showModal('firstPostingModal')">Prev</button>
+        <!-- <button type="button" class="btn btn-primary" onclick="showModal('firstPostingModal')">Prev</button> -->
         <button class="btn btn-primary" ng-click="finalizeQuiz()" data-dismiss="modal">Create Quiz</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -163,7 +163,9 @@
 
     })(jQuery);
 
-$('#secondPostingModal').on('shown.bs.modal', function () {
-   google.maps.event.trigger(map, "resize");
-});
+
+  // Load map AFTER the second model has been completely shown, only then will the map display correctly
+  $('#secondPostingModal').on('shown.bs.modal', function () {
+     loadMap(latitude, longitude);
+  });
 </script>
