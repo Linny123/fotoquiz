@@ -130,8 +130,8 @@ function getlocation(event){
 
 function Testlocation(event){
   latlng = event.latLng;
-   console.log(latlng);
    if(chances < 3){
+    // NIET VERGETEN OM DE LOCATIE NOG TE TESTEN 
       var marker = new google.maps.Marker(
     { 
       map: map,
@@ -141,6 +141,7 @@ function Testlocation(event){
   google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
        chances = chances + 1;
      }
+
 
 }
 
