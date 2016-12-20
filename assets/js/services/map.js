@@ -84,6 +84,19 @@ function GuessingMap(){
       
 }
 
+function setMarker(lat, long){
+  var currentLocation = new google.maps.LatLng(lat, long);
+  map.panTo(currentLocation);
+  var marker = new google.maps.Marker(
+    { 
+      map: map,
+      position: currentLocation,
+      title: "NEW MARKER"
+    });
+  google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
+
+}
+
 
 function LocationMap(){
   geocoder = new google.maps.Geocoder();
