@@ -37,7 +37,7 @@ function getLatLng(address, callback){
  }
 
 
-function GuessingMap(fotoID){
+function GuessingMap(){
     
       geocoder = new google.maps.Geocoder();
       //fotosID = fotoID
@@ -82,7 +82,7 @@ function GuessingMap(fotoID){
 }
 
 
-function LocationMap(latitude, longitude, fotoID){
+function LocationMap(){
   geocoder = new google.maps.Geocoder();
   var setting = false;
   if(latitude == "NULL"){
