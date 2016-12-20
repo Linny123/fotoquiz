@@ -148,8 +148,10 @@ function Testlocation(event){
     // testing location smaller then 100 m
     if(getDistance(loc, latlng) < 100){
       win = true;
-    chances = chances + 1;
+      
      }
+     chances = chances + 1;
+   }
 
 
 }
