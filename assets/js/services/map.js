@@ -146,13 +146,8 @@ function Testlocation(event){
   google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
 
     // testing location smaller then 100 m
-    if(getDistance(loc, latlng) < 25){
-      points = points+80; // if smaller add 80 points;
-    }else if(getDistance(loc, latlng) < 50)
-      points = points+40;
-    } else if(getDistance(loc, latlng) < 100)
-      points = points+20;
-    }     
+    if(getDistance(loc, latlng) < 100){
+      win = true;
     chances = chances + 1;
      }
 
