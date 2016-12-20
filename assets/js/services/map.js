@@ -128,15 +128,14 @@ function Testlocation(event){
   latlng = event.latLng;
   testwith = new google.maps.LatLng(point.lat, point.lng);
    console.log(latlng);
-   if(chances >= 3){
-      console.log("guessed too much");
-    }else{
-       if(getDistance(latlng, testwith) < 100){
-          console.log("yes");
-          win = true;
-       }else{
-          console.log("no");
-       }
+   if(chances < 3){
+      var marker = new google.maps.Marker(
+    { 
+      map: map,
+      position: event.latLng,
+      title: "NEW MARKER"
+    });
+  google.maps.event.addListener(marker, "click", function(event){openMarkerPopup(marker);});
        chances = chances + 1;
      }
 
