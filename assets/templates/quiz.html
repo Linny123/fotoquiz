@@ -52,9 +52,14 @@
           Select a picture of your location.
           <input type="file" ng-model="image" id="image" class="form-control" />
         </div>
+
+        <div class="form-group">
+          Give a hint for your location.
+          <input type="text" ng-model="quiz.hint" class="form-control" placeholder="Hint"/>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()" onclick="showModalWithWait('secondPostingModal')">Next</button>
+        <button type="button" class="btn btn-primary" ng-click="closeFirstModal()" onclick="showProgressBar()">Next</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -73,17 +78,14 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Upload your picture and start your own quiz!</h4>
       </div>
-      <div class="modal-body"> <!-- instead of NULL  we must put down de longitude and latitude of the picture, if there is none the string "NULL" instead of 1 there should be the quiz ID -->
-          <div id="map"><script>window.onload = LocationMap();</script></div>
-        <div class="form-group">
-          Give a hint for your location.
-          <input type="text" ng-model="quiz.hint" class="form-control" placeholder="Hint"/>
-        </div>
+      <div class="modal-body"> 
+
+        <div id="map"><script>window.onload = LocationMap();</script></div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="showModal('firstPostingModal')">Prev</button>
-        <button class="btn btn-primary" ng-click="createQuiz()" onclick="waitingDialog.show('Creating quiz');setTimeout(function () {waitingDialog.hide();}, 2000);" data-dismiss="modal">Create Quiz</button>
+        <button class="btn btn-primary" ng-click="finalizeQuiz()" data-dismiss="modal">Create Quiz</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -94,11 +96,9 @@
 
 
 <script>
-  function showModalWithWait(id) {
+  function showProgressBar() {
     waitingDialog.show('Uploading picture');
-    setTimeout(function () {waitingDialog.hide();}, 500);
     $(".modal").modal('hide');
-    $("#" + id).modal();
   }
 
 
@@ -162,6 +162,7 @@
       };
 
     })(jQuery);
+
 $('#secondPostingModal').on('shown.bs.modal', function () {
    google.maps.event.trigger(map, "resize");
 });

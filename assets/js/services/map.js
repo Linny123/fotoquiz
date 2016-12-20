@@ -99,6 +99,8 @@ function setMarker(lat, long){
 
 
 function LocationMap(){
+  console.log("LOCATION MAP!!");
+  console.log(latitude);
   geocoder = new google.maps.Geocoder();
   var setting = false;
   if(latitude == null){
@@ -141,7 +143,8 @@ function getlocation(event){
   chances = chances+1;
   latlng = event.latLng;
   }  
-  updateQuizLocation(quizID, latlng.lat(), latlng.lng());
+  latitude = latlng.lat();
+  longitude = latlng.lng();
 
 }
 

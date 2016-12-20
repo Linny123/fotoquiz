@@ -14,9 +14,12 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     };
 
     $scope.closeFirstModal = function () {
-      // var file = document.getElementById('image').files[0]
-      // $scope.quiz.file = file
-      // Moet dit echt hier?
+        var file = document.getElementById('image').files[0]
+        if(file == null) {
+          alert("No image selected! Please select an image of a location.")
+        } else {
+          $scope.createQuiz();
+        }
     };
 
      $scope.selectQuiz = function (data) {
@@ -24,21 +27,33 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     };
 
     $scope.createQuiz = function () {
+      console.log("IN CREATE QUIZ!!!!")
         var file = document.getElementById('image').files[0]
         $scope.quiz.file = file
 
         if (auth.isLoggedIn()) {
           appDB.createQuiz($scope.quiz).success(function (data) {
-            $state.reload();
+
+            //$state.reload();
             quizID = data.id;
             latitude = data.locationLat;
             longitude = data.locationLng;
+
+            setMarker(latitude, longitude);
+            showModal("secondPostingModal");
           });
 
         }
         else {
           $state.go('home');
         }
+    };
+
+    $scope.finalizeQuiz = function() {
+      console.log("FINALIZE!!!!");
+      console.log(latitude);
+      console.log(longitude);
+      $scope.updateQuizLocation(quizID, latitude, longitude);
     };
 
     $scope.updateQuizLocation = function (quizID, lat, lng) {
