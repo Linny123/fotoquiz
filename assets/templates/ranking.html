@@ -9,20 +9,10 @@
       	</tr>
     </thead>
     <tbody>
-    	<tr>
-        	<td>John</td>
-        	<td>1</td>
-        	<td>1000000000</td>
+    	<tr ng-repeat="item in items | orderBy:'-rank'">
+        	<td>{{item.username}}</td>
+        	<td>{{item.rank}}</td>
+        	<td>{{item.score}}</td>
     	</tr>
-      	<tr>
-        	<td>Mary</td>
-        	<td>2</td>
-        	<td>500000</td>
-      	</tr>
-      	<tr>
-        	<td>July</td>
-        	<td>3</td>
-        	<td>250000</td>
-      	</tr>
 	</tbody>
 </table>

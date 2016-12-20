@@ -170,5 +170,13 @@ fotoApp.factory('appDB',
       });
     };
 
+    obj.getLocation = function (ID) {
+      return $http({
+            method: 'GET',
+            url: '/quiz/location',
+            params: {quizID: ID}
+      });
+    };
+
 	return obj;
 }]);

@@ -48,15 +48,11 @@
 		</div>
 		<br>
 		<br>
-		<button ng-hide="visitMode()" type="button" class="btn btn-info" ng-click="addPoints(10)" >ADD POINTS</button>
-		<button ng-hide="visitMode()" type="button" class="btn btn-info" ng-click="addQuizDone('123abc')" >ADD QUIZID</button>
-		<button ng-hide="visitMode()" type="button" class="btn btn-info" ng-click="hasDoneQuiz('123abc')" >hasDoneQuiz</button>
         <div class="row">
         	<ul class="list-group">
 	            <li class="list-group-item text-muted">Activity</li>
-	            <li class="list-group-item text-right"><span class="pull-left"><strong>Ranking</strong></span>1</li>
+	            <li class="list-group-item text-right"><span class="pull-left"><strong>Ranking</strong></span>{{userProfile.rank}}</li>
 	            <li class="list-group-item text-right"><span class="pull-left"><strong>Points</strong></span>&nbsp;{{userProfile.score}}</li>
-	            <li class="list-group-item text-right"><span class="pull-left"><strong>Nr of Perfect gueses</strong></span>12</li>
 	            <li class="list-group-item text-right"><span class="pull-left"><strong>Quiz answered</strong></span> 88</li>
         	</ul>
         </div>

@@ -26,6 +26,10 @@ module.exports = {
             type: 'integer',
             defaultsTo: 0
         },
+        rank: {
+            type: 'integer',
+            defaultsTo : 1
+        },
         quizzes: {
             type: 'array',
             defaultsTo: []

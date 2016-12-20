@@ -7,13 +7,18 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.comment= '';
     $scope.lockClass = 'free';
 
-    var quizID = $stateParams.quiz.id;
+    quizID = $stateParams.quiz.id;
+
 
     var score = 0;
     var maxScore = 80;
     var done = false;
     var quizChance = 1;
 
+    var addPoints = function (points) {
+      appDB.addPoints(auth.currentUser(), points).success(function (data) {
+      });
+    };
 
     var addQuizDone = function (ID) {
       appDB.addQuizDone(auth.currentUser(), ID).success(function (data) {
@@ -49,6 +54,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
         if(win){
           score = maxScore;
           done = true;
+          addPoints(score);
           alert("You won and scored" + score);
           addQuizDone(quizID);
           lockQuiz();
@@ -67,6 +73,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.resetMap = function () {
       // moet want chances wordt over alle quiz gedeeld..
       chances = 0;
+      win = false;
     }
 
     // Get the comment section from DB
