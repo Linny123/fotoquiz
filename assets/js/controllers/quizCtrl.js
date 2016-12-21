@@ -5,15 +5,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.filter = {};
     $scope.lockClass = 'free';
 
-    // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
-    var lockQuiz2 = function () {
-      hasDoneQuiz(quizID, function(data) {
-        if(data){
-          $scope.lockClass = 'lock';
-        }
-      });
-    }
-
     $scope.closeFirstModal = function () {
         var file = document.getElementById('image').files[0]
         if(file == null) {
@@ -63,6 +54,8 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
         if (auth.isLoggedIn()) {
           appDB.updateQuizLocation(quizID, lat, lng).success(function (data) {
             //console.log(data)
+            // since usere created the quiz, the quiz will be locked.
+            data.lock = "lock2";
             $scope.quizzes.push(data); // Add new quiz to quizzes
           });
         }
@@ -109,13 +102,38 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       $state.reload();
     };
 
+    // This function tell us weither or not a quiz has been answered by the current user
+    var hasDoneQuiz = function (ID , callback) {
+      appDB.hasDoneQuiz(auth.currentUser(), ID).success(function (data) {
+        if(callback != null){
+          callback(data)
+        }
+      });
+    };
+
+    // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
+    var lockQuiz2 = function (ID, item) {
+      hasDoneQuiz(ID, function(data) {
+        if(data){
+          item.lock = 'lock2';
+        } else {
+          item.lock = 'free';
+        }
+      });
+    }
+
     // Load all quizzes
     appDB.getQuiz().success(function (data) {
       for (var i = 0; i < data.length; i++) {
         data[i].index = i;
+        console.log(data[i]);
+        console.log(data[i].lock);
+        lockQuiz2(data[i].id, data[i]);
       }
       $scope.quizzes = data;
     });
+
+
   }]);
 
 
