@@ -6,6 +6,8 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.commentSection = {};
     $scope.comment= '';
     $scope.lockClass = 'free';
+    $scope.selectedQuiz.lock = 'free';
+
 
     quizID = $stateParams.quiz.id;
     latitude = $stateParams.quiz.locationLat;
@@ -47,8 +49,14 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
       hasDoneQuiz(quizID, function(data) {
         if(data){
           $scope.lockClass = 'lock';
+          $scope.selectedQuiz.lock = 'lock';
         }
       });
+    }
+
+    var lockAfter = function () {
+      console.log("LOCK!")
+      $scope.selectedQuiz.lock = 'lock';
     }
 
     // This function will handle the guesses aswell lock the quiz when it's done
@@ -76,6 +84,35 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
         // user finished the quiz, the quiz is now locked
         lockQuiz();
       }
+    };
+
+    // This function will handle the guesses aswell lock the quiz when it's done
+    $scope.guess = function () {
+      console.log("GUESS!!")
+      var guessLocation = getMarkerLocation()
+      var quizLocation = new google.maps.LatLng($scope.selectedQuiz.locationLat, $scope.selectedQuiz.locationLng);
+
+      var distance = getDistance(guessLocation, quizLocation)
+
+      if(distance < 100){
+        score = maxScore;
+        addPoints(score);
+        addQuizDone(quizID);
+        lockAfter();
+        alert("You won and scored " + score);
+      } else if($scope.chanceLeft <= 1){ // any user might guess 3 times max
+        score = 0;
+        addQuizDone(quizID);
+        lockAfter();
+        alert("You lose and scored " + score);
+      } else {
+        $scope.chanceLeft = $scope.chanceLeft - 1;
+        maxScore = maxScore - 20;
+        score = maxScore;
+      }
+      
+
+ 
     };
 
     $scope.resetMap = function () {

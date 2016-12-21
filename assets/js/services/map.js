@@ -112,8 +112,28 @@ function GuessingMap(){
     onError();
   }
 
+  addMarker();
+
   // Add guess click function
-  google.maps.event.addListener(map, "click", Testlocation);    
+  //google.maps.event.addListener(map, "click", Testlocation);    
+}
+
+function addMarker() {
+  console.log("MARKER ADDED!!!");
+  newQuizMarker = new google.maps.Marker({ 
+    map: map,
+    position: map.getCenter(),
+    title: "Drag marker to the correct position",
+    draggable:true
+  });
+}
+
+function getMarkerLocation() {
+  var latlng = {
+    lat: newQuizMarker.getPosition().lat(),
+    lng: newQuizMarker.getPosition().lng()
+  }
+  return newQuizMarker.getPosition()
 }
 
 
