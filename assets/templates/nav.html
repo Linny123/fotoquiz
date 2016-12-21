@@ -3,7 +3,7 @@
         <ul class="nav navbar-nav">
             <li><a ui-sref="home">Home</a></li>
             <li ng-show="isLoggedIn()"><a ui-sref="ranking">Ranking</a></li>
-            <li><a ui-sref="quiz">Quiz</a></li>
+            <li><a ng-show="isLoggedIn()" ui-sref="quiz">Quiz</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-show="isLoggedIn()" role="presentation" class="dropdown">

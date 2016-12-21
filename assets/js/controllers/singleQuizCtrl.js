@@ -59,7 +59,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
           done = true;
           addQuizDone(quizID);
           lockQuiz();
-          alert("You lose and scored" + score);
+          alert("You lose and scored " + score);
         }
         if(win){ // user guessed right, score is added and quiz is locked afterwards
           score = maxScore;
@@ -67,7 +67,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
           addPoints(score);
           addQuizDone(quizID);
           lockQuiz();
-          alert("You won and scored" + score);
+          alert("You won and scored " + score);
         } //wrong guess, decrement the chances left and the max obtainable score
         $scope.chanceLeft = $scope.chanceLeft - 1;
         maxScore = maxScore - 20;
