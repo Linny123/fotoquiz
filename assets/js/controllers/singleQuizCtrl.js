@@ -14,8 +14,8 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     var score = 0;
     var maxScore = 80;
     var done = false;
-    var quizChance = 1;
-    var chanceLeft = 2;
+    $scope.chanceLeft = 3;
+    $scope.hintBoolean = false;
 
     var addPoints = function (points) {
       appDB.addPoints(auth.currentUser(), points).success(function (data) {
@@ -36,6 +36,12 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
       });
     };
 
+    $scope.showHint = function () {
+      $scope.hintBoolean = true;
+      maxScore = maxScore / 2;
+      console.log(maxScore);
+    }
+
     // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
     var lockQuiz = function () {
       hasDoneQuiz(quizID, function(data) {
@@ -48,24 +54,22 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     // This function will handle the guesses aswell lock the quiz when it's done
     $scope.guessingLocation = function () {
       if (!done){
-        if(quizChance >= 3){ // any user might guess 3 times max
+        if($scope.chanceLeft <= 1){ // any user might guess 3 times max
           score = 0;
           done = true;
-          alert("You lose and scored" + score);
           addQuizDone(quizID);
           lockQuiz();
+          alert("You lose and scored" + score);
         }
         if(win){ // user guessed right, score is added and quiz is locked afterwards
           score = maxScore;
           done = true;
           addPoints(score);
-          alert("You won and scored" + score);
           addQuizDone(quizID);
           lockQuiz();
+          alert("You won and scored" + score);
         } //wrong guess, decrement the chances left and the max obtainable score
-        alert("You guessed wrong and have " + chanceLeft + " chances left");
-        quizChance = quizChance + 1;
-        chanceLeft = chanceLeft - 1;
+        $scope.chanceLeft = $scope.chanceLeft - 1;
         maxScore = maxScore - 20;
         score = maxScore;
       } else {

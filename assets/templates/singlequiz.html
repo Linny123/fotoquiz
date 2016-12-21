@@ -6,17 +6,20 @@
   <div  ng-click="guessingLocation()" id="map"></div>
   <!-- Image & hint -->
   <div class="row">
-    <div class="col-md-4"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
-    <div class="col-md-4"><p> Hint: {{selectedQuiz.hint}} </p></div>
+    <div class="col-sm-8"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
+    <div class="col-sm-3">
+      <button ng-hide="hintBoolean"type="button" class="btn btn-info" ng-click="showHint()"> Hint </button>
+      <p ng-show="hintBoolean"> Hint: {{selectedQuiz.hint}} </p>
+    </div>
+    <div class="col-sm-1"><p> Chances left: {{chanceLeft}} </p></div>
   </div>
 </div>
 
 <!-- Comment Section -->
-<div class="jumbotron">
+<div class="">
   <h3 class="text-center lead">Comment Section</h3>
-  <div class="form" ng-show="isLoggedIn()" style="margin-bottom: 20px;">
-    <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
-    <button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
+  <div class="form" ng-show="isLoggedIn()">
+    <input type="text" class="form-control" placeholder="Comment" ng-model="comment"><button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
   </div>
   <div ng-repeat="comment in commentSection" class="list-group">
     <div class="list-group-item">
