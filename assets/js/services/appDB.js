@@ -172,7 +172,7 @@ fotoApp.factory('appDB',
 
   obj.computeRanking = function () {
     return $http({
-          method: 'GET',
+          method: 'PUT',
           url: '/profile/ranking/'
     });
   };

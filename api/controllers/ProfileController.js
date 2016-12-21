@@ -7,19 +7,22 @@
 module.exports = {
 
     computeRanking: function (req, res, next) {
+      var profilesArray = [];
       // Step 1 get all profiles
       User.find({}).exec(function (err, profiles){
         if (err) {return next(err);}
         if(profiles){
           // Step 2 sort by score via array
+          // Create an array so we can sort every user by their score
           var profilesArray = [];
-          for (var profile in profiles){
-            profilesArray.push([profile.username, profile.score]);
+          var profilesLength = profiles.length;
+          for (var i = 0; i < profilesLength; i++){
+            profilesArray.push([profiles[i].username, profiles[i].score]);
           }
           profilesArray.sort(function(a, b) {
-              return a[1] - b[1]
+              return b[1] - a[1]
           })
-          // Step 3 attribute rank when going over profiles and update!
+          // Step 3 update rank when going over profiles
           var singleProfile;
           var username;
           var newRank;
@@ -28,13 +31,13 @@ module.exports = {
             singleProfile = profilesArray[i];
             username = singleProfile[0];
             newRank = i + 1;
-            //update rank of given username equals to the cntr (since sorted)
+            // Update rank of given username via the cntr of the for loop (since sorted)
             User.update({username: username},
               {
                 rank: newRank
               },
               function(err, user) {
-                newRank = 0;
+                newRank = 0; // reset the rank
             });
           }
         }
@@ -61,7 +64,8 @@ module.exports = {
               email: user.email,
               score: user.score,
               quizzes: user.quizzes,
-              nrOfDoneQuizzes: user.quizzes.length
+              nrOfDoneQuizzes: user.quizzes.length,
+              rank: user.rank
             };
             res.json(userProfile);
           }
@@ -161,9 +165,5 @@ module.exports = {
       },
       function(err, quiz) {
       });
-  },
-
-  ComputeRanking: function(req, res, next){
-    // compute and return all user with correct ranking
-  },
+  }
 };

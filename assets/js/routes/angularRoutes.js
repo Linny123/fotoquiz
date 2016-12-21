@@ -19,7 +19,8 @@ fotoApp.config(function($stateProvider, $urlRouterProvider) {
 
         .state('ranking', {
               url: '/ranking',
-              templateUrl: 'templates/ranking.html'
+              templateUrl: 'templates/ranking.html',
+            controller: 'rankingCtrl'
         })
 
         .state('quiz', {

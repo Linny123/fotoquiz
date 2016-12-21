@@ -9,10 +9,10 @@
       	</tr>
     </thead>
     <tbody>
-    	<tr ng-repeat="profile in profiles | orderBy:'-rank'">
-        	<td>{{item.username}}</td>
-        	<td>{{item.rank}}</td>
-        	<td>{{item.score}}</td>
+    	<tr ng-repeat="profile in profiles | orderBy:'rank'">
+        	<td>{{profile.username}}</td>
+        	<td>{{profile.rank}}</td>
+        	<td>{{profile.score}}</td>
     	</tr>
 	</tbody>
 </table>

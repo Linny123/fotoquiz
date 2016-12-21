@@ -71,12 +71,21 @@ fotoApp.controller('profileCtrl', ['$scope', '$state', '$stateParams', 'auth', '
 
     $scope.addPoints = function (points) {
       appDB.addPoints(auth.currentUser(), points).success(function (data) {
+        $state.reload();
       });
+    };
+
+    var computeRanking = function () {
+    appDB.computeRanking().success(function (data) {
+        //  evrey user in DB has an up to date rank 
+        //  we can now get the up to date profile (rank) of the current user
+        getProfile($scope.userProfile.username);
+      })
     };
 
 
 	  //Initialize the profile shown on the page
-    getProfile($scope.userProfile.username);
+    computeRanking(); 
     getUserQuiz($scope.userProfile.username);
 
 }]);

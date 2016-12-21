@@ -77,7 +77,7 @@ module.exports.routes = {
 
   'get /profile/all': 'ProfileController.getAllProfiles',
 
-  'get /profile/ranking': 'ProfileController.computeRanking'
+  'put /profile/ranking': 'ProfileController.computeRanking'
 
   /***************************************************************************
   *                                                                          *
