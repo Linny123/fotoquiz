@@ -6,6 +6,9 @@
     <script> window.onload = GuessingMap();</script>
     <div  ng-click="guessingLocation()" id="map"></div>
   </div>
+  <div class="col-sm-2">
+    <p>{{selectedQuiz.content}} </p>
+  </div>
   <!-- Guesses left -->
   <div class="col-sm-2">
     <p> Chances left: {{chanceLeft}} </p>
@@ -38,7 +41,7 @@
             <div class="col-sm-9 col-sm-offset-1">
               <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
             </div>
-          </div>  
+          </div>
         </div>
         <br>
         <div class="row">
