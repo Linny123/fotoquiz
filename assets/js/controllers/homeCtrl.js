@@ -1,4 +1,4 @@
-fotoApp.controller('homeCtrl', ['$scope', '$state', 'auth', function($scope, $state, auth) {
+fotoApp.controller('homeCtrl', ['$scope', '$rootScope', '$state', 'auth', function($scope, $rootScope, $state, auth) {
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.user = {}; // login/signup form
 
@@ -32,5 +32,22 @@ fotoApp.controller('homeCtrl', ['$scope', '$state', 'auth', function($scope, $st
         $state.go('home');
       });
     };
+
+    // Set home background Image
+    $rootScope.setBackground = function(){
+    return {
+            'background-image':'url(../../images/backgroundH.jpg)'
+        }
+    }
+
+    // When leaving the home page remove the background image
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams){
+        $rootScope.setBackground = function(){
+        return {
+          'background-image':'null'
+        }
+      }
+    })
 
 }]);
