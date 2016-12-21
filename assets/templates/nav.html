@@ -4,7 +4,6 @@
             <li><a ui-sref="home">Home</a></li>
             <li ng-show="isLoggedIn()"><a ui-sref="ranking">Ranking</a></li>
             <li><a ui-sref="quiz">Quiz</a></li>
-            <li><a ui-sref="quizsearch">Search for quiz</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-show="isLoggedIn()" role="presentation" class="dropdown">
@@ -18,5 +17,15 @@
                 </ul>
             </li>
         </ul>
+      <form action="" class="navbar-form navbar-right">
+        <div class="input-group">
+          <input type="Search" ng-model="text" placeholder="User" class="form-control" />
+          <div class="input-group-btn">
+              <a ui-sref="quizsearch({term: text})">
+                <button class="btn btn-primary">Search</button>
+              </a>
+          </div>
+        </div>
+      </form>
     </div>
 </nav>
