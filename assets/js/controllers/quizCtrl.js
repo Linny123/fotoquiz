@@ -24,6 +24,8 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
           appDB.createQuiz($scope.quiz).success(function (data) {
             showModal("secondPostingModal");
 
+            $scope.quiz = data;
+
             // Load map AFTER the second model has been completely shown, only then will the map display correctly
             $('#secondPostingModal').on('shown.bs.modal', function () {
                loadMap($scope.quiz.locationLat, $scope.quiz.locationLng);
