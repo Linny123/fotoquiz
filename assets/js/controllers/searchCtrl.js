@@ -1,9 +1,6 @@
-fotoApp.controller('searchCtrl', ['$scope', '$state', 'auth', 'appDB',
-  function ($scope, $state, auth, appDB) {
-    $scope.general = '';
-    $scope.advanced = {};
-    $scope.advanced.author = '';
-    $scope.advanced.content = '';
+fotoApp.controller('searchCtrl', ['$scope', '$state', '$stateParams', 'auth', 'appDB',
+  function ($scope, $state, $stateParams, auth, appDB) {
+    $scope.general = $stateParams.term;
 
 
     $scope.generalSearch = function () {
@@ -28,6 +25,8 @@ fotoApp.controller('searchCtrl', ['$scope', '$state', 'auth', 'appDB',
         $scope.foundProfiles = data;
       })
     };
+
+    $scope.generalSearch();
 
   }]);
 
