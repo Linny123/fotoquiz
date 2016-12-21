@@ -34,7 +34,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
             showModal("secondPostingModal");
 
             $scope.quiz = data;
-
+            appDB.addQuizDone($scope.quiz.username, $scope.quiz.id).success(function (data) {}); // Lock quiz for creator of quiz
             // Load map AFTER the second model has been completely shown, only then will the map display correctly
             $('#secondPostingModal').on('shown.bs.modal', function () {
                loadMap($scope.quiz.locationLat, $scope.quiz.locationLng);
@@ -54,16 +54,16 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
       console.log(longitude);
       console.log(newQuizMarker.getPosition().lat());
       console.log(newQuizMarker.getPosition().lng());
+
       $scope.updateQuizLocation($scope.quiz.id, newQuizMarker.getPosition().lat(), newQuizMarker.getPosition().lng());
       $scope.quiz = {};
-      $scope.quiz.username = auth.currentUser(); // reset input
-      //$state.reload();
     };
 
     $scope.updateQuizLocation = function (quizID, lat, lng) {
         if (auth.isLoggedIn()) {
           appDB.updateQuizLocation(quizID, lat, lng).success(function (data) {
-            console.log(data)
+            //console.log(data)
+            $scope.quizzes.push(data); // Add new quiz to quizzes
           });
         }
         else {
