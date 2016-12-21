@@ -1,32 +1,63 @@
-<h4 class="modal-title"> Quiz: {{selectedQuiz.content}} - by: {{selectedQuiz.username}}</h4>
-
-<div ng-class="lockClass">
+<h2> Quiz by: {{selectedQuiz.username}}</h2>
+<br>
+<div class="row" ng-class="lockClass">
   <!-- Map -->
-  <script> window.onload = GuessingMap();</script>
-  <div  ng-click="guessingLocation()" id="map"></div>
+  <div class="col-sm-10">
+    <script> window.onload = GuessingMap();</script>
+    <div  ng-click="guessingLocation()" id="map"></div>
+  </div>
+  <!-- Guesses left -->
+  <div class="col-sm-2">
+    <p> Chances left: {{chanceLeft}} </p>
+  </div>
+</div>
+<br>
+<div class="row" ng-class="lockClass">
   <!-- Image & hint -->
-  <div class="row">
-    <div class="col-sm-8"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
-    <div class="col-sm-3">
+  <div class="col-sm-10">
+    <div class="row"><img style="width: 100%; height: 100%" ng-src="{{selectedQuiz.imageURL}}"/></div>
+  </div>
+  <div class="col-sm-2">
       <button ng-hide="hintBoolean"type="button" class="btn btn-info" ng-click="showHint()"> Hint </button>
       <p ng-show="hintBoolean"> Hint: {{selectedQuiz.hint}} </p>
+  </div>
+</div>
+<br>
+<!-- Comment Section -->
+<div class="row">
+  <div class="col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <h3 class="panel-title text-center lead">Comment Section</h3>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+          <div class="form" ng-show="isLoggedIn()">
+            <div class="col-md-7">
+              <input type="text" class="form-control" placeholder="Comment" ng-model="comment">
+            </div>
+            <div class="col-md-5">
+              <button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
+            </div>
+          </div>  
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <div ng-repeat="comment in commentSection" class="list-group">
+              <div class="list-group-item">
+                <blockquote>
+                  <p>{{comment.content}}</p>
+                  <footer>Posted by <cite title="Source Title">{{comment.author}}</cite></footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-1"><p> Chances left: {{chanceLeft}} </p></div>
   </div>
 </div>
 
-<!-- Comment Section -->
-<div class="">
-  <h3 class="text-center lead">Comment Section</h3>
-  <div class="form" ng-show="isLoggedIn()">
-    <input type="text" class="form-control" placeholder="Comment" ng-model="comment"><button type="button" class="btn btn-success" ng-click="postComment()">Add a comment</button>
-  </div>
-  <div ng-repeat="comment in commentSection" class="list-group">
-    <div class="list-group-item">
-      <blockquote>
-        <p>{{comment.content}}</p>
-        <footer>Posted by <cite title="Source Title">{{comment.author}}</cite></footer>
-      </blockquote>
-    </div>
-  </div>
-</div>
