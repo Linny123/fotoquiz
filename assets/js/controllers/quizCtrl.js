@@ -82,6 +82,8 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
               var inrange = inRange(latc, lngc, latp, lngp, radius)
 
+              lockQuiz2(data[i].id, data[i]);
+              
               if(inrange) {
                 quizzesInRange.push(data[i])
               }
