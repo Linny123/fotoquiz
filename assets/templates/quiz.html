@@ -21,7 +21,7 @@
 
 <div class="row">
 <div class="quiz-container col-md-3" ng-repeat="item in quizzes">
-  <div class="quiz" >
+  <div class="quiz" ng-class="item.lock">
     <a ui-sref="singleQuiz ({quiz: item})">
     <img class="full" ng-src="{{item.imageURL}}" />
     </a>

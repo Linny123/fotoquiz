@@ -23,6 +23,11 @@ filter: alpha(opacity = 50);
 pointer-events: none;
 }
 
+.lock2 {
+opacity: 0.5; 
+filter: alpha(opacity = 50);
+}
+
 .corner {
 float: right;
 }

@@ -3,7 +3,16 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.quiz = {};
     $scope.quiz.username = auth.currentUser();
     $scope.filter = {};
+    $scope.lockClass = 'free';
 
+    // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
+    var lockQuiz2 = function () {
+      hasDoneQuiz(quizID, function(data) {
+        if(data){
+          $scope.lockClass = 'lock';
+        }
+      });
+    }
 
     $scope.closeFirstModal = function () {
         var file = document.getElementById('image').files[0]

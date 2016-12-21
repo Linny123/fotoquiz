@@ -43,21 +43,15 @@
 
 <div class="row">
 	<div class="col-sm-4">
-		<div class="row">
-			<img src="../images/goldM.png" class="avatar img-circle img-thumbnail" alt="avatar">
-		</div>
 		<br>
-		<br>
-        <div class="row">
-        	<ul class="list-group">
-	            <li class="list-group-item text-muted">Activity</li>
-	            <li class="list-group-item text-right"><span class="pull-left"><strong>Ranking</strong></span>
-              {{userProfile.rank}}</li>
-	            <li class="list-group-item text-right"><span class="pull-left"><strong>Points</strong></span>
-              {{userProfile.score}}</li>
-        	</ul>
-          <button ng-hide="visitMode()" class="btn btn-primary" ng-click="addPoints(100)">Add Points</button>
-        </div>
+  	<ul class="list-group">
+	     <li class="list-group-item text-muted">Activity</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Ranking</strong></span>
+        {{userProfile.rank}}</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Points</strong></span>
+        {{userProfile.score}}</li>
+    	</ul>
+    <button ng-hide="visitMode()" class="btn btn-primary" ng-click="addPoints(100)">Add Points</button>
 	</div>
 	<div class="col-sm-8">
 		<div class="panel panel-default">
