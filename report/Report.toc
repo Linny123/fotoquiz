@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {2} the web application architecture}{3}
+\contentsline {section}{\numberline {3}Implemented functionalities}{3}
+\contentsline {subsection}{\numberline {3.1}Google maps}{3}
