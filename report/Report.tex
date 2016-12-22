@@ -41,9 +41,60 @@ We chose Sails.js framework because it lets us write everything in the same lang
 
 
 \section{Implemented functionalities}
+\subsection{User}
 
+\subsubsection{The user}
+
+\subsubsection{registering}
+
+\subsubsection{edit user}
+
+\subsubsection{User profile page}
+
+\subsubsection{quizes on user profile}
+
+
+\subsection{Quiz}
+\subsubsection{ overview page}
+\subsubsection{filter}
+\subsubsection{add a quiz}
+\subsubsection{ individual quiz}
+\subsubsection{comments}
+\subsubsection{search}
+
+
+\section{the other requirements} % please think of another title 
+\subsection{AJAX}
+
+\subsection{HTML 5}
+We have used 4 HTML features in our application
+\begin{enumerate}
+\item GEO-location, we use this one when you are doing a quiz, it will first center the map on your location.
+\item local storage, we use this to store the API secret on the users computer. So they will stay logged in.
+\item form tags, we have used this when you add a new quiz, for the file upload.
+\item %Forgot this one
+\end{enumerate}
+
+
+\subsection{Web service}
+As another web service we have used Imgur to upload and request the pictures. This way we don't have to store all the pictures ourselves and we still have an easy way of accessing. \\
+So when a user adds an quiz, he or she will upload a picture, we will immediately send an PUT request it to Imgur. When they are done uploading we will get the ID and the location of the picture back. \\
+The moment we need the picture, this can be on several locations, for example on the quiz page, on the overview page but also on the user page, we will send an GET request to Imgur to get the picture and to show it on the page.\\
+Imgur also removes all the exif data, so we don't have to worry about removing them.  
 
 \subsection{Google maps}
+We have used Google maps on several occasions.
+The first place where we use the google-maps API is when we are filtering based on location. The location the user fills in is send to Google. Google than sends back the gps locations of the location that matches closest with what the user filled in. \\
+
+The next place we use the Google maps API is when a user is adding a picture. We first look if a picture has Exif location data in his or her application. If they have we make a google map with a marker in the center of the location. Otherwise we center on the VUB. The user can than move the marker. when they save we ask the Google maps API to give us the location. \\
+
+And finally we use it when people guess the location, we again make a map with an marker, but this one is based on your GEO-location, if you do not want to share it we will use the location of the VUB for the start point. You can then again move the marker to chose the location. When you think you found the location, you save and we will ask the Google Maps API for the location. We will than do a calculation to see if you were close enough. If not you have 3 chances to guess, again by moving the marker. \\
+
+
+\subsection{Provide data}
+
+\section{conclusion}
+
 
 
 %\subsection{}
