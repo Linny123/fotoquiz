@@ -1,13 +1,4 @@
 var map;
-var chances = 0;
-var win = false;
-//var point = {lat: 50.8201646, lng: 4.398042};
-var latlng;
-//var options;
-//var quizID; // the quiz ID
-var latitude = null;
-var longitude = null;
-//var points = 0; // points earned
 var newQuizMarker;
 
 // Transforms an address/location (in text form) to latlng 
@@ -93,7 +84,7 @@ function GuessingMap(){
 
   // Ask for HTML5 user location (does not work on Safari 10 if HTTP)
   var onError = function(error) {
-    console.log("Could not get the current location. Error: "+error);
+    console.log("Could not get the current location of user. Error: "+error);
   };
 
   if(navigator.geolocation) {
@@ -111,11 +102,9 @@ function GuessingMap(){
     onError();
   }
 
-  addMarker();
-
-  // Add guess click function
-  //google.maps.event.addListener(map, "click", Testlocation);    
+  addMarker(); 
 }
+
 
 function addMarker() {
   newQuizMarker = new google.maps.Marker({ 
@@ -126,54 +115,8 @@ function addMarker() {
   });
 }
 
+
 function getMarkerLocation() {
-  var latlng = {
-    lat: newQuizMarker.getPosition().lat(),
-    lng: newQuizMarker.getPosition().lng()
-  }
   return newQuizMarker.getPosition()
-}
-
-
-
-// function getlocation(event){
-//   if(chances > 0){
-//     console.log("no");
-//   } else {
-//     var marker = new google.maps.Marker({ 
-//       map: map,
-//       position: event.latLng,
-//       title: "MARKER"
-//     });
-
-//     chances = chances+1;
-//     latlng = event.latLng;
-//   }  
-//   latitude = latlng.lat();
-//   longitude = latlng.lng();
-
-// }
-
-function Testlocation(event){
-  var loc = new google.maps.LatLng(latitude, longitude);
-  latlng = event.latLng;
-   if(chances < 3){
-    // NIET VERGETEN OM DE LOCATIE NOG TE TESTEN 
-      var marker = new google.maps.Marker(
-    { 
-      map: map,
-      position: event.latLng,
-      title: "A GUESS"
-    });
-
-    // testing location smaller then 100 m
-    if(getDistance(loc, latlng) < 100){
-      win = true;
-      
-     }
-     chances = chances + 1;
-   }
-
-
 }
 

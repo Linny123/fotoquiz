@@ -5,13 +5,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.author = auth.currentUser();
     $scope.commentSection = {};
     $scope.comment= '';
-    $scope.lockClass = 'free';
     $scope.selectedQuiz.lock = 'free';
-
-
-    quizID = $stateParams.quiz.id;
-    latitude = $stateParams.quiz.locationLat;
-    longitude = $stateParams.quiz.locationLng;
 
     var score = 0;
     var maxScore = 80;
@@ -45,9 +39,8 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
 
     // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
     var lockQuiz = function () {
-      hasDoneQuiz(quizID, function(data) {
-        if(data){
-          $scope.lockClass = 'lock';
+      hasDoneQuiz($scope.selectedQuiz.id, function(hasDone) {
+        if(hasDone){
           $scope.selectedQuiz.lock = 'lock';
         }
       });
@@ -64,34 +57,25 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
 
       var distance = getDistance(guessLocation, quizLocation)
 
-      if(distance < 100){
+      if(distance < 250){
         score = maxScore;
         addPoints(score);
-        addQuizDone(quizID);
+        addQuizDone($scope.selectedQuiz.id);
         lockAfter();
-        alert("You won and scored " + score);
+        alert("You won and scored " + score + "points!");
       } else if($scope.chanceLeft <= 1){ // any user might guess 3 times max
         score = 0;
-        addQuizDone(quizID);
+        addQuizDone($scope.selectedQuiz.id);
         lockAfter();
-        alert("You lose and scored " + score);
+        alert("You lose and scored " + score + "points!");
       } else {
         $scope.chanceLeft = $scope.chanceLeft - 1;
         maxScore = maxScore - 20;
         score = maxScore;
+        alert("You missed! Try again");
       }
-      
-
- 
+    
     };
-
-    $scope.resetMap = function () {
-      // Since map functionalities are loaded from map.js, 
-      // this little function is needed whenever the user is done with the current quiz
-      // and go on the next one.
-      chances = 0;
-      win = false;
-    }
 
     // Get the right comment section from DB
     var getCommentSection = function (quizID) {
@@ -106,9 +90,9 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
       if ($scope.comment == '') {
         alert('pls write something');
       } else {
-        appDB.postComment($scope.author, $scope.comment, quizID).
+        appDB.postComment($scope.author, $scope.comment, $scope.selectedQuiz.id).
         success(function() {
-          getCommentSection(quizID);
+          getCommentSection($scope.selectedQuiz.id);
           $scope.comment = '';
         });
         $scope.comment = ''; // in case something went wrong
@@ -117,6 +101,7 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
 
     // If the user already answered the quiz, then lock the quiz
     lockQuiz();
+
     // Get comment section of the right quiz
-    getCommentSection(quizID);
+    getCommentSection($scope.selectedQuiz.id);
   }]);
