@@ -6,7 +6,7 @@
 \usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
 								% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{amssymb}
-
+\usepackage{hyperref}
 %SetFonts
 
 
@@ -27,6 +27,19 @@
 \section{Introduction}
 You may know the game "Geoguessr", where you get a random location of google streetview and you have to guess where you are, and the closer your guess is the more points you get. 
 Our game has the same idea of guessing a location on a map. Only in our game everyone can upload a picture with a location and an hint. Other people can then guess where the picture is made. They can guess 3 times, every time they lose 20 points and when they ask for an hint they lose half the points.
+
+\subsection{installation of the project}
+\begin{enumerate}
+\item Install MongoDB \url{https://www.mongodb.com/download-center?jmp=nav#community} 
+\item  Install node.js \url{https://nodejs.org/en/}
+\item Install Sails.js \url{http://sailsjs.com/get-started} \\
+ npm -g install sails 
+\item Start MongoDB service (make sure you point to the database path in the project folder: /data/db) \\ 
+mongod --dbpath [Path-to-Project]/data/db
+\item Navigate to the project folder and start the Sails.js service
+\item The project should be running, visit \url{http://localhost:1337/ }
+
+\end{enumerate}
 
 \section{ the web application architecture}
 For this application we chose to use the framework Sails.js. This is a  MVC framework for node.js. 
@@ -56,8 +69,16 @@ We chose Sails.js framework because it lets us write everything in the same lang
 
 \subsection{Quiz}
 \subsubsection{ overview page}
-\subsubsection{filter}
-\subsubsection{add a quiz}
+\subsubsection{filtering}
+Quizzes can be filtered on location. On the top of the quiz overview page a user can fill in a location and press the ?filter? button. Only quizzes that are within a 30 km range of the given location are then displayed on the page.
+It works as follows. Upon pressing the ?filter? button the text from the input field gets transformed to coordinates. This is achieved by using the Google Maps Geocoder which can transform addresses to coordinates. This set of coordinates is then compared with every quiz. For each quiz the distance is calculated between the two, if the distance is shorter then 30 km the corresponding quiz is shown. All this happens on the client side.
+If the typed in location is not found, an alert message indicates so. To remove the filter, the user can simply press the ?X?.
+
+\subsubsection{creating a quiz}
+Creating a new quiz can be done by clicking the ?Add? button on the quiz overview page. On the popup that opens the user can fill in some information about his photo quiz. The user can add a personal touch to the quiz by adding a custom message. Eg: ?Visited this museum during my last vacation?. There?s also the option to provide a hint. The player of the quiz can use this hint if he or she has no clue about the location. (See X.X) The message and hint are optional fields. The middle field can be used for uploading a picture and is mandatory. Currently it only supports jpeg images. We use HTML5 form validation on the client side to comply with this restriction. (See X.X).
+After selecting an image and pressing ?next? HTML5 FormData is used to transfer the image file to the server side. The server first reads the exif data from the image and searches for GPS coordinates. The image file is then uploaded to Imgur - an online image host - via the Imgur API. Imgur automatically deletes all exif data, so it is not possible by the players of the game to find the GPS coordinates of die image. When the image is uploaded to Imgur, we save the URL and the delete hash (see X.X) of the image. All this information is stored in the quiz database. \\
+On the client side we now get a second popup showing a map with a marker. If the uploaded image included some GPS coordinates then the marker wil be on that position. The user has then the possibility to move the marker to a correct position, if that was not the case yet. If the image had no GPS coordinates in then the user can simply indicate the correct position with the marker. 
+
 \subsubsection{ individual quiz}
 \subsubsection{comments}
 \subsubsection{search}
@@ -77,10 +98,9 @@ We have used 4 HTML features in our application
 
 
 \subsection{Web service}
-As another web service we have used Imgur to upload and request the pictures. This way we don't have to store all the pictures ourselves and we still have an easy way of accessing. \\
-So when a user adds an quiz, he or she will upload a picture, we will immediately send an PUT request it to Imgur. When they are done uploading we will get the ID and the location of the picture back. \\
-The moment we need the picture, this can be on several locations, for example on the quiz page, on the overview page but also on the user page, we will send an GET request to Imgur to get the picture and to show it on the page.\\
-Imgur also removes all the exif data, so we don't have to worry about removing them.  
+\subsubsection{Facebook}
+\subsubsection{Imgur}
+For storing the all the images used for the quizzes we used Imgur (http://imgur.com). Using there public available API we can send the images. As return we get a JSON object containing information about the uploaded picture. For this project we only use the link, id and deletehash parameters.
 
 \subsection{Google maps}
 We have used Google maps on several occasions.
