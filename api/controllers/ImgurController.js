@@ -89,31 +89,6 @@ function isEmpty(obj) {
  }
 
 
- // function getLocation(lat, lng) {
- // 	return new Promise(function(resolve, reject) {
- // 		sails.log("-> getLocation in ImgurController: "+lat+lng);
-
- // 		var imageInfo = {};
-
- // 		var options = {
- // 			url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyBrriX06otU67RMzucGE-vRA_W4Rvvva5Y",
- // 			//method: 'DELETE',
- 			
- // 		};
-
- // 		function callback(error, response, body) {
- // 			if(error) {
- // 				sails.log.error("ERROR: "+error);
- // 				reject(error)
- // 			}
-	// 		resolve(body) // returns statuscode
-	// 		sails.log(body)
-	// 	}
-	// 	request(options, callback);
-	// });
- // }
-
-
  module.exports = {
 
  	getImageLinkByID: function(req, res){
@@ -196,8 +171,6 @@ function isEmpty(obj) {
     	// deletehash should be in params field: 'imageDeletehash'
     	return removeImage(req.query.imageDeletehash);
     },
-
-
 
 };
 

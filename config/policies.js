@@ -21,9 +21,39 @@ module.exports.policies = {
 
 // Adding authorization so that only those who are logged in and have a valid token can
 // use these functionalities..
+  ImgurController: {
+        getImageLinkByID: 'Authorized',
+        uploadImage: 'Authorized',
+        removeImage: 'Authorized'
+  },
+
+  CommentController: {
+        getCommentSection: 'Authorized',
+        postNewComment: 'Authorized'
+  },
+
   ProfileController: {
+        computeRanking: 'Authorized',
+        getAllProfiles: 'Authorized',
         getUserProfile: 'Authorized',
-        editUserProfile: 'Authorized'
+        editUserProfile: 'Authorized',
+        UserAddPoints: 'Authorized',
+        UserAddQuizDone: 'Authorized',
+        UserHasDoneQuiz: 'Authorized',
+        getUserQuiz: 'Authorized',
+        removeUserQuiz: 'Authorized',
+        editUserQuiz: 'Authorized'
+  },
+
+  QuizController: {
+        updateQuizLocation: 'Authorized',
+        getQuizzesInRange: 'Authorized',
+        getQuiz: 'Authorized'
+  },
+
+  SearchController: {
+        generalQuizSearch: 'Authorized',
+        generalProfileSearch: 'Authorized',
   }
 
   /***************************************************************************

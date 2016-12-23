@@ -61,12 +61,14 @@ fotoApp.factory('appDB',
             id: quizID,
             lat: lat,
             lng: lng
-          }
+          },
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
       });
     };
 
     obj.getQuiz = function () {
-      return $http.get('/quiz');
+      return $http.get('/quiz', 
+        { headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() } });
     };
 
 
@@ -74,7 +76,8 @@ fotoApp.factory('appDB',
       return $http.get('/profile/quiz', {
         params: {
           "username": username
-        }
+        },
+        headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
       });
     };
 
@@ -84,7 +87,8 @@ fotoApp.factory('appDB',
         params: {
           "id": quizID,
           "imageDeletehash" : imageDeletehash
-        }
+        },
+        headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
       });
     };
 
@@ -94,7 +98,8 @@ fotoApp.factory('appDB',
           params: {
             "id": quiz.id,
             "content": quiz.content
-          }
+          },
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
         });
     };
 
@@ -103,7 +108,8 @@ fotoApp.factory('appDB',
 		return $http({
 	        method: 'GET',
 	        url: '/comment/',
-	        params: {quizID: quizID}
+	        params: {quizID: quizID},
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
 		});
 	};
 
@@ -112,10 +118,11 @@ fotoApp.factory('appDB',
 	        method: 'POST',
 	        url: '/comment/',
 	        params: {
-				author: author,
-				content: comment,
-				quizID: quizID
-			}
+    				author: author,
+    				content: comment,
+    				quizID: quizID
+    			},
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
 		});
 	};
 
@@ -126,7 +133,8 @@ fotoApp.factory('appDB',
           params: {
             username: username,
             points: points
-          }
+          },
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
@@ -137,7 +145,8 @@ fotoApp.factory('appDB',
           params: {
             username: username,
             quizID: quizID
-          }
+          },
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
@@ -148,7 +157,8 @@ fotoApp.factory('appDB',
           params: {
             username: username,
             quizID: quizID
-          }
+          },
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
@@ -157,7 +167,8 @@ fotoApp.factory('appDB',
     return $http.get('/quizsearch/generalQuizSearch', {
       params: {
         "general": general
-      }
+      },
+      headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
@@ -165,22 +176,25 @@ fotoApp.factory('appDB',
   obj.generalProfileSearch = function (general) {
     return $http.get('/quizsearch/generalProfileSearch', {
       params: {
-          "general": general
-        }
+        "general": general
+      },
+      headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
   obj.computeRanking = function () {
     return $http({
           method: 'PUT',
-          url: '/profile/ranking/'
+          url: '/profile/ranking/',
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
   obj.getAllProfiles = function () {
     return $http({
           method: 'GET',
-          url: '/profile/all/'
+          url: '/profile/all/',
+          headers: {'Content-Type': 'application/json', Authorization: "Bearer " + auth.getToken() }
     });
   };
 
