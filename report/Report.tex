@@ -7,6 +7,7 @@
 								% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{subfig}
 %SetFonts
 
 
@@ -25,10 +26,9 @@
 
 
 \section{Introduction}
-You may know the game "Geoguessr", where you get a random location of google streetview and you have to guess where you are, and the closer your guess is the more points you get. 
-Our game has the same idea of guessing a location on a map. Only in our game everyone can upload a picture with a location and an hint. Other people can then guess where the picture is made. They can guess 3 times, every time they lose 20 points and when they ask for an hint they lose half the points.
+You may know the game ?Geoguessr?, where you get to see a random image of Google Street View and you have to guess where you are. The closer your guess is to the real location, the more points you get. Our game has the same idea of guessing a location on a map. Only in our game everyone can upload a picture of a location and a hint. Other people can then guess where the picture is made. They can guess 3 times, every time they lose 20 points and when they ask for an hint they lose half the points.
 
-\subsection{installation of the project}
+\subsection{Installation of the project}
 \begin{enumerate}
 \item Install MongoDB \url{https://www.mongodb.com/download-center?jmp=nav#community} 
 \item  Install node.js \url{https://nodejs.org/en/}
@@ -41,64 +41,73 @@ mongod --dbpath [Path-to-Project]/data/db
 
 \end{enumerate}
 
-\section{ the web application architecture}
-For this application we chose to use the framework Sails.js. This is a  MVC framework for node.js. 
+\section{ The web application architecture}
 
+Photoquiz uses a number of open source projects to work properly:
 \begin{itemize}
 \item Node.js, an execution environment for event-driven server-siede and networking application
-\item front-end: For the front-end we chose to include Angular.js for this, because it is a very popular JavaScript framework, which extends HTML to make it more dynamic.
-\item Database:  we chose MongoDB, this is a a very big noSQL database services. We chose to use it because it is flexible and is easy to use.
+\item Sails.js: popular MVC Framework fore Node.js We chose Sails.js framework because it lets us write everything in the same language and takes over some tasks, for example it automatically sets up an API.
+\item AngularJS, this is a very popular JavaScript framework, used to enhance HTML.
+\item Express: Fast node.js network app framework
+\item MongoDB: this is a a very big noSQL database services. We chose to use it because it is flexible and is easy to use.
+\item jQuery: 
+\item Bootstrap: An popular HTML, CSS and JavaScript framework, for creating responsive web applications. 
 \end{itemize}
 
-We chose Sails.js framework because it lets us write everything in the same language and takes over some tasks, for example it automatically sets up an API.
 
 
 \section{Implemented functionalities}
 \subsection{User}
+\subsubsection{Registering}
 
-\subsubsection{The user}
+A user can register in two ways: the easiest way is by connecting to their Facebook account by clicking on connect to Facebook on the homepage. A popup will open that will ask you to log in, followed by an authorisation page. You will have to authorise this app to log-in.
+The other way to register is by making an account. To do this click on the tab register account. Here we have added some restrictions. The -mail field is mandatory and has to be an e-mail adress. The Username has to be filled in, unique and a minimum of 5 characters and finally the password is mandatory and has a minimum of 5 characters.
+To check this we use .... (please explain this) \\
 
-\subsubsection{registering}
-
-\subsubsection{edit user}
+\subsubsection{Edit user}
 
 \subsubsection{User profile page}
 
-\subsubsection{quizes on user profile}
+\subsubsection{Quizes on user profile}
 
 
 \subsection{Quiz}
-\subsubsection{ overview page}
-\subsubsection{filtering}
-Quizzes can be filtered on location. On the top of the quiz overview page a user can fill in a location and press the ?filter? button. Only quizzes that are within a 30 km range of the given location are then displayed on the page.
+\subsubsection{ Overview page}
+On the Quiz page you can see an overview of all the existing quizes, together with some CSS and bootstrap You will see the picture and the username. When you click on the picture, you will go to the quiz itself and when you click on the username you will go to the user's profile page. 
+
+\subsubsection{Filtering}
+Quizzes can be filtered on location. On the top of the quiz overview page a user can fill in a location and press the 'filter' button. Only quizzes that are within a 30 km range of the given location are then displayed on the page.
 It works as follows. Upon pressing the ?filter? button the text from the input field gets transformed to coordinates. This is achieved by using the Google Maps Geocoder which can transform addresses to coordinates. This set of coordinates is then compared with every quiz. For each quiz the distance is calculated between the two, if the distance is shorter then 30 km the corresponding quiz is shown. All this happens on the client side.
 If the typed in location is not found, an alert message indicates so. To remove the filter, the user can simply press the ?X?.
 
-\subsubsection{creating a quiz}
-Creating a new quiz can be done by clicking the ?Add? button on the quiz overview page. On the popup that opens the user can fill in some information about his photo quiz. The user can add a personal touch to the quiz by adding a custom message. Eg: ?Visited this museum during my last vacation?. There?s also the option to provide a hint. The player of the quiz can use this hint if he or she has no clue about the location. (See X.X) The message and hint are optional fields. The middle field can be used for uploading a picture and is mandatory. Currently it only supports jpeg images. We use HTML5 form validation on the client side to comply with this restriction. (See X.X).
-After selecting an image and pressing ?next? HTML5 FormData is used to transfer the image file to the server side. The server first reads the exif data from the image and searches for GPS coordinates. The image file is then uploaded to Imgur - an online image host - via the Imgur API. Imgur automatically deletes all exif data, so it is not possible by the players of the game to find the GPS coordinates of die image. When the image is uploaded to Imgur, we save the URL and the delete hash (see X.X) of the image. All this information is stored in the quiz database. \\
+\subsubsection{Creating a quiz}
+Creating a new quiz can be done by clicking the 'Add' button on the quiz overview page. On the popup that opens the user can fill in some information about his photo quiz. The user can add a personal touch to the quiz by adding a custom message. Eg: ?Visited this museum during my last vacation?. There?s also the option to provide a hint. The player of the quiz can use this hint if he or she has no clue about the location. The message and hint are optional fields. The middle field can be used for uploading a picture and is mandatory. Currently it only supports jpeg images. We use HTML5 form validation on the client side to comply with this restriction. 
+After selecting an image and pressing 'next' HTML5 FormData is used to transfer the image file to the server side. The server first reads the exif data from the image and searches for GPS coordinates. The image file is then uploaded to Imgur - an online image host - via the Imgur API. Imgur automatically deletes all exif data, so it is not possible by the players of the game to find the GPS coordinates of die image. When the image is uploaded to Imgur, we save the URL and the delete hash of the image. All this information is stored in the quiz database. \\
 On the client side we now get a second popup showing a map with a marker. If the uploaded image included some GPS coordinates then the marker wil be on that position. The user has then the possibility to move the marker to a correct position, if that was not the case yet. If the image had no GPS coordinates in then the user can simply indicate the correct position with the marker. 
 
-\subsubsection{ individual quiz}
-\subsubsection{comments}
-\subsubsection{search}
+\subsubsection{Individual quiz}
+\subsubsection{Comments}
+\subsubsection{Search}
 
 
-\section{the other requirements} % please think of another title 
+\section{Short overview of the requirements} % please think of another title 
 \subsection{AJAX}
 
 \subsection{HTML 5}
 We have used 4 HTML features in our application
+
 \begin{enumerate}
 \item GEO-location, we use this one when you are doing a quiz, it will first center the map on your location.
 \item local storage, we use this to store the API secret on the users computer. So they will stay logged in.
-\item form tags, we have used this when you add a new quiz, for the file upload.
-\item %Forgot this one
+\item HTML5 form validation, to make sure the user adds an image when adding a quiz.
+\item ????
 \end{enumerate}
 
 
 \subsection{Web service}
 \subsubsection{Facebook}
+Users have to remember a lot of passwords, to prevent this we have decided to give the user the choice to use their Facebook account to log-in. The moment they chose to use Facebook for logging in we send a request to Facebook, they send back an request to the user for authorisation of the app and when the user authorised we get back the information we need (username and email adress). Now everytime the user wants to log in we will send a request to Facebook in order to check validity.
+
 \subsubsection{Imgur}
 For storing the all the images used for the quizzes we used Imgur (http://imgur.com). Using there public available API we can send the images. As return we get a JSON object containing information about the uploaded picture. For this project we only use the link, id and deletehash parameters.
 
@@ -113,13 +122,54 @@ And finally we use it when people guess the location, we again make a map with a
 
 \subsection{Provide data}
 
-\section{conclusion}
+\section{Conclusion}
+
+\clearpage
+\section{Screenshots}
+\subsection{Registering}
+\begin{figure}[!htb]
+\begin{tabular}{cc}
+\subfloat[Register: Homepage, log in or register.]{\includegraphics[width=180px]{screenshots/log-in.png}}
+\subfloat[Register: User name is taken]{\includegraphics[width=180px]{screenshots/register-username-taken.png}}\\
+\subfloat[Register: Username is too short]{\includegraphics[width=180px]{screenshots/register-short-username.png}}
+\subfloat[Register: Not an email adress]{\includegraphics[width=180px]{screenshots/register-no-mail.png}}\\
+\subfloat[Register: Password is too short]{\includegraphics[width=180px]{screenshots/register-short-pw.png}}
+\end{tabular}
+\end{figure}
+\clearpage
+\subsection{User profile}
+\begin{figure}[!htb]
+\begin{tabular}{cc}
+\subfloat[The profile page]{\includegraphics[width=180px]{screenshots/loged-in-profilepage.png}}
+\subfloat[Edit profiel]{\includegraphics[width=180px]{screenshots/edit-profile.png}}\\
+\subfloat[Remove user's quiz]{\includegraphics[width=180px]{screenshots/delete-quiz.png}}
+\subfloat[Edit user's quiz]{\includegraphics[width=180px]{screenshots/Edit-quiz.png}}\\
+\subfloat[Other user quiz]{\includegraphics[width=180px]{screenshots/other-user-profile.png}}
+\end{tabular}
+\end{figure}
+\clearpage
+\subsection{Quiz}
+\begin{figure}[!htb]
+\begin{tabular}{cc}
+\subfloat[Quiz overview page]{\includegraphics[width=180px]{screenshots/quizpage.png}}
+\subfloat[Filter quizes]{\includegraphics[width=180px]{screenshots/filered-quizes.png}}\\
+\subfloat[Add quiz part 1]{\includegraphics[width=180px]{screenshots/add-quiz-part1.png}}
+\subfloat[Add quiz part 2]{\includegraphics[width=180px]{screenshots/add-quiz-part2.png}}\\
+\subfloat[Search User]{\includegraphics[width=200px]{screenshots/searched-user-2.png}}
+\end{tabular}
+\end{figure}
+\clearpage
+\subsection{Indivivual quiz}
+\begin{figure}[!htb]
+\begin{tabular}{cc}
+\subfloat[A individual quiz page]{\includegraphics[width=180px]{screenshots/do-quiz.png}}
+\subfloat[Comments]{\includegraphics[width=180px]{screenshots/comment-section.png}}
+\end{tabular}
+\end{figure}
 
 
 
 %\subsection{}
 
 
-
- 
 \end{document}  
