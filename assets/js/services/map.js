@@ -62,7 +62,6 @@ function loadMap(lat, lng) {
   } else {
     var location = new google.maps.LatLng(lat, lng)
   }
-  console.log("Create new map and center, lat: "+ lat+ "lng: "+lng+" LOCATION:"+location);
 
   var options = {
       zoom: 13,
@@ -119,7 +118,6 @@ function GuessingMap(){
 }
 
 function addMarker() {
-  console.log("MARKER ADDED!!!");
   newQuizMarker = new google.maps.Marker({ 
     map: map,
     position: map.getCenter(),

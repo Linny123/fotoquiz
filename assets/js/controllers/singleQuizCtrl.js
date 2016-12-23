@@ -41,7 +41,6 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     $scope.showHint = function () {
       $scope.hintBoolean = true;
       maxScore = maxScore / 2;
-      console.log(maxScore);
     }
 
     // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
@@ -55,40 +54,11 @@ fotoApp.controller('singleQuizCtrl', ['$scope', '$state', '$stateParams', 'auth'
     }
 
     var lockAfter = function () {
-      console.log("LOCK!")
       $scope.selectedQuiz.lock = 'lock';
     }
 
     // This function will handle the guesses aswell lock the quiz when it's done
-    $scope.guessingLocation = function () {
-      if (!done){
-        if($scope.chanceLeft <= 1){ // any user might guess 3 times max
-          score = 0;
-          done = true;
-          addQuizDone(quizID);
-          lockQuiz();
-          alert("You lose and scored " + score);
-        }
-        if(win){ // user guessed right, score is added and quiz is locked afterwards
-          score = maxScore;
-          done = true;
-          addPoints(score);
-          addQuizDone(quizID);
-          lockQuiz();
-          alert("You won and scored " + score);
-        } //wrong guess, decrement the chances left and the max obtainable score
-        $scope.chanceLeft = $scope.chanceLeft - 1;
-        maxScore = maxScore - 20;
-        score = maxScore;
-      } else {
-        // user finished the quiz, the quiz is now locked
-        lockQuiz();
-      }
-    };
-
-    // This function will handle the guesses aswell lock the quiz when it's done
     $scope.guess = function () {
-      console.log("GUESS!!")
       var guessLocation = getMarkerLocation()
       var quizLocation = new google.maps.LatLng($scope.selectedQuiz.locationLat, $scope.selectedQuiz.locationLng);
 

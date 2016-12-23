@@ -30,7 +30,6 @@ fotoApp.controller('searchCtrl', ['$scope', '$state', '$stateParams', 'auth', 'a
     // Whenever a user already guessed a quiz, then the quiz will appear grayed out (locked)
     var lockQuiz2 = function (ID, item) {
       hasDoneQuiz(ID, function(data) {
-        console.log("LOCK TEST")
         if(data){
           item.lock = 'lock2';
         } else {

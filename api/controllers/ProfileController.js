@@ -89,7 +89,7 @@ module.exports = {
     var currentScore = 0;
     var username = req.query.username;
     var points = req.query.points;
-    sails.log.info("-> UserAddPoints for "+username+" points: "+points)
+
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
           if (user) {
@@ -107,7 +107,7 @@ module.exports = {
     var currentQuizzes;
     var username = req.query.username;
     var quizID = req.query.quizID;
-    sails.log.info("-> AddQuizDone for "+username+" with QuizID: "+quizID)
+
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
           if (user) {
@@ -126,7 +126,7 @@ module.exports = {
 
     var username = req.query.username;
     var quizID = req.query.quizID;
-    sails.log.info("-> UserHasDoneQuiz for "+username+" with QuizID: "+quizID)
+
     User.findOne({username: username}, function (err, user) {
           if (err) {return next(err);}
           if (user) {
@@ -158,7 +158,7 @@ module.exports = {
 
   editUserQuiz: function(req, res, next){
     var quiz = req.body.params;
-    sails.log(quiz.content);
+
     Quiz.update({id: quiz.id},
       {
         content: quiz.content

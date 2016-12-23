@@ -16,7 +16,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     };
 
     $scope.createQuiz = function () {
-      console.log("IN CREATE QUIZ!!!!")
         var file = document.getElementById('image').files[0]
         $scope.quiz.file = file
 
@@ -40,11 +39,6 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     };
 
     $scope.finalizeQuiz = function() {
-      console.log("FINALIZE!!!!");
-      console.log(latitude);
-      console.log(longitude);
-      console.log(newQuizMarker.getPosition().lat());
-      console.log(newQuizMarker.getPosition().lng());
 
       $scope.updateQuizLocation($scope.quiz.id, newQuizMarker.getPosition().lat(), newQuizMarker.getPosition().lng());
       $scope.quiz = {};
@@ -53,7 +47,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     $scope.updateQuizLocation = function (quizID, lat, lng) {
         if (auth.isLoggedIn()) {
           appDB.updateQuizLocation(quizID, lat, lng).success(function (data) {
-            //console.log(data)
+
             // since usere created the quiz, the quiz will be locked.
             data.lock = "lock2";
             $scope.quizzes.push(data); // Add new quiz to quizzes
@@ -66,7 +60,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
 
     $scope.filter = function() {
       if (auth.isLoggedIn()) {
-        console.log("-> in filter function")
+
         var address = $scope.filter.address;
         var radius = 30; // We use 30km as a radius (so that users cant find the exact location)
         var quizzesInRange = [];
@@ -83,7 +77,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
               var inrange = inRange(latc, lngc, latp, lngp, radius)
 
               lockQuiz2(data[i].id, data[i]);
-              
+
               if(inrange) {
                 quizzesInRange.push(data[i])
               }
@@ -128,8 +122,7 @@ fotoApp.controller('quizCtrl', ['$scope', '$state', 'auth', 'appDB',
     appDB.getQuiz().success(function (data) {
       for (var i = 0; i < data.length; i++) {
         data[i].index = i;
-        console.log(data[i]);
-        console.log(data[i].lock);
+
         lockQuiz2(data[i].id, data[i]);
       }
       $scope.quizzes = data;

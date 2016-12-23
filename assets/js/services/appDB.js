@@ -29,8 +29,6 @@ fotoApp.factory('appDB',
 	};
 
     obj.createQuiz = function(quiz){
-		console.log("-> appDB.createQuiz")
-    	console.log(quiz)
 
         // Transform data to formData (to send it with post)
         var formData = new FormData();
@@ -45,14 +43,10 @@ fotoApp.factory('appDB',
       		formData,
       		{ transformRequest: angular.identity, // So that angular does not change request
           	  headers: {'Content-Type': undefined}
-        }).success(function(data){
-        	console.log("-> appDB.createQuiz: succesfully added quiz: data:")
-            console.log(data);
-      });
+        }).success(function(data){});
     };
 
     obj.updateQuizLocation = function(quizID, lat, lng){
-      console.log("-> appDB.updateQuizlocation")
 
       return $http({
           method: 'PUT',

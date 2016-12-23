@@ -65,7 +65,6 @@ function isEmpty(obj) {
 
  function removeImage(imageDeleteHash) {
  	return new Promise(function(resolve, reject) {
- 		sails.log("-> Removed image with deletehash: "+imageDeleteHash);
 
  		var imageInfo = {};
 
@@ -111,7 +110,7 @@ function isEmpty(obj) {
  				return res.send(image)
  			}
  			if(error) {
- 				sails.log(error);
+ 				sails.log.error(error);
  			}
  		}
 
@@ -123,7 +122,7 @@ function isEmpty(obj) {
 
     uploadImage: function(req, res){
     	// file should be in formdata field: 'file'
-    	sails.log("-> uploadImage in ImgurController")
+
     	// Make promise of uploader
     	return new Promise(function(resolve, reject) {
 

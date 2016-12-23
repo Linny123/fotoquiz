@@ -20,7 +20,6 @@ module.exports = {
   },
 
   createQuiz: function (req, res, next) {
-    sails.log("-> createQuiz in QuizController")
     if (!req.body) {
       return res.status(400).json(
         {message: 'Please fill in the field'});
@@ -44,7 +43,6 @@ module.exports = {
           return next(err);
         }
 
-        sails.log(quiz) // DEBUG
         return res.send(quiz)
 
       });
@@ -54,7 +52,6 @@ module.exports = {
   },
 
   updateQuizLocation: function (req, res, next) {
-    sails.log("-> updateQuizLocation in QuizController")
     if (!req.body) {
       return res.status(400).json(
         {message: 'Please fill in the field'});
@@ -73,7 +70,6 @@ module.exports = {
   },
 
   getQuizzesInRange: function(req, res, next) {
-    sails.log("-> getQuizzesInRange in QuizController")
     if (!req.body) {
       return res.status(400).json(
         {message: 'Please fill in the field'});
