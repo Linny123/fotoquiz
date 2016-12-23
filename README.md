@@ -6,20 +6,18 @@ You may know the game ”Geoguessr”, where you get to see a random image of Go
 1. Install [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) 
 2. Install [Node.js](https://nodejs.org/en/)
 3. Install [Sails.js](http://sailsjs.com/get-started) 
-```
- npm -g install sails
- ```
+	```
+ 	npm -g install sails
+	```
 4. Start MongoDB service (make sure you point to the database path in the project folder: /data/db)
-Example
-```
-mongod --dbpath [Path-to-Project]/data/db
-```
+	```
+	mongod --dbpath [Path-to-Project]/data/db
+	```
 5. Navigate to the project folder and start the Sails.js service (sails lift)
-Example
-```
-cd testProject
-sails lift
-```
+	```
+	cd testProject
+	sails lift
+	```
 6. The project should be running, visit http://localhost:1337/ 
 
 
