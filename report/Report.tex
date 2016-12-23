@@ -64,16 +64,15 @@ A user can register in two ways: the easiest way is by connecting to their Faceb
 The other way to register is by making an account. To do this click on the tab register account. Here we have added some restrictions. The -mail field is mandatory and has to be an e-mail adress. The Username has to be filled in, unique and a minimum of 5 characters and finally the password is mandatory and has a minimum of 5 characters.
 To check this we use .... (please explain this) \\
 
-\subsubsection{Edit user}
-
 \subsubsection{User profile page}
-
-\subsubsection{Quizes on user profile}
+On the user page you will see a few different things. On the left you can see your ranking and the points you've earned. on the right you will see your username, first name, last name and email asdres. You can change your first name, last name and email address. by clicking on edit profile. An pop up will open, edit the fields you want to edit and close the popup to save. \\
+On this user page you will also see all the quizes you've made, they are shown in the same grid layout as the quiz overview page. On your own profile page you can also edit your quizes and remove them. Do this by clicking on the buttons below the picture.\\
+(Expand if you think that is needed)
 
 
 \subsection{Quiz}
 \subsubsection{ Overview page}
-On the Quiz page you can see an overview of all the existing quizes, together with some CSS and bootstrap You will see the picture and the username. When you click on the picture, you will go to the quiz itself and when you click on the username you will go to the user's profile page. 
+On the Quiz page you can see an overview of all the existing quizes, together with some CSS and bootstrap You will see the picture and the username. Quizes you've done or made yourself are gray-ed out. You can still click on them to see the comments, but you can not guess again. When you click on the picture, you will go to the quiz itself and when you click on the username you will go to the user's profile page. 
 
 \subsubsection{Filtering}
 Quizzes can be filtered on location. On the top of the quiz overview page a user can fill in a location and press the 'filter' button. Only quizzes that are within a 30 km range of the given location are then displayed on the page.
@@ -86,12 +85,20 @@ After selecting an image and pressing 'next' HTML5 FormData is used to transfer 
 On the client side we now get a second popup showing a map with a marker. If the uploaded image included some GPS coordinates then the marker wil be on that position. The user has then the possibility to move the marker to a correct position, if that was not the case yet. If the image had no GPS coordinates in then the user can simply indicate the correct position with the marker. 
 
 \subsubsection{Individual quiz}
-\subsubsection{Comments}
+When you are on the quiz-page and click on a quiz you will go the quiz page. Here you will see a big map, centered on your location if you've enabled GEO-location. If you've not enabled this the map will center on the VUB. \\
+Below the map you can see the picture of which you are searching the location. In the center of the map a marker is shown, to guess the location you have to move this marker and click on guess. \\
+You can guess 3 times before you lose. If you guess right in one go you will receive 80 points, overtime you guess wrong you will lose 20 points. You can also ask for a hint, this will cost you half of your points.\\
+Al the way below the picture you have a comment section, where you not only can comment on a picture, but also read comments made.
+(again extend where needed)
+
 \subsubsection{Search}
+In the menu you can also see an search bar. If you fill in a username in this field and click on search you will be redirected to a page where you first get an overview of all the quizes that are made by the users that match te string. This is followed by an overview of all the users that match the string. You can click on the quizes to go to those quiz-pages and click on the usernames to visit the user pages.
+(again extend where needed)
 
 
 \section{Short overview of the requirements} % please think of another title 
 \subsection{AJAX}
+(still need to be filled in, no idea where this is added)
 
 \subsection{HTML 5}
 We have used 4 HTML features in our application
@@ -121,6 +128,7 @@ And finally we use it when people guess the location, we again make a map with a
 
 
 \subsection{Provide data}
+(overview of the API getters and setters)
 
 \section{Conclusion}
 
